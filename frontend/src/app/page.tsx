@@ -1,9 +1,22 @@
-import React from 'react'
+import Hero from "@/components/home/Hero";
+import AboutPreview from "@/components/home/AboutPreview";
+import FeaturedProjects from "@/components/home/FeaturedProjects";
+import Testimonials from "@/components/home/Testimonials";
 
-const page = () => {
+export default function HomePage() {
   return (
-    <div>vision square infrastructure project</div>
-  )
-}
+    <main className="min-h-screen bg-[#172027] text-[#F8F7F3]">
+      {/* 1st: Hero Section */}
+      <Hero />
 
-export default page
+      {/* 2nd: About Us Section */}
+      <AboutPreview />
+
+      {/* 3rd: Project Section */}
+      <FeaturedProjects />
+
+      {/* 4th: Testimonials Section */}
+      <Testimonials />
+    </main>
+  );
+}
