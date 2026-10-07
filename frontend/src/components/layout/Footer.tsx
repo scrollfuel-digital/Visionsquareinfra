@@ -1,124 +1,136 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#172027] text-[#F8F7F3]/70 border-t border-[#284153] pt-20 pb-12 overflow-hidden">
-      {/* Background ambient glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-[#eeaf33]/5 rounded-full blur-3xl pointer-events-none" />
+    <footer className="relative bg-[#172027] text-[#d5dde2] font-sans border-t border-white/10 pt-16 pb-10 overflow-hidden z-20">
+      {/* Ambient Radial Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[220px] bg-[#EEAF33]/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-[#284153]">
+      <div className="max-w-[1140px] mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
           {/* Brand Info */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="inline-block mb-6">
-              <Image
-                src="/images/logo/logo.png"
-                alt="VisionSquare Infra"
-                width={200}
-                height={52}
-                className="h-10 w-auto object-contain"
-              />
-            </Link>
-            <p className="text-[#F8F7F3]/70 text-sm leading-relaxed max-w-sm mb-6 font-light">
-              Pioneering architectural excellence, premium gated communities, and HMDA approved plotted townships across Hyderabad's fastest-appreciating corridors.
+          <div className="lg:col-span-1">
+            <h3 className="font-serif text-2xl font-bold text-white mb-3 tracking-wide">
+              VisionSquare <span className="text-[#EEAF33]">Infra</span>
+            </h3>
+            <p className="text-[#a3b3bf] text-sm leading-relaxed mb-4">
+              VisionSquare Infra is a real estate channel partner in Nagpur, India. We guide buyers to shortlisted, verified residential projects and plots, arrange site visits, and guide you to booking.
             </p>
-            <div className="flex items-center gap-3 text-xs text-[#F8F7F3]/85">
-              <span className="inline-block h-2 w-2 rounded-full bg-[#eeaf33]" />
-              <span>RERA Registered & HMDA Compliant</span>
+            <div className="inline-flex items-center gap-2 bg-[#EEAF33]/10 border border-[#EEAF33]/30 text-[#EEAF33] text-xs font-semibold px-3.5 py-1.5 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#EEAF33]" />
+              <span>Verified Projects & Site Visit Guidance</span>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif font-bold text-[#F8F7F3] text-base mb-5 tracking-wider">
+            <h4 className="font-serif text-white text-lg font-bold mb-4 tracking-wider">
               Quick Links
             </h4>
-            <ul className="space-y-3 text-sm font-sans">
+            <ul className="space-y-2.5 text-sm text-[#a3b3bf]">
               <li>
-                <Link href="/about-us" className="hover:text-[#eeaf33] transition-colors">
+                <Link href="/" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about-us" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-[#eeaf33] transition-colors">
+                <Link href="/projects" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
                   Projects Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="/blogs" className="hover:text-[#eeaf33] transition-colors">
-                  Market Insights & Blog
+                <Link href="/blogs" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                  Blog & Insights
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-[#eeaf33] transition-colors">
+                <Link href="/contact" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
                   Contact Us
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Featured Projects */}
+          {/* Services & Offerings */}
           <div>
-            <h4 className="font-serif font-bold text-[#F8F7F3] text-base mb-5 tracking-wider">
-              Developments
+            <h4 className="font-serif text-white text-lg font-bold mb-4 tracking-wider">
+              Properties & Services
             </h4>
-            <ul className="space-y-3 text-sm font-sans">
+            <ul className="space-y-2.5 text-sm text-[#a3b3bf]">
               <li>
-                <Link href="/projects/vision-heights" className="hover:text-[#eeaf33] transition-colors">
-                  Vision Heights (Villas)
+                <Link href="/projects" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                  Residential Projects
                 </Link>
               </li>
               <li>
-                <Link href="/projects/vision-imperial-park" className="hover:text-[#eeaf33] transition-colors">
-                  Vision Imperial Park (Plots)
+                <Link href="/projects" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                  Plots & Land Opportunities
                 </Link>
               </li>
               <li>
-                <Link href="/projects/vision-horizon-commercial" className="hover:text-[#eeaf33] transition-colors">
-                  Vision Horizon (Commercial)
+                <Link href="/projects" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                  Investment Opportunities
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact#enquiry" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                  Free Site Visit Scheduling
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact#enquiry" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                  Booking Assistance
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact Details */}
+          {/* Direct Contact Details */}
           <div>
-            <h4 className="font-serif font-bold text-[#F8F7F3] text-base mb-5 tracking-wider">
-              Head Office
+            <h4 className="font-serif text-white text-lg font-bold mb-4 tracking-wider">
+              Get In Touch
             </h4>
-            <div className="space-y-3.5 text-sm font-sans">
+            <div className="space-y-3 text-sm text-[#a3b3bf]">
+              <div className="flex items-center gap-2.5">
+                <Phone className="h-4 w-4 text-[#EEAF33] shrink-0" />
+                <span>+91 9699660972</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Mail className="h-4 w-4 text-[#EEAF33] shrink-0" />
+                <span>info@visionsquareinfra.com</span>
+              </div>
               <div className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 text-[#eeaf33] shrink-0 mt-0.5" />
+                <MapPin className="h-4 w-4 text-[#EEAF33] shrink-0 mt-1" />
                 <span className="text-xs leading-relaxed">
-                  Financial District, Gachibowli, Hyderabad, Telangana 500032
+                  Bidoba Sahkari Sanstha, Plot no 133, Wardha Road, Near Hotel Center Point, Bante Layout, Sonegaon, Ujwal Nagar, Nagpur-440025
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-[#eeaf33] shrink-0" />
-                <span className="text-xs">+91 98765 43210</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-[#eeaf33] shrink-0" />
-                <span className="text-xs">info@visionsquareinfra.com</span>
+                <Clock className="h-4 w-4 text-[#EEAF33] shrink-0" />
+                <span className="text-xs">Mon–Sun: 10:00 AM – 7:00 PM</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F8F7F3]/50">
-          <p>© {new Date().getFullYear()} Vision Square Infrastructure. All rights reserved.</p>
+        {/* Bottom Legal Bar */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7b8e9b]">
+          <p>© {new Date().getFullYear()} VisionSquare Infra Private Limited · Real Estate Channel Partner, Nagpur.</p>
           <div className="flex items-center gap-6">
-            <Link href="/contact" className="hover:text-[#eeaf33] transition-colors">
+            <Link href="/contact" className="hover:text-[#EEAF33] transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/contact" className="hover:text-[#eeaf33] transition-colors">
+            <Link href="/contact" className="hover:text-[#EEAF33] transition-colors">
               Terms & Conditions
             </Link>
-            <Link href="/contact" className="hover:text-[#eeaf33] transition-colors">
-              RERA Disclaimers
+            <Link href="/contact" className="hover:text-[#EEAF33] transition-colors">
+              Channel Partner Disclaimer
             </Link>
           </div>
         </div>

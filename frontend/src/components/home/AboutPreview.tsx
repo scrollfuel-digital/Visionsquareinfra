@@ -13,7 +13,6 @@ import {
   X,
   Home,
   Building2,
-  Landmark,
   Building,
   Briefcase,
   Mountain,
@@ -29,11 +28,6 @@ const propertyCategories = [
     label: "Apartments",
     count: "2,350+ Properties",
     icon: Building2,
-  },
-  {
-    label: "Villas",
-    count: "850+ Properties",
-    icon: Landmark,
   },
   {
     label: "Penthouses",
@@ -197,7 +191,7 @@ export default function AboutPreview() {
           {/* Bottom Property Types Floating Bar */}
           <div className="mt-8 sm:mt-12">
             <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_15px_45px_rgba(40,65,83,0.06)] border border-[#284153]/10">
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 divide-y sm:divide-y-0 lg:divide-x divide-neutral-100">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 divide-y sm:divide-y-0 lg:divide-x divide-neutral-100">
                 {propertyCategories.map((item, idx) => {
                   const Icon = item.icon;
                   return (
