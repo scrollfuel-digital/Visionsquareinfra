@@ -2,7 +2,6 @@ import Hero from "@/components/home/Hero";
 import AboutPreview from "@/components/home/AboutPreview";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import Testimonials from "@/components/home/Testimonials";
-import SignatureCollections from "@/components/home/SignatureCollections";
 
 export default function HomePage() {
   return (
@@ -17,10 +16,7 @@ export default function HomePage() {
       <FeaturedProjects />
 
       {/* 4th: Testimonials Section */}
-      <Testimonials />
-
-      {/* 5th: Signature Collections (Neralu Korlaparthi) */}
-      <SignatureCollections />
+      {/* <Testimonials /> */}
     </main>
   );
 }
