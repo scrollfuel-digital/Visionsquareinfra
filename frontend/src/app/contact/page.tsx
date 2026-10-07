@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { submitContactForm } from "@/services/contactService";
+import type { ContactFormData } from "@/types/contact";
 
 export default function ContactPage() {
   const WHATSAPP_NUMBER = "[Your WhatsApp Number]";
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     fullName: "",
     phoneNum: "",
     emailAdd: "",
@@ -15,9 +17,20 @@ export default function ContactPage() {
     messageText: "",
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [serverMessage, setServerMessage] = useState("");
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const buildingRef = useRef<SVGSVGElement>(null);
+  const card1Ref = useRef<HTMLDivElement>(null);
+  const card2Ref = useRef<HTMLDivElement>(null);
+  const card3Ref = useRef<HTMLDivElement>(null);
+  const driftContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // IntersectionObserver for scroll reveal
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -30,36 +43,166 @@ export default function ContactPage() {
     );
 
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    // Mouse Parallax Effect on Hero
+    const heroEl = heroRef.current;
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroEl) return;
+      const rect = heroEl.getBoundingClientRect();
+      const normX = (e.clientX - rect.left) / rect.width - 0.5;
+      const normY = (e.clientY - rect.top) / rect.height - 0.5;
+
+      if (buildingRef.current) {
+        buildingRef.current.style.transform = `translate(${normX * -22}px, ${normY * -16}px)`;
+      }
+      if (card1Ref.current) {
+        card1Ref.current.style.transform = `translate(${normX * 14}px, ${normY * 14}px)`;
+      }
+      if (card2Ref.current) {
+        card2Ref.current.style.transform = `translate(${normX * 28}px, ${normY * 28}px)`;
+      }
+      if (card3Ref.current) {
+        card3Ref.current.style.transform = `translate(${normX * 42}px, ${normY * 42}px)`;
+      }
+    };
+
+    const handleMouseLeave = () => {
+      if (buildingRef.current) buildingRef.current.style.transform = "translate(0px, 0px)";
+      if (card1Ref.current) card1Ref.current.style.transform = "translate(0px, 0px)";
+      if (card2Ref.current) card2Ref.current.style.transform = "translate(0px, 0px)";
+      if (card3Ref.current) card3Ref.current.style.transform = "translate(0px, 0px)";
+    };
+
+    if (heroEl) {
+      heroEl.addEventListener("mousemove", handleMouseMove);
+      heroEl.addEventListener("mouseleave", handleMouseLeave);
+    }
+
+    // Generate 12 Drifting Hollow Gold Squares
+    const driftContainer = driftContainerRef.current;
+    if (driftContainer && driftContainer.children.length === 0) {
+      const sizes = [6, 10, 14];
+      for (let i = 0; i < 12; i++) {
+        const square = document.createElement("div");
+        square.className = "drift-square";
+        const size = sizes[i % 3];
+        const left = Math.floor(Math.random() * 90) + 5;
+        const duration = 9 + Math.random() * 8;
+        const delay = -(Math.random() * duration);
+        const opacity = 0.2 + Math.random() * 0.45;
+
+        square.style.width = `${size}px`;
+        square.style.height = `${size}px`;
+        square.style.left = `${left}%`;
+        square.style.bottom = `-20px`;
+        square.style.opacity = `${opacity}`;
+        square.style.animation = `floatSquare ${duration}s linear infinite ${delay}s`;
+        driftContainer.appendChild(square);
+      }
+    }
+
+    return () => {
+      observer.disconnect();
+      if (heroEl) {
+        heroEl.removeEventListener("mousemove", handleMouseMove);
+        heroEl.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
   }, []);
+
+  const validate = (): boolean => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.fullName || formData.fullName.trim().length < 2) {
+      newErrors.fullName = "Please enter your full name (at least 2 characters).";
+    }
+
+    const cleanPhone = formData.phoneNum.replace(/\D/g, "");
+    if (!cleanPhone || cleanPhone.length !== 10) {
+      newErrors.phoneNum = "Please enter a valid 10-digit phone number.";
+    }
+
+    if (formData.emailAdd && formData.emailAdd.trim() !== "") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.emailAdd)) {
+        newErrors.emailAdd = "Please enter a valid email address.";
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (errors[name]) {
+      setErrors((prev) => {
+        const copy = { ...prev };
+        delete copy[name];
+        return copy;
+      });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    let msg = `Hello VisionSquare Infra,\n\nI would like to enquire about properties in Nagpur.\n\n`;
-    if (formData.fullName) msg += `*Name:* ${formData.fullName}\n`;
-    if (formData.phoneNum) msg += `*Phone:* ${formData.phoneNum}\n`;
-    if (formData.emailAdd) msg += `*Email:* ${formData.emailAdd}\n`;
-    if (formData.propReq) msg += `*Requirement:* ${formData.propReq}\n`;
-    if (formData.budgetRange && formData.budgetRange !== "Select budget")
-      msg += `*Budget:* ${formData.budgetRange}\n`;
-    if (formData.contactTime) msg += `*Preferred Time:* ${formData.contactTime}\n`;
-    if (formData.messageText) msg += `*Message:* ${formData.messageText}\n`;
+    if (!validate()) {
+      return;
+    }
 
-    const encodedMsg = encodeURIComponent(msg);
-    const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`;
+    setIsSubmitting(true);
+    setServerMessage("");
 
-    setSubmitted(true);
+    const response = await submitContactForm(formData);
+    setIsSubmitting(false);
 
-    setTimeout(() => {
-      window.open(waUrl, "_blank");
-    }, 800);
+    if (response.success) {
+      setSubmitted(true);
+      setServerMessage(response.message);
+
+      let msg = `Hello VisionSquare Infra,\n\nI would like to enquire about properties in Nagpur.\n\n`;
+      if (formData.fullName) msg += `*Name:* ${formData.fullName}\n`;
+      if (formData.phoneNum) msg += `*Phone:* ${formData.phoneNum}\n`;
+      if (formData.emailAdd) msg += `*Email:* ${formData.emailAdd}\n`;
+      if (formData.propReq) msg += `*Requirement:* ${formData.propReq}\n`;
+      if (formData.budgetRange && formData.budgetRange !== "Select budget")
+        msg += `*Budget:* ${formData.budgetRange}\n`;
+      if (formData.contactTime) msg += `*Preferred Time:* ${formData.contactTime}\n`;
+      if (formData.messageText) msg += `*Message:* ${formData.messageText}\n`;
+
+      const encodedMsg = encodeURIComponent(msg);
+      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMsg}`;
+
+      setTimeout(() => {
+        window.open(waUrl, "_blank");
+      }, 800);
+    } else {
+      if (response.errors) {
+        setErrors(response.errors);
+      } else {
+        setServerMessage(response.message || "Form submission failed. Please try again.");
+      }
+    }
+  };
+
+  const handleReset = () => {
+    setFormData({
+      fullName: "",
+      phoneNum: "",
+      emailAdd: "",
+      propReq: "Residential Project",
+      budgetRange: "Select budget",
+      contactTime: "Anytime",
+      messageText: "",
+    });
+    setSubmitted(false);
+    setErrors({});
+    setServerMessage("");
   };
 
   const directWaUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -116,49 +259,51 @@ export default function ContactPage() {
 
         /* HERO SECTION */
         .hero {
-          background: linear-gradient(135deg, var(--navy) 0%, var(--dark) 100%);
+          background: linear-gradient(135deg, #F3EFE6 0%, #FAF8F5 55%, #EFEADF 100%);
           position: relative;
           overflow: hidden;
-          padding-top: 90px;
-          padding-bottom: 170px;
-          color: var(--white);
+          padding-top: 140px;
+          padding-bottom: 90px;
+          color: var(--dark);
+          border-bottom: 2px solid rgba(238, 175, 51, 0.35);
         }
 
-        .hero-glow {
+        /* Drifting Squares Container */
+        .drift-container {
           position: absolute;
-          top: -100px;
-          right: -100px;
-          width: 500px;
-          height: 500px;
-          background: radial-gradient(circle, rgba(238, 175, 51, 0.18) 0%, transparent 70%);
-          pointer-events: none;
-          animation: pulseGlow 6s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-          0% { transform: scale(0.9); opacity: 0.7; }
-          100% { transform: scale(1.15); opacity: 1; }
-        }
-
-        .skyline-svg {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 120px;
+          inset: 0;
           pointer-events: none;
           z-index: 1;
+          overflow: hidden;
+        }
+
+        .drift-square {
+          position: absolute;
+          border: 1.5px solid var(--gold);
+          background: transparent;
+          pointer-events: none;
+        }
+
+        @keyframes floatSquare {
+          0% {
+            transform: translateY(0) rotate(0deg);
+          }
+          100% {
+            transform: translateY(-560px) rotate(200deg);
+            opacity: 0;
+          }
         }
 
         .hero-grid {
           display: grid;
           grid-template-columns: 1.15fr 0.85fr;
-          gap: 40px;
+          gap: 30px;
           align-items: center;
           position: relative;
           z-index: 2;
         }
 
+        /* Left Column */
         .hero-eyebrow-wrap {
           display: inline-flex;
           align-items: center;
@@ -182,9 +327,9 @@ export default function ContactPage() {
 
         .hero-eyebrow {
           color: var(--gold);
-          font-size: 0.85rem;
+          font-size: 0.75rem;
           font-weight: 700;
-          letter-spacing: 2.5px;
+          letter-spacing: 0.18em;
           text-transform: uppercase;
         }
 
@@ -192,23 +337,35 @@ export default function ContactPage() {
           font-family: var(--font-heading);
           font-size: clamp(2.5rem, 5vw, 4.2rem);
           font-weight: 600;
-          line-height: 1.12;
-          color: var(--white);
+          line-height: 1.1;
+          color: var(--dark);
           margin-bottom: 20px;
         }
 
-        .hero-h1 .gold-italic {
-          color: var(--gold);
+        .hero-h1 em {
           font-style: italic;
           font-weight: 600;
+          background: linear-gradient(100deg, #EEAF33 30%, #ffdf8f 50%, #EEAF33 70%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+          display: inline-block;
+          animation: goldShine 3.5s linear infinite;
+        }
+
+        @keyframes goldShine {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
         }
 
         .hero-paragraph {
-          color: #d5dde2;
-          font-size: 1.08rem;
+          color: var(--text-muted);
+          font-size: 1.05rem;
           line-height: 1.65;
           margin-bottom: 32px;
-          max-width: 580px;
+          max-width: 600px;
         }
 
         .hero-cta-group {
@@ -224,7 +381,7 @@ export default function ContactPage() {
           color: var(--dark);
           font-weight: 700;
           font-size: 0.98rem;
-          padding: 14px 28px;
+          padding: 15px 28px;
           border-radius: 50px;
           text-decoration: none;
           display: inline-flex;
@@ -240,7 +397,7 @@ export default function ContactPage() {
           background: #f5b942;
           border-color: #f5b942;
           transform: translateY(-3px);
-          box-shadow: 0 8px 24px var(--gold-glow);
+          box-shadow: 0 10px 25px var(--gold-glow);
         }
 
         .btn-gold .arrow {
@@ -249,28 +406,29 @@ export default function ContactPage() {
         }
 
         .btn-gold:hover .arrow {
-          transform: translateX(5px);
+          transform: translateX(6px);
         }
 
-        .btn-outline-white {
+        .btn-outline-navy {
           background: transparent;
-          color: var(--white);
-          font-weight: 600;
+          color: var(--navy);
+          font-weight: 700;
           font-size: 0.98rem;
-          padding: 14px 28px;
+          padding: 15px 28px;
           border-radius: 50px;
           text-decoration: none;
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          border: 1.5px solid rgba(255, 255, 255, 0.4);
+          border: 1px solid var(--navy);
           transition: all 0.3s ease;
         }
 
-        .btn-outline-white:hover {
-          background: rgba(255, 255, 255, 0.12);
-          border-color: var(--white);
+        .btn-outline-navy:hover {
+          background: var(--navy);
+          color: var(--white);
           transform: translateY(-3px);
+          box-shadow: 0 6px 18px rgba(40, 65, 83, 0.2);
         }
 
         .hero-chips {
@@ -280,13 +438,13 @@ export default function ContactPage() {
         }
 
         .chip {
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          color: var(--white);
+          background: var(--white);
+          border: 1px solid rgba(40, 65, 83, 0.3);
+          color: var(--navy);
           padding: 7px 16px;
           border-radius: 50px;
           font-size: 0.85rem;
-          font-weight: 500;
-          backdrop-filter: blur(4px);
+          font-weight: 600;
           transition: all 0.3s ease;
           display: inline-flex;
           align-items: center;
@@ -297,7 +455,7 @@ export default function ContactPage() {
           background: var(--gold);
           border-color: var(--gold);
           color: var(--dark);
-          transform: translateY(-2px);
+          transform: translateY(-3px);
           box-shadow: 0 4px 12px rgba(238, 175, 51, 0.3);
         }
 
@@ -308,15 +466,17 @@ export default function ContactPage() {
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: transform 0.35s ease-out;
         }
 
         .rotating-ring {
           position: absolute;
           width: 320px;
           height: 320px;
-          border: 2px dashed rgba(238, 175, 51, 0.25);
+          border: 1.5px dashed rgba(238, 175, 51, 0.3);
+          stroke-dasharray: 4 10;
           border-radius: 50%;
-          animation: rotateRing 30s linear infinite;
+          animation: rotateRing 50s linear infinite;
         }
 
         @keyframes rotateRing {
@@ -327,67 +487,93 @@ export default function ContactPage() {
         .building-svg {
           width: 280px;
           height: 300px;
-          filter: drop-shadow(0 0 20px rgba(238, 175, 51, 0.4));
+          filter: drop-shadow(0 6px 14px rgba(238, 175, 51, 0.3));
           position: relative;
           z-index: 2;
+          transition: transform 0.35s ease-out;
         }
 
-        .building-path {
+        .building-main-path {
           stroke: var(--gold);
-          stroke-width: 2.5;
+          stroke-width: 3;
+          stroke-linejoin: round;
+          stroke-linecap: round;
           fill: none;
           stroke-dasharray: 1000;
           stroke-dashoffset: 1000;
-          animation: drawBuilding 2.5s ease-out forwards;
+          animation: drawBuilding 2.6s ease-out forwards;
+        }
+
+        .building-sec-path {
+          stroke: var(--gold);
+          stroke-width: 2;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+          opacity: 0.55;
+          fill: none;
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: drawBuilding 2.6s ease-out 1.2s forwards;
         }
 
         @keyframes drawBuilding {
           to { stroke-dashoffset: 0; }
         }
 
+        .window-rect {
+          fill: var(--gold);
+          opacity: 0.05;
+          animation: windowBlink 3.4s ease-in-out infinite;
+        }
+
+        @keyframes windowBlink {
+          0%, 100% { opacity: 0.05; }
+          50% { opacity: 0.95; }
+        }
+
+        /* Floating Cards */
         .glass-card {
           position: absolute;
-          background: rgba(255, 255, 255, 0.09);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          background: var(--white);
+          border: 1px solid var(--border-light);
           border-radius: 16px;
           padding: 12px 18px;
           display: flex;
           align-items: center;
           gap: 12px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 20px 40px -20px rgba(40, 65, 83, 0.35);
           z-index: 3;
           white-space: nowrap;
+          transition: transform 0.35s ease-out;
         }
 
         .glass-card-1 {
           top: 15px;
           left: -20px;
-          animation: floatBob 4.5s ease-in-out infinite 0s;
+          animation: floatBob 6s ease-in-out infinite 0s;
         }
 
         .glass-card-2 {
           top: 175px;
           right: -20px;
-          animation: floatBob 4.8s ease-in-out infinite 1.3s;
+          animation: floatBob 6s ease-in-out infinite -2s;
         }
 
         .glass-card-3 {
           bottom: 25px;
           left: -10px;
-          animation: floatBob 5.2s ease-in-out infinite 2.6s;
+          animation: floatBob 6s ease-in-out infinite -4s;
         }
 
         @keyframes floatBob {
           0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+          50% { transform: translateY(-14px); }
         }
 
         .glass-icon {
           width: 36px;
           height: 36px;
-          background: rgba(238, 175, 51, 0.22);
+          background: rgba(238, 175, 51, 0.18);
           color: var(--gold);
           border-radius: 10px;
           display: flex;
@@ -395,19 +581,18 @@ export default function ContactPage() {
           justify-content: center;
           font-size: 1.1rem;
           font-weight: 700;
-          border: 1px solid rgba(238, 175, 51, 0.4);
         }
 
         .glass-text-title {
           font-weight: 700;
           font-size: 0.9rem;
-          color: var(--white);
+          color: var(--dark);
           line-height: 1.2;
         }
 
         .glass-text-sub {
           font-size: 0.76rem;
-          color: rgba(255, 255, 255, 0.7);
+          color: var(--text-muted);
         }
 
         .fade-up-init {
@@ -416,9 +601,10 @@ export default function ContactPage() {
           animation: fadeUpAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .delay-1 { animation-delay: 0.15s; }
-        .delay-2 { animation-delay: 0.3s; }
-        .delay-3 { animation-delay: 0.45s; }
+        .delay-1 { animation-delay: 0.12s; }
+        .delay-2 { animation-delay: 0.24s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.36s; }
 
         @keyframes fadeUpAnim {
           to {
@@ -427,13 +613,51 @@ export default function ContactPage() {
           }
         }
 
-        /* MAIN CONTENT OVERLAP */
+        /* SECTION PARTITION BADGE BAR */
+        .section-partition {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+          margin-bottom: 40px;
+          padding-top: 20px;
+        }
+
+        .partition-line {
+          flex: 1;
+          height: 1.5px;
+          background: linear-gradient(90deg, transparent, rgba(238, 175, 51, 0.4), transparent);
+        }
+
+        .partition-pill {
+          background: #F8F7F3;
+          border: 1px solid rgba(238, 175, 51, 0.5);
+          color: var(--navy);
+          font-family: var(--font-body);
+          font-size: 0.82rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          padding: 8px 22px;
+          border-radius: 50px;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 4px 15px rgba(238, 175, 51, 0.15);
+        }
+
+        .partition-icon {
+          color: var(--gold);
+          font-size: 0.95rem;
+        }
+
+        /* MAIN CONTENT SECTION */
         .main-section {
-          margin-top: -100px;
           position: relative;
           z-index: 10;
+          padding-top: 20px;
           padding-bottom: 90px;
-          background: transparent;
+          background: var(--white);
         }
 
         .cards-grid {
@@ -621,6 +845,17 @@ export default function ContactPage() {
           transition: all 0.3s ease;
         }
 
+        .form-input.has-error, .form-select.has-error, .form-textarea.has-error {
+          border-color: #e53e3e;
+          background: #fff5f5;
+        }
+
+        .error-msg {
+          font-size: 0.78rem;
+          color: #e53e3e;
+          margin-top: 3px;
+        }
+
         .form-textarea {
           resize: vertical;
           min-height: 110px;
@@ -676,6 +911,11 @@ export default function ContactPage() {
           box-shadow: 0 6px 20px rgba(40, 65, 83, 0.25);
         }
 
+        .btn-submit:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+
         .btn-submit::after {
           content: '';
           position: absolute;
@@ -688,14 +928,27 @@ export default function ContactPage() {
           animation: shineSweep 5s infinite 1.5s;
         }
 
-        .btn-submit:hover {
+        .btn-submit:hover:not(:disabled) {
           background: #1e3343;
           transform: translateY(-2px);
           box-shadow: 0 10px 25px rgba(40, 65, 83, 0.35);
         }
 
-        .btn-submit:active {
+        .btn-submit:active:not(:disabled) {
           transform: translateY(1px);
+        }
+
+        .spinner {
+          width: 20px;
+          height: 20px;
+          border: 2.5px solid rgba(255, 255, 255, 0.3);
+          border-top-color: #fff;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+          to { transform: rotate(360deg); }
         }
 
         .privacy-text {
@@ -746,7 +999,25 @@ export default function ContactPage() {
           to { stroke-dashoffset: 0; }
         }
 
-        /* HOW IT WORKS SECTION */
+        .btn-reset {
+          background: transparent;
+          color: var(--navy);
+          border: 1px solid var(--navy);
+          font-weight: 600;
+          padding: 8px 18px;
+          border-radius: 50px;
+          cursor: pointer;
+          font-size: 0.88rem;
+          margin-top: 14px;
+          transition: all 0.2s ease;
+        }
+
+        .btn-reset:hover {
+          background: var(--navy);
+          color: #fff;
+        }
+
+        /* ASK US ABOUT SECTION */
         .section-padding {
           padding: 90px 0;
           background: var(--white);
@@ -780,57 +1051,6 @@ export default function ContactPage() {
           font-size: 1.02rem;
         }
 
-        .steps-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
-        }
-
-        .step-card {
-          background: var(--cream);
-          border-radius: 16px;
-          padding: 32px 28px;
-          border: 1px solid transparent;
-          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-          position: relative;
-        }
-
-        .step-card:hover {
-          background: var(--white);
-          border-color: var(--gold);
-          transform: translateY(-6px);
-          box-shadow: 0 15px 35px var(--gold-glow);
-        }
-
-        .step-num {
-          font-family: var(--font-heading);
-          font-size: 3.5rem;
-          font-weight: 700;
-          color: var(--gold);
-          line-height: 1;
-          margin-bottom: 16px;
-          transition: transform 0.3s ease;
-          display: inline-block;
-        }
-
-        .step-card:hover .step-num {
-          transform: scale(1.15);
-        }
-
-        .step-title {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--dark);
-          margin-bottom: 10px;
-        }
-
-        .step-desc {
-          color: var(--text-muted);
-          font-size: 0.95rem;
-          line-height: 1.6;
-        }
-
-        /* ASK US ABOUT SECTION */
         .topics-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -905,17 +1125,144 @@ export default function ContactPage() {
           100% { transform: scale(1.15); opacity: 0; }
         }
 
-        /* FOOTER */
+        /* COMPREHENSIVE FOOTER STYLES */
         footer {
           background: var(--dark);
-          color: #8a99a4;
-          font-size: 0.88rem;
-          text-align: center;
-          padding: 32px 20px;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          color: #d5dde2;
+          font-size: 0.9rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* SCROLL REVEAL CLASS */
+        .footer-top {
+          padding: 75px 0 50px;
+        }
+
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 1.6fr 1fr 1.1fr 1.3fr;
+          gap: 40px;
+        }
+
+        .footer-brand-title {
+          font-family: var(--font-heading);
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: var(--white);
+          margin-bottom: 14px;
+        }
+
+        .footer-brand-title span {
+          color: var(--gold);
+        }
+
+        .footer-desc {
+          color: #a3b3bf;
+          font-size: 0.92rem;
+          line-height: 1.65;
+          margin-bottom: 20px;
+          max-width: 360px;
+        }
+
+        .footer-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(238, 175, 51, 0.12);
+          border: 1px solid rgba(238, 175, 51, 0.3);
+          color: var(--gold);
+          padding: 6px 14px;
+          border-radius: 50px;
+          font-size: 0.78rem;
+          font-weight: 600;
+        }
+
+        .badge-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: var(--gold);
+        }
+
+        .footer-col-title {
+          font-family: var(--font-heading);
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: var(--white);
+          margin-bottom: 20px;
+          letter-spacing: 0.03em;
+        }
+
+        .footer-links {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .footer-links a {
+          color: #a3b3bf;
+          text-decoration: none;
+          transition: all 0.25s ease;
+          display: inline-block;
+        }
+
+        .footer-links a:hover {
+          color: var(--gold);
+          transform: translateX(4px);
+        }
+
+        .footer-contact-items {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        .footer-contact-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          color: #a3b3bf;
+          font-size: 0.9rem;
+        }
+
+        .footer-icon {
+          color: var(--gold);
+          font-size: 1.1rem;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+
+        .footer-bottom {
+          background: #11181d;
+          padding: 24px 0;
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .footer-bottom-inner {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          color: #7b8e9b;
+          font-size: 0.82rem;
+        }
+
+        .footer-legal-links {
+          display: flex;
+          gap: 20px;
+        }
+
+        .footer-legal-links a {
+          color: #7b8e9b;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+
+        .footer-legal-links a:hover {
+          color: var(--gold);
+        }
+
         .reveal {
           opacity: 0;
           transform: translateY(30px);
@@ -928,15 +1275,22 @@ export default function ContactPage() {
         }
 
         /* RESPONSIVE DESIGN */
+        @media (max-width: 960px) {
+          .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+          }
+        }
+
         @media (max-width: 900px) {
           .hero-grid {
             grid-template-columns: 1fr;
-            gap: 50px;
+            gap: 40px;
           }
 
           .hero {
-            padding-top: 60px;
-            padding-bottom: 150px;
+            padding-top: 120px;
+            padding-bottom: 70px;
             text-align: center;
           }
 
@@ -958,24 +1312,16 @@ export default function ContactPage() {
           }
 
           .hero-art-container {
-            height: 360px;
+            height: 330px;
           }
 
-          .glass-card-1 { left: 0; }
-          .glass-card-2 { right: 0; }
-          .glass-card-3 { left: 20px; }
+          .glass-card-1 { left: 0; padding: 10px 14px; }
+          .glass-card-2 { right: 0; padding: 10px 14px; }
+          .glass-card-3 { left: 10px; padding: 10px 14px; }
         }
 
         @media (max-width: 860px) {
           .cards-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .main-section {
-            margin-top: -80px;
-          }
-
-          .steps-grid {
             grid-template-columns: 1fr;
           }
 
@@ -984,7 +1330,16 @@ export default function ContactPage() {
           }
         }
 
-        @media (max-width: 540px) {
+        @media (max-width: 580px) {
+          .footer-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .footer-bottom-inner {
+            flex-direction: column;
+            text-align: center;
+          }
+
           .topics-grid {
             grid-template-columns: 1fr;
           }
@@ -998,7 +1353,7 @@ export default function ContactPage() {
           }
 
           .hero-h1 {
-            font-size: 2.3rem;
+            font-size: 2.2rem;
           }
 
           .content-card {
@@ -1014,36 +1369,22 @@ export default function ContactPage() {
             scroll-behavior: auto !important;
           }
 
-          .reveal, .fade-up-init {
+          .reveal, .fade-up-init, .building-main-path, .building-sec-path, .window-rect, .glass-card {
             opacity: 1 !important;
             transform: none !important;
+            animation: none !important;
           }
 
-          .building-path {
+          .building-main-path, .building-sec-path {
             stroke-dashoffset: 0 !important;
           }
         }
       `}</style>
 
       {/* HERO SECTION */}
-      <section className="hero">
-        <div className="hero-glow"></div>
-
-        {/* Skyline Silhouette */}
-        <svg
-          className="skyline-svg"
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0 120V90H40V120H90V70H140V120H180V50H230V120H300V80H350V120H420V60H480V120H550V40H600V120H680V75H740V120H800V45H860V120H930V85H990V120H1060V55H1120V120H1200V70H1260V120H1330V40H1390V120H1440V120Z"
-            fill="rgba(248,247,243,0.05)"
-            stroke="rgba(238,175,51,0.35)"
-            strokeWidth="1.5"
-          />
-        </svg>
+      <section className="hero" ref={heroRef}>
+        {/* 12 Drifting Hollow Gold Squares */}
+        <div className="drift-container" ref={driftContainerRef}></div>
 
         <div className="container">
           <div className="hero-grid">
@@ -1055,8 +1396,7 @@ export default function ContactPage() {
               </div>
 
               <h1 className="hero-h1 fade-up-init delay-1">
-                Let's find the property that fits{" "}
-                <span className="gold-italic">your future</span>
+                Let's find the property that fits <em>your future</em>
               </h1>
 
               <p className="hero-paragraph fade-up-init delay-2">
@@ -1071,51 +1411,62 @@ export default function ContactPage() {
                   <span className="arrow">→</span>
                 </a>
 
-                <a href="tel:[Your Phone Number]" className="btn-outline-white">
+                <a href="tel:[Your Phone Number]" className="btn-outline-navy">
                   <span>☎ Call Our Team</span>
                 </a>
               </div>
 
-              <div className="hero-chips fade-up-init delay-3">
-                <span className="chip">✔ Verified Projects</span>
-                <span className="chip">⌖ Free Site Visits</span>
-                <span className="chip">◈ Transparent Guidance</span>
+              <div className="hero-chips fade-up-init delay-4">
+                <span className="chip">Verified Projects</span>
+                <span className="chip">Free Site Visits</span>
+                <span className="chip">Transparent Guidance</span>
               </div>
             </div>
 
             {/* Right Column Art */}
-            <div className="hero-art-container">
+            <div className="hero-art-container fade-up-init delay-2">
               <div className="rotating-ring"></div>
 
               <svg
+                ref={buildingRef}
                 className="building-svg"
                 viewBox="0 0 300 300"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                {/* Windows and accents */}
+                {/* 12 Blinking Gold Windows */}
+                {/* Building 1 */}
+                <rect className="window-rect" x="45" y="140" width="9" height="13" rx="1" style={{ animationDelay: "3s" }} />
+                <rect className="window-rect" x="45" y="175" width="9" height="13" rx="1" style={{ animationDelay: "3.9s" }} />
+                <rect className="window-rect" x="45" y="210" width="9" height="13" rx="1" style={{ animationDelay: "4.7s" }} />
+
+                {/* Building 2 */}
+                <rect className="window-rect" x="95" y="70" width="9" height="13" rx="1" style={{ animationDelay: "3s" }} />
+                <rect className="window-rect" x="125" y="70" width="9" height="13" rx="1" style={{ animationDelay: "3.9s" }} />
+                <rect className="window-rect" x="95" y="115" width="9" height="13" rx="1" style={{ animationDelay: "4.7s" }} />
+                <rect className="window-rect" x="125" y="115" width="9" height="13" rx="1" style={{ animationDelay: "3s" }} />
+                <rect className="window-rect" x="95" y="160" width="9" height="13" rx="1" style={{ animationDelay: "3.9s" }} />
+                <rect className="window-rect" x="125" y="160" width="9" height="13" rx="1" style={{ animationDelay: "4.7s" }} />
+
+                {/* Building 3 */}
+                <rect className="window-rect" x="185" y="130" width="9" height="13" rx="1" style={{ animationDelay: "3s" }} />
+                <rect className="window-rect" x="220" y="145" width="9" height="13" rx="1" style={{ animationDelay: "3.9s" }} />
+                <rect className="window-rect" x="185" y="180" width="9" height="13" rx="1" style={{ animationDelay: "4.7s" }} />
+
+                {/* Secondary Path (55% opacity) */}
                 <path
-                  d="M45 140h20M45 170h20M45 200h20M45 230h20 M100 80h40M100 110h40M100 140h40M100 170h40M100 200h40M100 230h40 M185 130h50M185 160h50M185 190h50M185 220h50"
-                  stroke="rgba(238,175,51,0.4)"
-                  strokeWidth="1.5"
-                  strokeDasharray="3 3"
+                  className="building-sec-path"
+                  d="M10 270H290M105 90v40M105 160v40M135 70v40M135 140v40M190 150v30M225 165v30"
                 />
 
                 {/* Main 3 Buildings Line Art */}
                 <path
-                  className="building-path"
+                  className="building-main-path"
                   d="M30 270V120l50-30v180M80 270V50l80-40v260M160 270V100l110 60v110z"
-                />
-
-                {/* Baseline */}
-                <path
-                  className="building-path"
-                  d="M20 270h260"
-                  style={{ animationDelay: "1s" }}
                 />
               </svg>
 
-              {/* Floating Glass Cards */}
-              <div className="glass-card glass-card-1">
+              {/* Floating Cards */}
+              <div className="glass-card glass-card-1" ref={card1Ref}>
                 <div className="glass-icon">✔</div>
                 <div>
                   <div className="glass-text-title">Verified Projects</div>
@@ -1123,7 +1474,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="glass-card glass-card-2">
+              <div className="glass-card glass-card-2" ref={card2Ref}>
                 <div className="glass-icon">⌖</div>
                 <div>
                   <div className="glass-text-title">Free Site Visits</div>
@@ -1131,7 +1482,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="glass-card glass-card-3">
+              <div className="glass-card glass-card-3" ref={card3Ref}>
                 <div className="glass-icon">◈</div>
                 <div>
                   <div className="glass-text-title">Plots & Residential</div>
@@ -1143,7 +1494,19 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* MAIN CONTENT (OVERLAP) */}
+      {/* SECTION PARTITION DIVIDER BAR */}
+      <div className="container">
+        <div className="section-partition">
+          <div className="partition-line"></div>
+          <div className="partition-pill">
+            <span className="partition-icon">◈</span>
+            <span className="partition-text">ENQUIRY & DIRECT CONTACT</span>
+          </div>
+          <div className="partition-line"></div>
+        </div>
+      </div>
+
+      {/* MAIN CONTENT SECTION */}
       <section className="main-section" id="enquiry">
         <div className="container">
           <div className="cards-grid">
@@ -1159,7 +1522,7 @@ export default function ContactPage() {
                   <div className="contact-icon">☎</div>
                   <div>
                     <div className="contact-label">Phone</div>
-                    <div className="contact-val">[Your Phone Number]</div>
+                    <div className="contact-val">9699660972, 8788430110</div>
                   </div>
                 </a>
 
@@ -1167,7 +1530,7 @@ export default function ContactPage() {
                   <div className="contact-icon">✉</div>
                   <div>
                     <div className="contact-label">Email</div>
-                    <div className="contact-val">[Your Email Address]</div>
+                    <div className="contact-val">info@visionsquareinfra.com</div>
                   </div>
                 </a>
 
@@ -1175,7 +1538,9 @@ export default function ContactPage() {
                   <div className="contact-icon">⌖</div>
                   <div>
                     <div className="contact-label">Office</div>
-                    <div className="contact-val">[Your Office Address, Nagpur]</div>
+                    <div className="contact-val">
+                      Bidoba Sahkari Sanstha, Plot no 133, Wardha Road, Near Hotel Center Point, Bante Layout, Sonegaon, Ujwal Nagar, Nagpur-440025
+                    </div>
                   </div>
                 </div>
 
@@ -1183,7 +1548,7 @@ export default function ContactPage() {
                   <div className="contact-icon">◷</div>
                   <div>
                     <div className="contact-label">Hours</div>
-                    <div className="contact-val">Mon–Sat, 10:00 AM – 7:00 PM</div>
+                    <div className="contact-val">Mon–Sun, 10:00 AM – 7:00 PM</div>
                   </div>
                 </div>
               </div>
@@ -1205,7 +1570,7 @@ export default function ContactPage() {
                 Tell us what you are looking for and we will share suitable options.
               </p>
 
-              <form onSubmit={handleSubmit} className="form-grid">
+              <form onSubmit={handleSubmit} className="form-grid" noValidate>
                 <div className="form-group full-width">
                   <label htmlFor="fullName" className="form-label">
                     Full Name
@@ -1217,12 +1582,13 @@ export default function ContactPage() {
                       name="fullName"
                       required
                       placeholder="Enter your name"
-                      className="form-input"
+                      className={`form-input ${errors.fullName ? "has-error" : ""}`}
                       value={formData.fullName}
                       onChange={handleChange}
                     />
                     <div className="input-underline"></div>
                   </div>
+                  {errors.fullName && <div className="error-msg">{errors.fullName}</div>}
                 </div>
 
                 <div className="form-group">
@@ -1236,12 +1602,13 @@ export default function ContactPage() {
                       name="phoneNum"
                       required
                       placeholder="Your 10-digit number"
-                      className="form-input"
+                      className={`form-input ${errors.phoneNum ? "has-error" : ""}`}
                       value={formData.phoneNum}
                       onChange={handleChange}
                     />
                     <div className="input-underline"></div>
                   </div>
+                  {errors.phoneNum && <div className="error-msg">{errors.phoneNum}</div>}
                 </div>
 
                 <div className="form-group">
@@ -1254,12 +1621,13 @@ export default function ContactPage() {
                       id="emailAdd"
                       name="emailAdd"
                       placeholder="your.email@example.com"
-                      className="form-input"
+                      className={`form-input ${errors.emailAdd ? "has-error" : ""}`}
                       value={formData.emailAdd}
                       onChange={handleChange}
                     />
                     <div className="input-underline"></div>
                   </div>
+                  {errors.emailAdd && <div className="error-msg">{errors.emailAdd}</div>}
                 </div>
 
                 <div className="form-group">
@@ -1344,10 +1712,20 @@ export default function ContactPage() {
                 </div>
 
                 <div className="form-group full-width">
-                  <button type="submit" className="btn-submit">
-                    <span>Submit Enquiry</span>
-                    <span>→</span>
+                  <button type="submit" className="btn-submit" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <div className="spinner"></div>
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Enquiry</span>
+                        <span>→</span>
+                      </>
+                    )}
                   </button>
+
                   <p className="privacy-text">
                     We respect your privacy and will use your details only to respond to
                     your enquiry.
@@ -1382,52 +1760,14 @@ export default function ContactPage() {
                     Thank you!
                   </h4>
                   <p style={{ fontSize: "0.92rem", color: "var(--text-muted)" }}>
-                    Your enquiry is ready in WhatsApp. Send it and our team will get back
-                    to you shortly.
+                    {serverMessage ||
+                      "Your enquiry is ready in WhatsApp. Send it and our team will get back to you shortly."}
                   </p>
+                  <button type="button" onClick={handleReset} className="btn-reset">
+                    Send another enquiry
+                  </button>
                 </div>
               )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS SECTION */}
-      <section className="section-padding">
-        <div className="container">
-          <div className="section-header reveal">
-            <div className="eyebrow">HOW IT WORKS</div>
-            <h2 className="section-title">Your property journey, made simple</h2>
-            <p className="section-subtitle">
-              As your channel partner, we work for a smooth, well-informed buying
-              experience.
-            </p>
-          </div>
-
-          <div className="steps-grid">
-            <div className="step-card reveal">
-              <div className="step-num">01</div>
-              <h3 className="step-title">Share Your Needs</h3>
-              <p className="step-desc">
-                Tell us your budget, preferred location and property type.
-              </p>
-            </div>
-
-            <div className="step-card reveal">
-              <div className="step-num">02</div>
-              <h3 className="step-title">Get Curated Options</h3>
-              <p className="step-desc">
-                We shortlist verified projects and plots with clear details on location,
-                layout and connectivity.
-              </p>
-            </div>
-
-            <div className="step-card reveal">
-              <div className="step-num">03</div>
-              <h3 className="step-title">Visit & Decide</h3>
-              <p className="step-desc">
-                We arrange site visits and support you through documentation and booking.
-              </p>
             </div>
           </div>
         </div>
@@ -1473,13 +1813,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer>
-        <div className="container">
-          <p>© 2026 VisionSquare Infra · Real Estate Channel Partner, Nagpur</p>
-        </div>
-      </footer>
     </>
   );
 }
