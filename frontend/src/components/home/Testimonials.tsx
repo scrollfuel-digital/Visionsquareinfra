@@ -19,19 +19,19 @@ export default function Testimonials() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-px w-8 bg-[#eeaf33]" />
-            <span className="font-sans text-xs uppercase tracking-[0.25em] text-[#eeaf33] font-semibold">
+            <span className="font-sans text-xs uppercase tracking-[0.25em] text-[#eeaf33] font-bold">
               Client Testimonials
             </span>
             <span className="h-px w-8 bg-[#eeaf33]" />
           </div>
 
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-[#F8F7F3] leading-tight mb-4">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#F8F7F3] leading-tight mb-4">
             Stories of{" "}
-            <span className="italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-[#F8F7F3] via-[#eeaf33] to-[#eeaf33]">
+            <span className="italic font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#F8F7F3] via-[#eeaf33] to-[#eeaf33]">
               Trust & Fulfillment
             </span>
           </h2>
-          <p className="text-[#F8F7F3]/70 text-base font-light">
+          <p className="font-sans text-[#F8F7F3]/75 text-base font-normal">
             Hear from families and investors who built their dreams and grew their wealth with Vision Square Infra.
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function Testimonials() {
                 </div>
 
                 {/* Quote Text */}
-                <p className="font-serif text-[#F8F7F3] text-lg sm:text-xl font-light leading-relaxed italic mb-8">
+                <p className="font-serif text-[#F8F7F3] text-lg sm:text-xl font-normal leading-relaxed italic mb-8">
                   "{t.quote}"
                 </p>
               </div>
@@ -77,10 +77,10 @@ export default function Testimonials() {
                     />
                   </div>
                   <div>
-                    <h4 className="font-serif text-base text-[#F8F7F3] font-medium leading-snug">
+                    <h4 className="font-serif text-base text-[#F8F7F3] font-bold leading-snug">
                       {t.author}
                     </h4>
-                    <p className="text-xs text-[#F8F7F3]/65 font-light mt-0.5">
+                    <p className="font-sans text-xs text-[#F8F7F3]/70 font-normal mt-0.5">
                       {t.role}
                     </p>
                   </div>
@@ -93,34 +93,34 @@ export default function Testimonials() {
         {/* Trust Badges Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-8 rounded-3xl bg-[#284153]/30 border border-[#284153]/70 backdrop-blur-sm text-center">
           <div>
-            <span className="font-serif text-2xl sm:text-3xl text-[#eeaf33] font-light block mb-1">
+            <span className="font-serif text-2xl sm:text-3xl text-[#eeaf33] font-bold block mb-1">
               4.9 / 5.0
             </span>
-            <span className="text-xs text-[#F8F7F3]/70 uppercase tracking-wider">
+            <span className="font-sans text-xs text-[#F8F7F3]/75 uppercase tracking-wider font-semibold">
               Customer Satisfaction
             </span>
           </div>
           <div>
-            <span className="font-serif text-2xl sm:text-3xl text-[#eeaf33] font-light block mb-1">
+            <span className="font-serif text-2xl sm:text-3xl text-[#eeaf33] font-bold block mb-1">
               100%
             </span>
-            <span className="text-xs text-[#F8F7F3]/70 uppercase tracking-wider">
+            <span className="font-sans text-xs text-[#F8F7F3]/75 uppercase tracking-wider font-semibold">
               Clear & Spot Registrations
             </span>
           </div>
           <div>
-            <span className="font-serif text-2xl sm:text-3xl text-[#eeaf33] font-light block mb-1">
+            <span className="font-serif text-2xl sm:text-3xl text-[#eeaf33] font-bold block mb-1">
               500+
             </span>
-            <span className="text-xs text-[#F8F7F3]/70 uppercase tracking-wider">
+            <span className="font-sans text-xs text-[#F8F7F3]/75 uppercase tracking-wider font-semibold">
               Delighted Families
             </span>
           </div>
           <div>
-            <span className="font-serif text-2xl sm:text-3xl text-[#eeaf33] font-light block mb-1">
+            <span className="font-serif text-2xl sm:text-3xl text-[#eeaf33] font-bold block mb-1">
               Zero
             </span>
-            <span className="text-xs text-[#F8F7F3]/70 uppercase tracking-wider">
+            <span className="font-sans text-xs text-[#F8F7F3]/75 uppercase tracking-wider font-semibold">
               Dispute Land Guarantee
             </span>
           </div>

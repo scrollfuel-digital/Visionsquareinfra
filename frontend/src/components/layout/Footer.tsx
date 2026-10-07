@@ -32,10 +32,10 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif text-[#F8F7F3] text-base font-medium mb-5 tracking-wider">
+            <h4 className="font-serif font-bold text-[#F8F7F3] text-base mb-5 tracking-wider">
               Quick Links
             </h4>
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-3 text-sm font-sans">
               <li>
                 <Link href="/about-us" className="hover:text-[#eeaf33] transition-colors">
                   About Us
@@ -61,10 +61,10 @@ export default function Footer() {
 
           {/* Featured Projects */}
           <div>
-            <h4 className="font-serif text-[#F8F7F3] text-base font-medium mb-5 tracking-wider">
+            <h4 className="font-serif font-bold text-[#F8F7F3] text-base mb-5 tracking-wider">
               Developments
             </h4>
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-3 text-sm font-sans">
               <li>
                 <Link href="/projects/vision-heights" className="hover:text-[#eeaf33] transition-colors">
                   Vision Heights (Villas)
@@ -85,10 +85,10 @@ export default function Footer() {
 
           {/* Contact Details */}
           <div>
-            <h4 className="font-serif text-[#F8F7F3] text-base font-medium mb-5 tracking-wider">
+            <h4 className="font-serif font-bold text-[#F8F7F3] text-base mb-5 tracking-wider">
               Head Office
             </h4>
-            <div className="space-y-3.5 text-sm">
+            <div className="space-y-3.5 text-sm font-sans">
               <div className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-[#eeaf33] shrink-0 mt-0.5" />
                 <span className="text-xs leading-relaxed">

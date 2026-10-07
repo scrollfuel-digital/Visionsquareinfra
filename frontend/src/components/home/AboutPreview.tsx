@@ -88,7 +88,7 @@ export default function AboutPreview() {
                 </button>
 
                 {/* Bottom Right Floating Badge: 28+ YEARS OF EXCELLENCE */}
-                <div className="absolute bottom-5 right-5 sm:bottom-6 sm:right-6 bg-[#172027]/95 backdrop-blur-md border border-[#eeaf33]/30 text-white rounded-2xl px-5 py-3.5 sm:px-6 sm:py-4 shadow-2xl flex flex-col items-center justify-center text-center z-10">
+                {/* <div className="absolute bottom-5 right-5 sm:bottom-6 sm:right-6 bg-[#172027]/95 backdrop-blur-md border border-[#eeaf33]/30 text-white rounded-2xl px-5 py-3.5 sm:px-6 sm:py-4 shadow-2xl flex flex-col items-center justify-center text-center z-10">
                   <span className="font-serif text-3xl sm:text-4xl font-bold text-[#eeaf33] tracking-tight leading-none">
                     28+
                   </span>
@@ -97,7 +97,7 @@ export default function AboutPreview() {
                     <br />
                     Excellence
                   </span>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -109,7 +109,7 @@ export default function AboutPreview() {
               </span>
 
               {/* Headline */}
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-[#172027] leading-[1.12] tracking-tight mb-5">
+              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-[#284153] leading-[1.12] tracking-tight mb-5">
                 Elevating Real Estate Experience in Nagpur
               </h2>
 
@@ -126,10 +126,10 @@ export default function AboutPreview() {
                     <TrendingUp className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-[#172027] leading-snug">
+                    <h3 className="font-serif text-base sm:text-lg font-bold text-[#284153] leading-snug">
                       Market Expertise
                     </h3>
-                    <p className="text-xs text-[#5A6872] leading-normal mt-1">
+                    <p className="font-sans text-xs text-[#5A6872] leading-normal mt-1">
                       In-depth Nagpur market knowledge &amp; strategic planning.
                     </p>
                   </div>
@@ -141,10 +141,10 @@ export default function AboutPreview() {
                     <UserCheck className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-[#172027] leading-snug">
+                    <h3 className="font-serif text-base sm:text-lg font-bold text-[#284153] leading-snug">
                       Personalized Service
                     </h3>
-                    <p className="text-xs text-[#5A6872] leading-normal mt-1">
+                    <p className="font-sans text-xs text-[#5A6872] leading-normal mt-1">
                       Honest &amp; clear communication tailored to your lifestyle.
                     </p>
                   </div>
@@ -156,10 +156,10 @@ export default function AboutPreview() {
                     <ShieldCheck className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-[#172027] leading-snug">
+                    <h3 className="font-serif text-base sm:text-lg font-bold text-[#284153] leading-snug">
                       Trusted &amp; Transparent
                     </h3>
-                    <p className="text-xs text-[#5A6872] leading-normal mt-1">
+                    <p className="font-sans text-xs text-[#5A6872] leading-normal mt-1">
                       Clear documentation and verified project insights.
                     </p>
                   </div>
@@ -171,10 +171,10 @@ export default function AboutPreview() {
                     <Handshake className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-[#172027] leading-snug">
+                    <h3 className="font-serif text-base sm:text-lg font-bold text-[#284153] leading-snug">
                       Seamless Process
                     </h3>
-                    <p className="text-xs text-[#5A6872] leading-normal mt-1">
+                    <p className="font-sans text-xs text-[#5A6872] leading-normal mt-1">
                       Smooth from initial exploration to registry &amp; possession.
                     </p>
                   </div>
@@ -211,10 +211,10 @@ export default function AboutPreview() {
                         <Icon className="h-6 w-6" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-[#172027] leading-tight">
+                        <h4 className="font-serif text-base font-bold text-[#284153] leading-tight">
                           {item.label}
                         </h4>
-                        <p className="text-xs text-[#5A6872] mt-0.5">
+                        <p className="font-sans text-xs text-[#5A6872] mt-0.5">
                           {item.count}
                         </p>
                       </div>
@@ -233,7 +233,7 @@ export default function AboutPreview() {
           <div className="relative w-full max-w-4xl rounded-2xl overflow-hidden bg-[#172027] border border-[#eeaf33]/30 shadow-2xl">
             {/* Modal Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[#284153]">
-              <span className="font-serif text-lg text-[#F8F7F3] font-medium">
+              <span className="font-serif text-lg text-[#F8F7F3] font-bold">
                 VisionS Infra — Luxury Living Showcase
               </span>
               <button
@@ -258,10 +258,10 @@ export default function AboutPreview() {
                 <div className="w-16 h-16 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center mb-4 shadow-lg">
                   <Play className="h-7 w-7 fill-[#172027] translate-x-0.5" />
                 </div>
-                <h3 className="font-serif text-2xl text-white font-medium mb-2">
+                <h3 className="font-serif text-2xl text-white font-bold mb-2">
                   Experience Architectural Brilliance
                 </h3>
-                <p className="text-neutral-300 text-sm max-w-md">
+                <p className="font-sans text-neutral-300 text-sm max-w-md font-normal">
                   Private video walkthrough of our signature luxury properties in Nagpur &amp; premier corridors.
                 </p>
               </div>

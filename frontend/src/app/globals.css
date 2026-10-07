@@ -2,7 +2,9 @@
 
 @theme {
   --font-serif: var(--font-serif), "Cormorant Garamond", Georgia, serif;
-  --font-sans: var(--font-sans), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: var(--font-sans), "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-sans), "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
   --color-cream: #f8f7f3;
   --color-gold: #eeaf33;
   --color-gold-hover: #f5be47;
@@ -11,6 +13,10 @@
 }
 
 :root {
+  /* Official Brand Fonts */
+  --font-heading: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
+  --font-body: var(--font-sans), 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+
   /* Official Brand Color System */
   --brand-cream: #f8f7f3;
   --brand-gold: #eeaf33;
@@ -30,6 +36,11 @@
 
   --slate-border: rgba(40, 65, 83, 0.75);
   --gold-border: rgba(238, 175, 51, 0.28);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
 }
 
 * {

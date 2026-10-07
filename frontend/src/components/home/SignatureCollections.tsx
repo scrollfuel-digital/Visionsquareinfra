@@ -21,6 +21,7 @@ import {
 export default function SignatureCollections() {
   // Modal states
   const [activeVideoModal, setActiveVideoModal] = useState<"crown" | "amara" | "skyjoy" | null>(null);
+  const [activeCrownVideo, setActiveCrownVideo] = useState<1 | 2>(1);
   const [activeExploreModal, setActiveExploreModal] = useState<"crown" | "amara" | "skyjoy" | null>(null);
   const [activeLightbox, setActiveLightbox] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(true);
@@ -55,15 +56,15 @@ export default function SignatureCollections() {
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-px w-8 bg-[#eeaf33]" />
-            <span className="font-serif text-xs uppercase tracking-[0.25em] text-[#eeaf33] font-bold">
+            <span className="font-sans text-xs uppercase tracking-[0.25em] text-[#eeaf33] font-bold">
               Signature Collections
             </span>
             <span className="h-px w-8 bg-[#eeaf33]" />
           </div>
-          <h2 className="font-serif font-normal text-2xl sm:text-3xl md:text-4xl lg:text-[42px] text-[#172027] uppercase tracking-[0.22em] sm:tracking-[0.28em] leading-tight">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl md:text-4xl lg:text-[42px] text-[#284153] uppercase tracking-[0.16em] sm:tracking-[0.22em] leading-tight">
             Curated Architectural Enclaves
           </h2>
-          <p className="font-serif italic text-xs sm:text-sm md:text-base text-[#172027]/75 font-normal mt-2.5 tracking-wide">
+          <p className="font-sans italic text-xs sm:text-sm md:text-base text-[#284153]/75 font-normal mt-2.5 tracking-wide">
             More than a home. A signature way of living.
           </p>
         </div>
@@ -91,7 +92,7 @@ export default function SignatureCollections() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#172027]/40 via-transparent to-transparent pointer-events-none" />
 
                 <div className="absolute top-5 left-5 z-10">
-                  <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md">
+                  <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md font-sans">
                     SIGNATURE ADDRESS
                   </span>
                 </div>
@@ -108,16 +109,18 @@ export default function SignatureCollections() {
                   setActiveVideoModal("crown");
                 }}
                 className="absolute -left-3 sm:-left-5 -bottom-4 sm:-bottom-5 w-36 sm:w-48 h-24 sm:h-30 rounded-2xl overflow-hidden border-4 border-[#FAF9F5] shadow-2xl z-20 cursor-pointer transition-transform duration-300 hover:scale-105 group/video"
-                title="Watch SkyConnect 7 Crown walkthrough video"
+                title="Watch SkyConnect 7 Crown walkthrough videos"
               >
-                <Image
-                  src="/images/projects/skyconnect-penthouse.jpg"
-                  alt="SkyConnect 7 Crown Penthouse & Rooftop Tour Video"
-                  fill
-                  sizes="200px"
-                  className="object-cover transition-transform duration-500 group-hover/video:scale-110"
+                <video
+                  src="/videos/SKY%20connect.mp4"
+                  muted
+                  autoPlay
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-110 pointer-events-none"
                 />
-                <div className="absolute inset-0 bg-black/35 group-hover/video:bg-black/20 transition-colors" />
+                <div className="absolute inset-0 bg-black/30 group-hover/video:bg-black/15 transition-colors" />
 
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="relative flex items-center justify-center">
@@ -128,10 +131,10 @@ export default function SignatureCollections() {
                   </div>
                 </div>
 
-                <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md">
+                <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md z-10 font-sans">
                   <span className="inline-flex items-center gap-1 bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
                     <span className="w-1 h-1 rounded-full bg-[#eeaf33] animate-pulse" />
-                    VIDEO
+                    2 VIDEOS
                   </span>
                   <span className="bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm text-[8px]">
                     Tour
@@ -144,21 +147,21 @@ export default function SignatureCollections() {
           {/* Right: Reduced Height Elevated Card */}
           <div className="w-full lg:w-[44%] max-w-[450px] mt-8 lg:mt-0 lg:-ml-12 relative z-20">
             <div className="bg-[#FAF9F5] rounded-[2rem] p-6 sm:p-7 md:p-8 shadow-[0_25px_60px_-15px_rgba(23,32,39,0.18),0_10px_25px_-5px_rgba(23,32,39,0.08)] relative">
-              <div className="font-serif font-bold text-[11px] sm:text-xs text-[#172027] uppercase tracking-[0.2em] mb-2">
+              <div className="font-sans font-bold text-[11px] sm:text-xs text-[#284153] uppercase tracking-[0.2em] mb-2">
                 JAIPRAKASH NAGAR · NAGPUR
               </div>
 
-              <h3 className="font-serif font-normal text-2xl sm:text-3xl lg:text-[34px] text-[#eeaf33] tracking-[0.22em] leading-[1.12] uppercase mb-2">
+              <h3 className="font-serif font-bold text-2xl sm:text-3xl lg:text-[34px] text-[#284153] tracking-[0.16em] leading-[1.12] uppercase mb-2">
                 SKYCONNECT
                 <br />
                 7 CROWN
               </h3>
 
-              <p className="font-serif italic text-xs sm:text-sm text-[#172027]/85 font-medium mb-2.5">
+              <p className="font-sans italic text-xs sm:text-sm text-[#284153]/85 font-medium mb-2.5">
                 More than a home. A signature way of living.
               </p>
 
-              <p className="font-sans text-xs sm:text-[13px] text-[#172027]/75 font-normal leading-relaxed mb-4 max-w-sm font-light">
+              <p className="font-sans text-xs sm:text-[13px] text-[#284153]/75 font-normal leading-relaxed mb-4 max-w-sm">
                 A premium 3 BHK residential address designed around spacious living,
                 refined finishes, smart security and contemporary lifestyle amenities.
               </p>
@@ -166,37 +169,37 @@ export default function SignatureCollections() {
               <div className="border-t border-[#172027]/12 pt-3.5 pb-3.5 mb-5">
                 <div className="grid grid-cols-2 gap-y-3.5">
                   <div className="pr-3 border-r border-[#172027]/12">
-                    <div className="font-sans text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
+                    <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
                       3
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       BHK PREMIUM HOMES
                     </div>
                   </div>
 
                   <div className="pl-4">
-                    <div className="font-sans text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
+                    <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
                       01
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       SIGNATURE ADDRESS
                     </div>
                   </div>
 
                   <div className="pr-3 border-r border-[#172027]/12">
-                    <div className="font-sans text-lg sm:text-xl font-bold text-[#eeaf33]">
+                    <div className="font-serif text-lg sm:text-xl font-bold text-[#eeaf33]">
                       24×7
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       SECURITY &amp; WATER
                     </div>
                   </div>
 
                   <div className="pl-4">
-                    <div className="font-sans text-lg sm:text-xl font-bold text-[#eeaf33]">
+                    <div className="font-serif text-lg sm:text-xl font-bold text-[#eeaf33]">
                       01
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       ROOFTOP GARDEN
                     </div>
                   </div>
@@ -231,7 +234,7 @@ export default function SignatureCollections() {
 
         {/* Ribbon 1: Pyramid Amara Ticker */}
         <div className="mb-20 sm:mb-28 overflow-hidden py-3 border-y border-[#172027]/10 bg-white/50 backdrop-blur-sm rounded-full">
-          <div className="flex items-center justify-around gap-6 text-[11px] sm:text-xs font-serif font-medium uppercase tracking-[0.2em] text-[#172027]/80">
+          <div className="flex items-center justify-around gap-6 text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-[0.2em] text-[#284153]/80">
             <span className="inline-flex items-center gap-2">
               Pyramid Amara <span className="text-[#eeaf33]">✦</span>
             </span>
@@ -260,21 +263,21 @@ export default function SignatureCollections() {
           {/* Left: Reduced Height Elevated Card for Pyramid Amara */}
           <div className="w-full lg:w-[450px] max-w-[450px] order-2 lg:order-1 mt-8 lg:mt-0 relative z-20">
             <div className="bg-[#FAF9F5] rounded-[2rem] p-6 sm:p-7 md:p-8 shadow-[0_25px_60px_-15px_rgba(23,32,39,0.18),0_10px_25px_-5px_rgba(23,32,39,0.08)] relative">
-              <div className="font-serif font-bold text-[11px] sm:text-xs text-[#172027] uppercase tracking-[0.2em] mb-2">
+              <div className="font-sans font-bold text-[11px] sm:text-xs text-[#284153] uppercase tracking-[0.2em] mb-2">
                 PYRAMID GROUP · BESA–PIPLA ROAD, NAGPUR
               </div>
 
-              <h3 className="font-serif font-normal text-2xl sm:text-3xl lg:text-[34px] text-[#eeaf33] tracking-[0.22em] leading-[1.12] uppercase mb-2">
+              <h3 className="font-serif font-bold text-2xl sm:text-3xl lg:text-[34px] text-[#284153] tracking-[0.16em] leading-[1.12] uppercase mb-2">
                 PYRAMID
                 <br />
                 AMARA
               </h3>
 
-              <p className="font-serif italic text-xs sm:text-sm text-[#172027]/85 font-medium mb-2.5">
+              <p className="font-sans italic text-xs sm:text-sm text-[#284153]/85 font-medium mb-2.5">
                 Premium living on Besa–Pipla Road.
               </p>
 
-              <p className="font-sans text-xs sm:text-[13px] text-[#172027]/75 font-normal leading-relaxed mb-4 max-w-sm font-light">
+              <p className="font-sans text-xs sm:text-[13px] text-[#284153]/75 font-normal leading-relaxed mb-4 max-w-sm">
                 A grand ~6-acre premium gated township featuring 6 high-rise towers
                 rising 14–16 floors. Thoughtfully planned 2 &amp; 3 BHK residences with RERA approval.
               </p>
@@ -282,37 +285,37 @@ export default function SignatureCollections() {
               <div className="border-t border-[#172027]/12 pt-3.5 pb-3.5 mb-5">
                 <div className="grid grid-cols-2 gap-y-3.5">
                   <div className="pr-3 border-r border-[#172027]/12">
-                    <div className="font-sans text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
+                    <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
                       ~6 Acres
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       TOTAL AREA
                     </div>
                   </div>
 
                   <div className="pl-4">
-                    <div className="font-sans text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
+                    <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
                       6 Towers
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       TOWERS
                     </div>
                   </div>
 
                   <div className="pr-3 border-r border-[#172027]/12">
-                    <div className="font-sans text-lg sm:text-xl font-bold text-[#eeaf33]">
+                    <div className="font-serif text-lg sm:text-xl font-bold text-[#eeaf33]">
                       14–16 Floors
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       FLOORS
                     </div>
                   </div>
 
                   <div className="pl-4">
-                    <div className="font-sans text-lg sm:text-xl font-bold text-[#eeaf33]">
+                    <div className="font-serif text-lg sm:text-xl font-bold text-[#eeaf33]">
                       2 &amp; 3 BHK
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       CONFIG
                     </div>
                   </div>
@@ -415,7 +418,7 @@ export default function SignatureCollections() {
 
         {/* Ribbon 2: Sky Joy Waterfront Ticker */}
         <div className="mb-20 sm:mb-28 overflow-hidden py-3 border-y border-[#172027]/10 bg-white/50 backdrop-blur-sm rounded-full">
-          <div className="flex items-center justify-around gap-6 text-[11px] sm:text-xs font-serif font-medium uppercase tracking-[0.2em] text-[#172027]/80">
+          <div className="flex items-center justify-around gap-6 text-[11px] sm:text-xs font-sans font-semibold uppercase tracking-[0.2em] text-[#284153]/80">
             <span className="inline-flex items-center gap-2">
               Sky Joy <span className="text-[#eeaf33]">✦</span>
             </span>
@@ -478,7 +481,7 @@ export default function SignatureCollections() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#172027]/40 via-transparent to-transparent pointer-events-none" />
 
                 <div className="absolute top-5 left-5 z-10">
-                  <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md">
+                  <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md font-sans">
                     INDIA&apos;S FIRST WATERFRONT PLOTS
                   </span>
                 </div>
@@ -515,7 +518,7 @@ export default function SignatureCollections() {
                   </div>
                 </div>
 
-                <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md">
+                <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md font-sans">
                   <span className="inline-flex items-center gap-1 bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
                     <span className="w-1 h-1 rounded-full bg-[#eeaf33] animate-pulse" />
                     VIDEO
@@ -531,21 +534,21 @@ export default function SignatureCollections() {
           {/* Right: Reduced Height Elevated Card for Sky Joy */}
           <div className="w-full lg:w-[44%] max-w-[450px] mt-8 lg:mt-0 lg:-ml-12 relative z-20">
             <div className="bg-[#FAF9F5] rounded-[2rem] p-6 sm:p-7 md:p-8 shadow-[0_25px_60px_-15px_rgba(23,32,39,0.18),0_10px_25px_-5px_rgba(23,32,39,0.08)] relative">
-              <div className="font-serif font-bold text-[11px] sm:text-xs text-[#172027] uppercase tracking-[0.2em] mb-1.5">
+              <div className="font-sans font-bold text-[11px] sm:text-xs text-[#284153] uppercase tracking-[0.2em] mb-1.5">
                 HOABL · MAHARERA PP1190002502095
               </div>
 
-              <h3 className="font-serif font-normal text-2xl sm:text-3xl lg:text-[34px] text-[#eeaf33] tracking-[0.22em] leading-[1.12] uppercase mb-1">
+              <h3 className="font-serif font-bold text-2xl sm:text-3xl lg:text-[34px] text-[#284153] tracking-[0.16em] leading-[1.12] uppercase mb-1">
                 SKY
                 <br />
                 JOY
               </h3>
 
-              <p className="font-serif italic text-xs sm:text-sm text-[#172027]/85 font-medium mb-2.5">
+              <p className="font-sans italic text-xs sm:text-sm text-[#284153]/85 font-medium mb-2.5">
                 Where luxury meets the waterfront.
               </p>
 
-              <p className="font-sans text-xs sm:text-[13px] text-[#172027]/75 font-normal leading-relaxed mb-4 max-w-sm font-light">
+              <p className="font-sans text-xs sm:text-[13px] text-[#284153]/75 font-normal leading-relaxed mb-4 max-w-sm">
                 India&apos;s first luxury waterfront plotted development featuring a ~3-acre man-made beach, wave pool, and grand 28,000 sq. ft. clubhouse.
               </p>
 
@@ -554,40 +557,40 @@ export default function SignatureCollections() {
                 <div className="grid grid-cols-2 gap-y-3.5">
                   {/* ~78 Acres Total Area */}
                   <div className="pr-3 border-r border-[#172027]/12">
-                    <div className="font-sans text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
+                    <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
                       ~78 Acres
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       TOTAL AREA
                     </div>
                   </div>
 
                   {/* 918 Total Plots */}
                   <div className="pl-4">
-                    <div className="font-sans text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
+                    <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
                       918
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       TOTAL PLOTS
                     </div>
                   </div>
 
                   {/* 28,000 sq.ft Clubhouse */}
                   <div className="pr-3 border-r border-[#172027]/12">
-                    <div className="font-sans text-lg sm:text-xl font-bold text-[#eeaf33]">
+                    <div className="font-serif text-lg sm:text-xl font-bold text-[#eeaf33]">
                       28,000 sq.ft
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       CLUBHOUSE
                     </div>
                   </div>
 
                   {/* ~3 Acres Beach & Pool */}
                   <div className="pl-4">
-                    <div className="font-sans text-lg sm:text-xl font-bold text-[#eeaf33]">
+                    <div className="font-serif text-lg sm:text-xl font-bold text-[#eeaf33]">
                       ~3 Acres
                     </div>
-                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#172027]/55 mt-0.5">
+                    <div className="font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-[#284153]/65 mt-0.5">
                       BEACH &amp; POOL
                     </div>
                   </div>
@@ -633,14 +636,16 @@ export default function SignatureCollections() {
             className="relative max-w-3xl w-full bg-[#FAF9F5] border-2 border-[#172027] rounded-3xl overflow-hidden p-5 sm:p-7 shadow-2xl text-[#172027]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between pb-4 border-b border-[#172027]/12 mb-4">
+            <div className="flex items-center justify-between pb-4 border-b border-[#172027]/12 mb-3">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#eeaf33] block">
+                <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-[#eeaf33] block">
                   RESIDENTIAL WALKTHROUGH TOUR
                 </span>
-                <h4 className="font-serif text-xl sm:text-2xl text-[#172027] font-medium tracking-wide">
+                <h4 className="font-serif text-xl sm:text-2xl text-[#284153] font-bold tracking-wide">
                   {activeVideoModal === "crown"
-                    ? "SkyConnect 7 Crown · Architecture & Penthouse Living"
+                    ? activeCrownVideo === 1
+                      ? "SkyConnect 7 Crown · Video Tour 1 (Architecture & Overview)"
+                      : "SkyConnect 7 Crown · Video Tour 2 (Interior & Living Spaces)"
                     : activeVideoModal === "amara"
                     ? "Pyramid Amara · 6 Towers High-Rise Township"
                     : "Sky Joy · India's First Waterfront Plotted Development"}
@@ -648,80 +653,124 @@ export default function SignatureCollections() {
               </div>
               <button
                 onClick={() => setActiveVideoModal(null)}
-                className="p-2 rounded-full hover:bg-black/10 text-[#172027] transition-colors"
+                className="p-2 rounded-full hover:bg-black/10 text-[#172027] transition-colors cursor-pointer"
                 aria-label="Close video"
               >
                 <X className="h-6 w-6" />
               </button>
             </div>
 
-            <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-black shadow-inner">
-              <Image
-                src={
-                  activeVideoModal === "crown"
-                    ? "/images/projects/skyconnect-penthouse.jpg"
-                    : activeVideoModal === "amara"
-                    ? "/images/projects/pyramid-amara.jpg"
-                    : "/images/projects/vision-imperial.jpg"
-                }
-                alt="Walkthrough Video Preview"
-                fill
-                className="object-cover"
-              />
+            {/* Video Switcher for SkyConnect 7 Crown (2 Available Videos) */}
+            {activeVideoModal === "crown" && (
+              <div className="flex flex-wrap items-center gap-2 mb-4 font-sans">
+                <button
+                  type="button"
+                  onClick={() => setActiveCrownVideo(1)}
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
+                    activeCrownVideo === 1
+                      ? "bg-[#eeaf33] text-[#172027] shadow-sm font-bold scale-[1.02]"
+                      : "bg-black/5 text-[#172027]/70 hover:bg-black/10 hover:text-[#172027]"
+                  }`}
+                >
+                  <Play className="h-3 w-3 fill-current" />
+                  <span>Video 1 · Project Tour</span>
+                </button>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30 flex flex-col justify-between p-6">
-                <div className="flex items-center justify-between text-white text-xs">
-                  <span className="inline-flex items-center gap-2 bg-black/60 px-3 py-1 rounded-full backdrop-blur-md">
-                    <span className="w-2 h-2 rounded-full bg-[#eeaf33] animate-pulse" />
-                    {activeVideoModal === "crown"
-                      ? "Double-Height Living & City Skyline"
-                      : activeVideoModal === "amara"
-                      ? "~6 Acres Gated Township · 14–16 Floors"
-                      : "~78 Acres Waterfront Plotted Development"}
-                  </span>
-                  <button
-                    onClick={() => setIsMuted(!isMuted)}
-                    className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md transition-colors"
-                  >
-                    {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-                  </button>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveCrownVideo(2)}
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
+                    activeCrownVideo === 2
+                      ? "bg-[#eeaf33] text-[#172027] shadow-sm font-bold scale-[1.02]"
+                      : "bg-black/5 text-[#172027]/70 hover:bg-black/10 hover:text-[#172027]"
+                  }`}
+                >
+                  <Play className="h-3 w-3 fill-current" />
+                  <span>Video 2 · Walkthrough</span>
+                </button>
 
-                <div className="text-white text-center max-w-md mx-auto">
-                  <div className="w-14 h-14 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center mx-auto mb-3 shadow-xl">
-                    <Play className="h-6 w-6 fill-[#172027] translate-x-0.5" />
-                  </div>
-                  <h5 className="font-serif text-lg sm:text-xl font-medium mb-1">
-                    {activeVideoModal === "crown"
-                      ? "Signature 3 BHK Residences"
-                      : activeVideoModal === "amara"
-                      ? "2 & 3 BHK High-Rise Homes"
-                      : "India's First Waterfront Plots"}
-                  </h5>
-                  <p className="text-xs text-white/80 leading-relaxed font-light">
-                    {activeVideoModal === "crown"
-                      ? "Italian marble finishes, covered parking, and an exclusive landscaped rooftop sanctuary in Jaiprakash Nagar."
-                      : activeVideoModal === "amara"
-                      ? "Grand clubhouse, landscaped central garden, multi-tier security, and unmatched connectivity on Besa–Pipla Road."
-                      : "~3-acre man-made beach and wave pool with a grand 28,000 sq.ft clubhouse and 40+ world-class lifestyle amenities."}
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between text-[11px] text-white/70">
-                  <span>
-                    {activeVideoModal === "crown"
-                      ? "Jaiprakash Nagar"
-                      : activeVideoModal === "amara"
-                      ? "Besa–Pipla Road"
-                      : "Mondha, Hingna, South Nagpur"}
-                  </span>
-                  <span>Nagpur</span>
-                </div>
+                <span className="text-[11px] text-[#172027]/55 ml-auto hidden sm:inline-block font-medium">
+                  Switch between 2 walkthrough videos
+                </span>
               </div>
+            )}
+
+            <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-black shadow-inner">
+              {activeVideoModal === "crown" ? (
+                <video
+                  key={activeCrownVideo}
+                  src={
+                    activeCrownVideo === 1
+                      ? "/videos/SKY%20connect.mp4"
+                      : "/videos/SKYconnect%202.mp4"
+                  }
+                  controls
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-contain bg-black"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <>
+                  <Image
+                    src={
+                      activeVideoModal === "amara"
+                        ? "/images/projects/pyramid-amara.jpg"
+                        : "/images/projects/vision-imperial.jpg"
+                    }
+                    alt="Walkthrough Video Preview"
+                    fill
+                    className="object-cover"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/30 flex flex-col justify-between p-6">
+                    <div className="flex items-center justify-between text-white text-xs font-sans">
+                      <span className="inline-flex items-center gap-2 bg-black/60 px-3 py-1 rounded-full backdrop-blur-md">
+                        <span className="w-2 h-2 rounded-full bg-[#eeaf33] animate-pulse" />
+                        {activeVideoModal === "amara"
+                          ? "~6 Acres Gated Township · 14–16 Floors"
+                          : "~78 Acres Waterfront Plotted Development"}
+                      </span>
+                      <button
+                        onClick={() => setIsMuted(!isMuted)}
+                        className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md transition-colors"
+                      >
+                        {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+                      </button>
+                    </div>
+
+                    <div className="text-white text-center max-w-md mx-auto">
+                      <div className="w-14 h-14 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center mx-auto mb-3 shadow-xl">
+                        <Play className="h-6 w-6 fill-[#172027] translate-x-0.5" />
+                      </div>
+                      <h5 className="font-serif text-lg sm:text-xl font-bold mb-1 text-white">
+                        {activeVideoModal === "amara"
+                          ? "2 & 3 BHK High-Rise Homes"
+                          : "India's First Waterfront Plots"}
+                      </h5>
+                      <p className="font-sans text-xs text-white/85 leading-relaxed font-normal">
+                        {activeVideoModal === "amara"
+                          ? "Grand clubhouse, landscaped central garden, multi-tier security, and unmatched connectivity on Besa–Pipla Road."
+                          : "~3-acre man-made beach and wave pool with a grand 28,000 sq.ft clubhouse and 40+ world-class lifestyle amenities."}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between text-[11px] text-white/70 font-sans">
+                      <span>
+                        {activeVideoModal === "amara"
+                          ? "Besa–Pipla Road"
+                          : "Mondha, Hingna, South Nagpur"}
+                      </span>
+                      <span>Nagpur</span>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="mt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <span className="text-xs text-[#172027]/70 font-light">
+              <span className="font-sans text-xs text-[#172027]/70 font-normal">
                 Schedule a private site visit to experience floor plans and availability in person.
               </span>
               <button
@@ -730,7 +779,7 @@ export default function SignatureCollections() {
                   setActiveVideoModal(null);
                   setActiveExploreModal(current);
                 }}
-                className="px-6 py-2.5 rounded-full bg-[#eeaf33] text-[#172027] text-xs font-bold uppercase tracking-wider hover:bg-[#f5be47] transition-all shadow-sm shrink-0"
+                className="px-6 py-2.5 rounded-full bg-[#eeaf33] text-[#172027] font-sans text-xs font-bold uppercase tracking-wider hover:bg-[#f5be47] transition-all shadow-sm shrink-0"
               >
                 Enquire Details
               </button>
@@ -753,10 +802,10 @@ export default function SignatureCollections() {
           >
             <div className="flex items-center justify-between pb-3 border-b border-[#172027]/12 mb-4">
               <div>
-                <h4 className="font-serif text-xl sm:text-2xl text-[#172027] font-medium tracking-wide">
+                <h4 className="font-serif text-xl sm:text-2xl text-[#284153] font-bold tracking-wide">
                   ARCHITECTURE SHOWCASE
                 </h4>
-                <p className="text-xs text-[#172027]/60">
+                <p className="font-sans text-xs text-[#284153]/70 font-normal">
                   Signature Residential &amp; Waterfront Collection · Nagpur
                 </p>
               </div>
@@ -797,17 +846,17 @@ export default function SignatureCollections() {
             {/* Modal Header */}
             <div className="flex items-start justify-between pb-5 border-b border-[#172027]/12 mb-6">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#eeaf33] block mb-1">
+                <span className="font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-[#eeaf33] block mb-1">
                   SIGNATURE ENCLAVE SHOWCASE
                 </span>
-                <h3 className="font-serif text-2xl sm:text-3xl text-[#172027] font-normal tracking-[0.16em] uppercase">
+                <h3 className="font-serif text-2xl sm:text-3xl text-[#284153] font-bold tracking-[0.16em] uppercase">
                   {activeExploreModal === "crown"
                     ? "SKYCONNECT 7 CROWN"
                     : activeExploreModal === "amara"
                     ? "PYRAMID AMARA"
                     : "SKY JOY · WATERFRONT PLOTS"}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#172027]/70 mt-1 flex items-center gap-1.5 font-light">
+                <p className="font-sans text-xs sm:text-sm text-[#284153]/70 mt-1 flex items-center gap-1.5 font-normal">
                   <MapPin className="h-3.5 w-3.5 text-[#eeaf33]" />
                   <span>
                     {activeExploreModal === "crown"
@@ -951,10 +1000,10 @@ export default function SignatureCollections() {
             {formSubmitted ? (
               <div className="py-8 text-center bg-white rounded-2xl border border-[#eeaf33]/40">
                 <CheckCircle2 className="h-12 w-12 text-[#eeaf33] mx-auto mb-3" />
-                <h4 className="font-serif text-xl font-bold text-[#172027] mb-1">
+                <h4 className="font-serif text-xl font-bold text-[#284153] mb-1">
                   Enquiry Received
                 </h4>
-                <p className="text-xs sm:text-sm text-[#172027]/70 max-w-sm mx-auto">
+                <p className="font-sans text-xs sm:text-sm text-[#284153]/70 max-w-sm mx-auto">
                   Our private client wealth advisor will get in touch shortly with brochure, plot inventory, and pricing.
                 </p>
               </div>
