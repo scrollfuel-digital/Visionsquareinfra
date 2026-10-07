@@ -41,11 +41,10 @@ export default function Testimonials() {
           {testimonials.map((t, idx) => (
             <div
               key={t.id}
-              className={`relative flex flex-col justify-between p-8 rounded-3xl bg-[#284153]/35 border transition-all duration-500 backdrop-blur-md ${
-                idx === activeIndex
+              className={`relative flex flex-col justify-between p-8 rounded-3xl bg-[#284153]/35 border transition-all duration-500 backdrop-blur-md ${idx === activeIndex
                   ? "border-[#eeaf33]/50 shadow-[0_15px_35px_rgba(238,175,51,0.12)] -translate-y-1"
                   : "border-[#284153]/75 hover:border-[#eeaf33]/40"
-              }`}
+                }`}
             >
               <div>
                 {/* Gold Quote Icon & Stars */}

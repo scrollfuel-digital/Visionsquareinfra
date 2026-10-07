@@ -18,7 +18,11 @@ import {
   VolumeX,
 } from "lucide-react";
 
-export default function SignatureCollections() {
+interface SignatureCollectionsProps {
+  className?: string;
+}
+
+export default function SignatureCollections({ className = "" }: SignatureCollectionsProps = {}) {
   // Modal states
   const [activeVideoModal, setActiveVideoModal] = useState<"crown" | "amara" | "skyjoy" | null>(null);
   const [activeCrownVideo, setActiveCrownVideo] = useState<1 | 2>(1);
@@ -49,11 +53,11 @@ export default function SignatureCollections() {
   return (
     <section
       id="signature-collections"
-      className="relative pt-6 sm:pt-8 md:pt-10 pb-20 sm:pb-28 lg:pb-32 bg-[#F8F7F3] text-[#172027] overflow-hidden"
+      className={`relative pt-28 sm:pt-28 md:pt-32 lg:pt-40 pb-20 sm:pb-28 lg:pb-32 bg-[#F8F7F3] text-[#172027] overflow-hidden ${className}`}
     >
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-10">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="h-px w-8 bg-[#eeaf33]" />
             <span className="font-sans text-xs uppercase tracking-[0.25em] text-[#eeaf33] font-bold">
@@ -72,81 +76,81 @@ export default function SignatureCollections() {
         {/* ========================================================================= */}
         {/* SHOWCASE 1: SKYCONNECT 7 CROWN */}
         {/* ========================================================================= */}
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:items-center mb-20 sm:mb-28">
-          {/* Left: Building Showcase with Overlapping Video Card */}
-          <div className="w-full lg:w-[54%] shrink-0">
-            <div className="relative group max-w-[520px] mx-auto lg:mx-0">
-              <div
-                onClick={() => setActiveLightbox("/images/projects/skyconnect-7-crown.jpeg")}
-                className="relative h-[360px] sm:h-[410px] lg:h-[450px] w-full rounded-[2.2rem] overflow-hidden shadow-[0_20px_45px_rgba(23,32,39,0.12)] cursor-pointer border border-black/5 transition-transform duration-500 hover:scale-[1.01]"
-                title="Click to view SkyConnect 7 Crown"
-              >
-                <Image
-                  src="/images/projects/skyconnect-7-crown.jpeg"
-                  alt="SkyConnect 7 Crown - Luxury Residential Address in Jaiprakash Nagar, Nagpur"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 520px"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172027]/40 via-transparent to-transparent pointer-events-none" />
+        <div className="bg-[#FAF9F5] rounded-[2.2rem] sm:rounded-[2.5rem] p-6 sm:p-8 lg:p-10 shadow-[0_25px_60px_-15px_rgba(23,32,39,0.12),0_10px_25px_-5px_rgba(23,32,39,0.06)] mb-20 sm:mb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
+            {/* Left: Building Visual with Overlapping Video Card */}
+            <div className="lg:col-span-6 xl:col-span-6">
+              <div className="relative group w-full">
+                <div
+                  onClick={() => setActiveLightbox("/images/projects/skyconnect-7-crown.jpeg")}
+                  className="relative h-[360px] sm:h-[420px] lg:h-[450px] w-full rounded-[1.8rem] sm:rounded-[2rem] overflow-hidden shadow-[0_15px_35px_rgba(23,32,39,0.10)] cursor-pointer transition-transform duration-500 hover:scale-[1.01]"
+                  title="Click to view SkyConnect 7 Crown"
+                >
+                  <Image
+                    src="/images/projects/skyconnect-7-crown.jpeg"
+                    alt="SkyConnect 7 Crown - Luxury Residential Address in Jaiprakash Nagar, Nagpur"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 550px"
+                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#172027]/40 via-transparent to-transparent pointer-events-none" />
 
-                <div className="absolute top-5 left-5 z-10">
-                  <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md font-sans">
-                    SIGNATURE ADDRESS
-                  </span>
-                </div>
+                  <div className="absolute top-5 left-5 z-10">
+                    <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md font-sans">
+                      SIGNATURE ADDRESS
+                    </span>
+                  </div>
 
-                <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#172027]/75 backdrop-blur-md text-[#F8F7F3] p-1.5 rounded-full border border-white/20 shadow-lg">
-                  <Maximize2 className="h-3.5 w-3.5" />
-                </div>
-              </div>
-
-              {/* Bottom-Left Overlapping Video Card */}
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveVideoModal("crown");
-                }}
-                className="absolute -left-3 sm:-left-5 -bottom-4 sm:-bottom-5 w-36 sm:w-48 h-24 sm:h-30 rounded-2xl overflow-hidden border-4 border-[#FAF9F5] shadow-2xl z-20 cursor-pointer transition-transform duration-300 hover:scale-105 group/video"
-                title="Watch SkyConnect 7 Crown walkthrough videos"
-              >
-                <video
-                  src="/videos/SKY%20connect.mp4"
-                  muted
-                  autoPlay
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-110 pointer-events-none"
-                />
-                <div className="absolute inset-0 bg-black/30 group-hover/video:bg-black/15 transition-colors" />
-
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative flex items-center justify-center">
-                    <span className="absolute w-9 h-9 rounded-full bg-[#eeaf33]/45 animate-ping pointer-events-none" />
-                    <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center shadow-xl group-hover/video:scale-110 transition-transform">
-                      <Play className="h-3.5 sm:h-4 w-3.5 sm:h-4 fill-[#172027] translate-x-0.5" />
-                    </div>
+                  <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#172027]/75 backdrop-blur-md text-[#F8F7F3] p-1.5 rounded-full border border-white/20 shadow-lg">
+                    <Maximize2 className="h-3.5 w-3.5" />
                   </div>
                 </div>
 
-                <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md z-10 font-sans">
-                  <span className="inline-flex items-center gap-1 bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
-                    <span className="w-1 h-1 rounded-full bg-[#eeaf33] animate-pulse" />
-                    2 VIDEOS
-                  </span>
-                  <span className="bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm text-[8px]">
-                    Tour
-                  </span>
+                {/* Bottom-Left Overlapping Video Card */}
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveVideoModal("crown");
+                  }}
+                  className="absolute -left-2 sm:-left-3 -bottom-3 sm:-bottom-4 w-36 sm:w-48 h-24 sm:h-30 rounded-2xl overflow-hidden border-4 border-[#FAF9F5] shadow-2xl z-20 cursor-pointer transition-transform duration-300 hover:scale-105 group/video"
+                  title="Watch SkyConnect 7 Crown walkthrough videos"
+                >
+                  <video
+                    src="/videos/SKY%20connect.mp4"
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-110 pointer-events-none"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover/video:bg-black/15 transition-colors" />
+
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative flex items-center justify-center">
+                      <span className="absolute w-9 h-9 rounded-full bg-[#eeaf33]/45 animate-ping pointer-events-none" />
+                      <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center shadow-xl group-hover/video:scale-110 transition-transform">
+                        <Play className="h-3.5 sm:h-4 w-3.5 sm:h-4 fill-[#172027] translate-x-0.5" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md z-10 font-sans">
+                    <span className="inline-flex items-center gap-1 bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
+                      <span className="w-1 h-1 rounded-full bg-[#eeaf33] animate-pulse" />
+                      2 VIDEOS
+                    </span>
+                    <span className="bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm text-[8px]">
+                      Tour
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right: Reduced Height Elevated Card */}
-          <div className="w-full lg:w-[44%] max-w-[450px] mt-8 lg:mt-0 lg:-ml-12 relative z-20">
-            <div className="bg-[#FAF9F5] rounded-[2rem] p-6 sm:p-7 md:p-8 shadow-[0_25px_60px_-15px_rgba(23,32,39,0.18),0_10px_25px_-5px_rgba(23,32,39,0.08)] relative">
+            {/* Right: Project Details & Actions */}
+            <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center lg:pl-2">
               <div className="font-sans font-bold text-[11px] sm:text-xs text-[#284153] uppercase tracking-[0.2em] mb-2">
                 JAIPRAKASH NAGAR · NAGPUR
               </div>
@@ -161,12 +165,12 @@ export default function SignatureCollections() {
                 More than a home. A signature way of living.
               </p>
 
-              <p className="font-sans text-xs sm:text-[13px] text-[#284153]/75 font-normal leading-relaxed mb-4 max-w-sm">
+              <p className="font-sans text-xs sm:text-[13px] text-[#284153]/75 font-normal leading-relaxed mb-4 max-w-md">
                 A premium 3 BHK residential address designed around spacious living,
                 refined finishes, smart security and contemporary lifestyle amenities.
               </p>
 
-              <div className="border-t border-[#172027]/12 pt-3.5 pb-3.5 mb-5">
+              <div className="border-t border-[#172027]/12 pt-3.5 pb-3.5 mb-5 max-w-md">
                 <div className="grid grid-cols-2 gap-y-3.5">
                   <div className="pr-3 border-r border-[#172027]/12">
                     <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
@@ -259,10 +263,10 @@ export default function SignatureCollections() {
         {/* ========================================================================= */}
         {/* SHOWCASE 2: PYRAMID AMARA */}
         {/* ========================================================================= */}
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:items-center lg:gap-9 mb-20 sm:mb-28">
-          {/* Left: Reduced Height Elevated Card for Pyramid Amara */}
-          <div className="w-full lg:w-[450px] max-w-[450px] order-2 lg:order-1 mt-8 lg:mt-0 relative z-20">
-            <div className="bg-[#FAF9F5] rounded-[2rem] p-6 sm:p-7 md:p-8 shadow-[0_25px_60px_-15px_rgba(23,32,39,0.18),0_10px_25px_-5px_rgba(23,32,39,0.08)] relative">
+        <div className="bg-[#FAF9F5] rounded-[2.2rem] sm:rounded-[2.5rem] p-6 sm:p-8 lg:p-10 shadow-[0_25px_60px_-15px_rgba(23,32,39,0.12),0_10px_25px_-5px_rgba(23,32,39,0.06)] mb-20 sm:mb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
+            {/* Left: Project Details & Actions */}
+            <div className="lg:col-span-6 xl:col-span-6 order-2 lg:order-1 flex flex-col justify-center lg:pr-2">
               <div className="font-sans font-bold text-[11px] sm:text-xs text-[#284153] uppercase tracking-[0.2em] mb-2">
                 PYRAMID GROUP · BESA–PIPLA ROAD, NAGPUR
               </div>
@@ -277,12 +281,12 @@ export default function SignatureCollections() {
                 Premium living on Besa–Pipla Road.
               </p>
 
-              <p className="font-sans text-xs sm:text-[13px] text-[#284153]/75 font-normal leading-relaxed mb-4 max-w-sm">
+              <p className="font-sans text-xs sm:text-[13px] text-[#284153]/75 font-normal leading-relaxed mb-4 max-w-md">
                 A grand ~6-acre premium gated township featuring 6 high-rise towers
                 rising 14–16 floors. Thoughtfully planned 2 &amp; 3 BHK residences with RERA approval.
               </p>
 
-              <div className="border-t border-[#172027]/12 pt-3.5 pb-3.5 mb-5">
+              <div className="border-t border-[#172027]/12 pt-3.5 pb-3.5 mb-5 max-w-md">
                 <div className="grid grid-cols-2 gap-y-3.5">
                   <div className="pr-3 border-r border-[#172027]/12">
                     <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
@@ -344,72 +348,72 @@ export default function SignatureCollections() {
                 </button>
               </div>
             </div>
-          </div>
 
-          {/* Right: High-Rise Tower Frame with Video Card */}
-          <div className="w-full lg:w-[520px] max-w-[520px] shrink-0 order-1 lg:order-2">
-            <div className="relative group max-w-[520px] mx-auto lg:mx-0">
-              <div
-                onClick={() => setActiveLightbox("/images/projects/pyramid-amara.jpg")}
-                className="relative h-[360px] sm:h-[410px] lg:h-[450px] w-full rounded-[2.2rem] overflow-hidden shadow-[0_20px_45px_rgba(23,32,39,0.12)] cursor-pointer border border-black/5 transition-transform duration-500 hover:scale-[1.01]"
-                title="Click to view Pyramid Amara High-Rise Towers"
-              >
-                <Image
-                  src="/images/projects/pyramid-amara.jpg"
-                  alt="Pyramid Amara - Premium 2 & 3 BHK High-Rise Township in Besa-Pipla Road, Nagpur"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 520px"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172027]/40 via-transparent to-transparent pointer-events-none" />
+            {/* Right: High-Rise Tower Frame with Video Card */}
+            <div className="lg:col-span-6 xl:col-span-6 order-1 lg:order-2">
+              <div className="relative group w-full">
+                <div
+                  onClick={() => setActiveLightbox("/images/projects/pyramid-amara.jpg")}
+                  className="relative h-[360px] sm:h-[420px] lg:h-[450px] w-full rounded-[1.8rem] sm:rounded-[2rem] overflow-hidden shadow-[0_15px_35px_rgba(23,32,39,0.10)] cursor-pointer transition-transform duration-500 hover:scale-[1.01]"
+                  title="Click to view Pyramid Amara High-Rise Towers"
+                >
+                  <Image
+                    src="/images/projects/pyramid-amara.jpg"
+                    alt="Pyramid Amara - Premium 2 & 3 BHK High-Rise Township in Besa-Pipla Road, Nagpur"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 550px"
+                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#172027]/40 via-transparent to-transparent pointer-events-none" />
 
-                <div className="absolute top-5 left-5 z-10">
-                  <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md">
-                    6 TOWERS · 14–16 FLOORS
-                  </span>
-                </div>
+                  <div className="absolute top-5 left-5 z-10">
+                    <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md font-sans">
+                      6 TOWERS · 14–16 FLOORS
+                    </span>
+                  </div>
 
-                <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#172027]/75 backdrop-blur-md text-[#F8F7F3] p-1.5 rounded-full border border-white/20 shadow-lg">
-                  <Maximize2 className="h-3.5 w-3.5" />
-                </div>
-              </div>
-
-              {/* Bottom-Right Overlapping Video Card */}
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveVideoModal("amara");
-                }}
-                className="absolute -right-3 sm:-right-5 -bottom-4 sm:-bottom-5 w-36 sm:w-48 h-24 sm:h-30 rounded-2xl overflow-hidden border-4 border-[#FAF9F5] shadow-2xl z-20 cursor-pointer transition-transform duration-300 hover:scale-105 group/video"
-                title="Watch Pyramid Amara Township walkthrough video"
-              >
-                <Image
-                  src="/images/projects/skyconnect-penthouse.jpg"
-                  alt="Pyramid Amara Township Walkthrough Video"
-                  fill
-                  sizes="200px"
-                  className="object-cover transition-transform duration-500 group-hover/video:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/35 group-hover/video:bg-black/20 transition-colors" />
-
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative flex items-center justify-center">
-                    <span className="absolute w-9 h-9 rounded-full bg-[#eeaf33]/45 animate-ping pointer-events-none" />
-                    <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center shadow-xl group-hover/video:scale-110 transition-transform">
-                      <Play className="h-3.5 sm:h-4 w-3.5 sm:h-4 fill-[#172027] translate-x-0.5" />
-                    </div>
+                  <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#172027]/75 backdrop-blur-md text-[#F8F7F3] p-1.5 rounded-full border border-white/20 shadow-lg">
+                    <Maximize2 className="h-3.5 w-3.5" />
                   </div>
                 </div>
 
-                <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md">
-                  <span className="inline-flex items-center gap-1 bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
-                    <span className="w-1 h-1 rounded-full bg-[#eeaf33] animate-pulse" />
-                    VIDEO
-                  </span>
-                  <span className="bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm text-[8px]">
-                    Tour
-                  </span>
+                {/* Bottom-Right Overlapping Video Card */}
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveVideoModal("amara");
+                  }}
+                  className="absolute -right-2 sm:-right-3 -bottom-3 sm:-bottom-4 w-36 sm:w-48 h-24 sm:h-30 rounded-2xl overflow-hidden border-4 border-[#FAF9F5] shadow-2xl z-20 cursor-pointer transition-transform duration-300 hover:scale-105 group/video"
+                  title="Watch Pyramid Amara Township walkthrough video"
+                >
+                  <Image
+                    src="/images/projects/skyconnect-penthouse.jpg"
+                    alt="Pyramid Amara Township Walkthrough Video"
+                    fill
+                    sizes="200px"
+                    className="object-cover transition-transform duration-500 group-hover/video:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/35 group-hover/video:bg-black/20 transition-colors" />
+
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative flex items-center justify-center">
+                      <span className="absolute w-9 h-9 rounded-full bg-[#eeaf33]/45 animate-ping pointer-events-none" />
+                      <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center shadow-xl group-hover/video:scale-110 transition-transform">
+                        <Play className="h-3.5 sm:h-4 w-3.5 sm:h-4 fill-[#172027] translate-x-0.5" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md font-sans">
+                    <span className="inline-flex items-center gap-1 bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
+                      <span className="w-1 h-1 rounded-full bg-[#eeaf33] animate-pulse" />
+                      VIDEO
+                    </span>
+                    <span className="bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm text-[8px]">
+                      Tour
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -461,79 +465,79 @@ export default function SignatureCollections() {
         {/* ========================================================================= */}
         {/* SHOWCASE 3: SKY JOY (INDIA'S FIRST WATERFRONT PLOTS) */}
         {/* ========================================================================= */}
-        <div className="flex flex-col lg:flex-row items-center justify-center lg:items-center">
-          {/* Left: Waterfront Plotted Masterplan Frame with Video Card */}
-          <div className="w-full lg:w-[54%] shrink-0">
-            <div className="relative group max-w-[520px] mx-auto lg:mx-0">
-              <div
-                onClick={() => setActiveLightbox("/images/projects/vision-imperial.jpg")}
-                className="relative h-[360px] sm:h-[410px] lg:h-[450px] w-full rounded-[2.2rem] overflow-hidden shadow-[0_20px_45px_rgba(23,32,39,0.12)] cursor-pointer border border-black/5 transition-transform duration-500 hover:scale-[1.01]"
-                title="Click to view Sky Joy Waterfront Plotted Masterplan"
-              >
-                <Image
-                  src="/images/projects/vision-imperial.jpg"
-                  alt="Sky Joy - India's First Waterfront Plots in Mondha, Hingna, South Nagpur"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 520px"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172027]/40 via-transparent to-transparent pointer-events-none" />
+        <div className="bg-[#FAF9F5] rounded-[2.2rem] sm:rounded-[2.5rem] p-6 sm:p-8 lg:p-10 shadow-[0_25px_60px_-15px_rgba(23,32,39,0.12),0_10px_25px_-5px_rgba(23,32,39,0.06)]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center">
+            {/* Left: Waterfront Plotted Masterplan Frame with Video Card */}
+            <div className="lg:col-span-6 xl:col-span-6">
+              <div className="relative group w-full">
+                <div
+                  onClick={() => setActiveLightbox("/images/projects/vision-imperial.jpg")}
+                  className="relative h-[360px] sm:h-[420px] lg:h-[450px] w-full rounded-[1.8rem] sm:rounded-[2rem] overflow-hidden shadow-[0_15px_35px_rgba(23,32,39,0.10)] cursor-pointer transition-transform duration-500 hover:scale-[1.01]"
+                  title="Click to view Sky Joy Waterfront Plotted Masterplan"
+                >
+                  <Image
+                    src="/images/projects/vision-imperial.jpg"
+                    alt="Sky Joy - India's First Waterfront Plots in Mondha, Hingna, South Nagpur"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 550px"
+                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#172027]/40 via-transparent to-transparent pointer-events-none" />
 
-                <div className="absolute top-5 left-5 z-10">
-                  <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md font-sans">
-                    INDIA&apos;S FIRST WATERFRONT PLOTS
-                  </span>
-                </div>
+                  <div className="absolute top-5 left-5 z-10">
+                    <span className="inline-flex items-center justify-center px-5 py-1.5 rounded-full bg-[#eeaf33] text-white text-[11px] font-bold uppercase tracking-[0.14em] shadow-md font-sans">
+                      INDIA&apos;S FIRST WATERFRONT PLOTS
+                    </span>
+                  </div>
 
-                <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#172027]/75 backdrop-blur-md text-[#F8F7F3] p-1.5 rounded-full border border-white/20 shadow-lg">
-                  <Maximize2 className="h-3.5 w-3.5" />
-                </div>
-              </div>
-
-              {/* Bottom-Left Overlapping Video Card */}
-              <div
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveVideoModal("skyjoy");
-                }}
-                className="absolute -left-3 sm:-left-5 -bottom-4 sm:-bottom-5 w-36 sm:w-48 h-24 sm:h-30 rounded-2xl overflow-hidden border-4 border-[#FAF9F5] shadow-2xl z-20 cursor-pointer transition-transform duration-300 hover:scale-105 group/video"
-                title="Watch Sky Joy Beach & Wave Pool Tour Video"
-              >
-                <Image
-                  src="/images/projects/neralu-lake-inset.jpg"
-                  alt="Sky Joy Man-Made Beach & Lake Waterfront Video"
-                  fill
-                  sizes="200px"
-                  className="object-cover transition-transform duration-500 group-hover/video:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/35 group-hover/video:bg-black/20 transition-colors" />
-
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative flex items-center justify-center">
-                    <span className="absolute w-9 h-9 rounded-full bg-[#eeaf33]/45 animate-ping pointer-events-none" />
-                    <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center shadow-xl group-hover/video:scale-110 transition-transform">
-                      <Play className="h-3.5 sm:h-4 w-3.5 sm:h-4 fill-[#172027] translate-x-0.5" />
-                    </div>
+                  <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[#172027]/75 backdrop-blur-md text-[#F8F7F3] p-1.5 rounded-full border border-white/20 shadow-lg">
+                    <Maximize2 className="h-3.5 w-3.5" />
                   </div>
                 </div>
 
-                <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md font-sans">
-                  <span className="inline-flex items-center gap-1 bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
-                    <span className="w-1 h-1 rounded-full bg-[#eeaf33] animate-pulse" />
-                    VIDEO
-                  </span>
-                  <span className="bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm text-[8px]">
-                    Beach Tour
-                  </span>
+                {/* Bottom-Left Overlapping Video Card */}
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveVideoModal("skyjoy");
+                  }}
+                  className="absolute -left-2 sm:-left-3 -bottom-3 sm:-bottom-4 w-36 sm:w-48 h-24 sm:h-30 rounded-2xl overflow-hidden border-4 border-[#FAF9F5] shadow-2xl z-20 cursor-pointer transition-transform duration-300 hover:scale-105 group/video"
+                  title="Watch Sky Joy Beach & Wave Pool Tour Video"
+                >
+                  <Image
+                    src="/images/projects/neralu-lake-inset.jpg"
+                    alt="Sky Joy Man-Made Beach & Lake Waterfront Video"
+                    fill
+                    sizes="200px"
+                    className="object-cover transition-transform duration-500 group-hover/video:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/35 group-hover/video:bg-black/20 transition-colors" />
+
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative flex items-center justify-center">
+                      <span className="absolute w-9 h-9 rounded-full bg-[#eeaf33]/45 animate-ping pointer-events-none" />
+                      <div className="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center shadow-xl group-hover/video:scale-110 transition-transform">
+                        <Play className="h-3.5 sm:h-4 w-3.5 sm:h-4 fill-[#172027] translate-x-0.5" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute bottom-1.5 left-2 right-2 flex items-center justify-between text-[9px] font-semibold text-white drop-shadow-md font-sans">
+                    <span className="inline-flex items-center gap-1 bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm">
+                      <span className="w-1 h-1 rounded-full bg-[#eeaf33] animate-pulse" />
+                      VIDEO
+                    </span>
+                    <span className="bg-black/60 px-1.5 py-0.5 rounded-full backdrop-blur-sm text-[8px]">
+                      Beach Tour
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right: Reduced Height Elevated Card for Sky Joy */}
-          <div className="w-full lg:w-[44%] max-w-[450px] mt-8 lg:mt-0 lg:-ml-12 relative z-20">
-            <div className="bg-[#FAF9F5] rounded-[2rem] p-6 sm:p-7 md:p-8 shadow-[0_25px_60px_-15px_rgba(23,32,39,0.18),0_10px_25px_-5px_rgba(23,32,39,0.08)] relative">
+            {/* Right: Project Details & Actions */}
+            <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center lg:pl-2">
               <div className="font-sans font-bold text-[11px] sm:text-xs text-[#284153] uppercase tracking-[0.2em] mb-1.5">
                 HOABL · MAHARERA PP1190002502095
               </div>
@@ -548,14 +552,13 @@ export default function SignatureCollections() {
                 Where luxury meets the waterfront.
               </p>
 
-              <p className="font-sans text-xs sm:text-[13px] text-[#284153]/75 font-normal leading-relaxed mb-4 max-w-sm">
+              <p className="font-sans text-xs sm:text-[13px] text-[#284153]/75 font-normal leading-relaxed mb-4 max-w-md">
                 India&apos;s first luxury waterfront plotted development featuring a ~3-acre man-made beach, wave pool, and grand 28,000 sq. ft. clubhouse.
               </p>
 
-              {/* Specs 2x2 Grid (Exact User Content & All in Gold #eeaf33) */}
-              <div className="border-t border-[#172027]/12 pt-3.5 pb-3.5 mb-5">
+              {/* Specs 2x2 Grid */}
+              <div className="border-t border-[#172027]/12 pt-3.5 pb-3.5 mb-5 max-w-md">
                 <div className="grid grid-cols-2 gap-y-3.5">
-                  {/* ~78 Acres Total Area */}
                   <div className="pr-3 border-r border-[#172027]/12">
                     <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
                       ~78 Acres
@@ -565,7 +568,6 @@ export default function SignatureCollections() {
                     </div>
                   </div>
 
-                  {/* 918 Total Plots */}
                   <div className="pl-4">
                     <div className="font-serif text-xl sm:text-2xl font-bold text-[#eeaf33] tracking-tight">
                       918
@@ -575,7 +577,6 @@ export default function SignatureCollections() {
                     </div>
                   </div>
 
-                  {/* 28,000 sq.ft Clubhouse */}
                   <div className="pr-3 border-r border-[#172027]/12">
                     <div className="font-serif text-lg sm:text-xl font-bold text-[#eeaf33]">
                       28,000 sq.ft
@@ -585,7 +586,6 @@ export default function SignatureCollections() {
                     </div>
                   </div>
 
-                  {/* ~3 Acres Beach & Pool */}
                   <div className="pl-4">
                     <div className="font-serif text-lg sm:text-xl font-bold text-[#eeaf33]">
                       ~3 Acres

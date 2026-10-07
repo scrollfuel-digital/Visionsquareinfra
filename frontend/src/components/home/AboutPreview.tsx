@@ -203,9 +203,8 @@ export default function AboutPreview() {
                   return (
                     <div
                       key={item.label}
-                      className={`flex items-center gap-3.5 ${
-                        idx !== 0 ? "pt-4 sm:pt-0 lg:pl-6" : ""
-                      } transition-transform duration-300 hover:translate-y-[-2px]`}
+                      className={`flex items-center gap-3.5 ${idx !== 0 ? "pt-4 sm:pt-0 lg:pl-6" : ""
+                        } transition-transform duration-300 hover:translate-y-[-2px]`}
                     >
                       <div className="w-12 h-12 rounded-2xl bg-[#eeaf33]/15 flex items-center justify-center shrink-0 text-[#eeaf33]">
                         <Icon className="h-6 w-6" />

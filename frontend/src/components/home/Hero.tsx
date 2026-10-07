@@ -1,53 +1,47 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import ShutterBlindsCarousel, { Slide } from "@/components/ui/shutter-blinds-carousel";
 
-export const HERO_IMAGES = [
-  "/images/projects/skyconnect-7-crown.jpeg",
-  "/images/projects/pyramid-amara.jpg",
-  "/images/projects/vision-heights.webp",
+export const HERO_SLIDES: Slide[] = [
+  {
+    image: "/images/projects/skyconnect-7-crown.jpeg",
+    title: "SkyConnect 7 Crown",
+    caption: "Jaiprakash Nagar, Nagpur — Ultra-Luxury 3 BHK Signature Residences",
+    alt: "SkyConnect 7 Crown Luxury Residences in Nagpur",
+  },
+  {
+    image: "/images/projects/pyramid-amara.jpg",
+    title: "Pyramid Amara",
+    caption: "Besa–Pipla Road, Nagpur — 6 High-Rise Towers & Gated Community",
+    alt: "Pyramid Amara High-Rise Township in Nagpur",
+  },
+  {
+    image: "/images/projects/vision-heights.webp",
+    title: "Vision Heights",
+    caption: "Nagpur — Curated Luxury Villas & Contemporary Living Spaces",
+    alt: "Vision Heights Luxury Architecture",
+  },
+  {
+    image: "/images/projects/vision-imperial.jpg",
+    title: "Sky Joy Waterfront",
+    caption: "South Nagpur — India's First Waterfront Plotted Community",
+    alt: "Sky Joy Waterfront Plots in Nagpur",
+  },
 ];
 
 export default function Hero() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 4000);
-
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#172027]">
-      {/* 3 Project Building Images Crossfading every 4 seconds */}
-      {HERO_IMAGES.map((src, index) => {
-        const isActive = index === currentIndex;
-        return (
-          <div
-            key={src}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-            }`}
-          >
-            <Image
-              src={src}
-              alt={`Vision Square Architecture Building ${index + 1}`}
-              fill
-              priority={index === 0}
-              sizes="100vw"
-              className={`object-cover object-center transition-transform duration-[4000ms] ease-out ${
-                isActive ? "scale-105" : "scale-100"
-              }`}
-            />
-          </div>
-        );
-      })}
-
-      {/* Subtle top & bottom ambient vignette for seamless navbar transparency & smooth section transition */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/30 z-20 pointer-events-none" />
+      <ShutterBlindsCarousel
+        slides={HERO_SLIDES}
+        height="100vh"
+        slats={9}
+        duration={760}
+        stagger={55}
+        autoplay={5000}
+        ink="#eeaf33"
+        ariaLabel="Vision Square Infra Signature Developments Carousel"
+      />
     </section>
   );
 }
