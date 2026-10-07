@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Star, Quote, CheckCircle } from "lucide-react";
+import Image from "next/image";
+import { Star, Quote } from "lucide-react";
 import { testimonials } from "@/data/testimonials";
 
 export default function Testimonials() {
   const [activeIndex] = useState(0);
 
   return (
-    <section className="relative py-24 md:py-32 bg-[#172027] border-t border-[#284153] overflow-hidden">
+    <section className="relative pt-16 sm:pt-20 md:pt-24 pb-14 sm:pb-16 md:pb-20 bg-[#172027] border-t border-[#284153] overflow-hidden">
       {/* Background ambient gold & slate aura */}
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-[#eeaf33]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-[#284153]/20 rounded-full blur-3xl pointer-events-none" />
@@ -65,23 +66,23 @@ export default function Testimonials() {
 
               {/* Author & Verification Details */}
               <div className="pt-6 border-t border-[#284153]">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden shrink-0 border-2 border-[#eeaf33]/40 shadow-md bg-[#172027]">
+                    <Image
+                      src={t.avatar || "/images/testimonials/avatar-user.png"}
+                      alt={t.author}
+                      fill
+                      sizes="48px"
+                      className="object-cover object-top"
+                    />
+                  </div>
                   <div>
-                    <h4 className="font-serif text-base text-[#F8F7F3] font-medium">
+                    <h4 className="font-serif text-base text-[#F8F7F3] font-medium leading-snug">
                       {t.author}
                     </h4>
                     <p className="text-xs text-[#F8F7F3]/65 font-light mt-0.5">
                       {t.role}
                     </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#eeaf33] bg-[#eeaf33]/15 px-2.5 py-1 rounded-full border border-[#eeaf33]/30">
-                      <CheckCircle className="h-3 w-3" />
-                      {t.project}
-                    </span>
-                    <span className="block text-[10px] text-[#F8F7F3]/60 mt-1">
-                      {t.location}
-                    </span>
                   </div>
                 </div>
               </div>

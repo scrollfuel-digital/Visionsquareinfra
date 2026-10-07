@@ -1,23 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, Building, Check, ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
 
-const categories = ["All", "Luxury Villas", "Gated Plots", "Commercial Hub"] as const;
-
 export default function FeaturedProjects() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-
-  const filteredProjects =
-    selectedCategory === "All"
-      ? projects
-      : projects.filter((p) => p.category === selectedCategory);
-
   return (
-    <section className="relative py-24 md:py-32 bg-[#172027] border-t border-[#284153] overflow-hidden">
+    <section className="relative pt-[16px] sm:pt-[18px] md:pt-[30px] pb-16 md:pb-24 bg-[#172027] border-t border-[#284153] overflow-hidden">
       {/* Subtle ambient gold & slate radial lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#eeaf33]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-[#284153]/25 rounded-full blur-3xl pointer-events-none" />
@@ -49,32 +39,15 @@ export default function FeaturedProjects() {
           </Link>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2.5 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2 rounded-full text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 ${
-                selectedCategory === cat
-                  ? "bg-[#eeaf33] text-[#172027] font-semibold shadow-[0_0_15px_rgba(238,175,51,0.4)]"
-                  : "bg-[#284153]/45 text-[#F8F7F3]/80 hover:text-[#F8F7F3] hover:bg-[#284153]/75 border border-[#284153]"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <div
               key={project.slug}
               className="group relative flex flex-col rounded-3xl overflow-hidden bg-[#284153]/35 border border-[#284153]/75 backdrop-blur-md transition-all duration-500 hover:-translate-y-1.5 hover:border-[#eeaf33]/50 hover:shadow-[0_20px_40px_rgba(23,32,39,0.85)]"
             >
               {/* Image Container */}
-              <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-[#172027]">
+              <div className="relative h-[251px] sm:h-[283px] w-full overflow-hidden bg-[#172027]">
                 {project.image ? (
                   <Image
                     src={project.image}
@@ -90,15 +63,7 @@ export default function FeaturedProjects() {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#172027] via-[#172027]/25 to-transparent" />
 
-                {/* Top Badges */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[#172027]/85 backdrop-blur-md text-[#eeaf33] border border-[#eeaf33]/35">
-                    {project.category}
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-[11px] font-medium uppercase tracking-wider bg-[#284153]/85 text-[#F8F7F3] border border-[#284153] backdrop-blur-md">
-                    {project.status}
-                  </span>
-                </div>
+
 
                 {/* Price Tag overlay */}
                 {project.priceStarting && (
@@ -158,21 +123,6 @@ export default function FeaturedProjects() {
           ))}
         </div>
 
-        {/* Bottom Banner */}
-        <div className="mt-16 p-8 rounded-3xl bg-gradient-to-r from-[#284153]/60 via-[#284153]/35 to-[#284153]/60 border border-[#eeaf33]/25 backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h4 className="font-serif text-2xl text-[#F8F7F3] font-light mb-1">
-              Looking for a custom plot or bespoke villa requirement?
-            </h4>
-            <p className="text-[#F8F7F3]/70 text-sm">
-              Our real estate consultants can assist with tailored layout selections and private site tours.
-            </p>
-          </div>
-          <Link href="/contact" className="luxury-cta-btn shrink-0 text-sm px-7 py-3">
-            <span>Talk to an Expert</span>
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
       </div>
     </section>
   );
