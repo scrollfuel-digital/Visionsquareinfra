@@ -1,4 +1,4 @@
-export type ProjectStatus = "ongoing" | "completed" | "booking open" | "upcoming" | "near completion";
+export type ProjectStatus = "ongoing" | "completed" | "booking open" | "upcoming" | "near completion" | string;
 
 export type Project = {
   slug: string;
@@ -6,7 +6,7 @@ export type Project = {
   tagline?: string;
   description: string;
   status?: ProjectStatus;
-  category?: "Luxury Villas" | "Gated Plots" | "Commercial Hub" | "Eco-Luxury Habitat";
+  category?: "Luxury Villas" | "Gated Plots" | "Commercial Hub" | "Eco-Luxury Habitat" | "Luxury Flats" | "Ultra Luxury Apartments" | "Luxury Apartments" | string;
   location?: string;
   area?: string;
   units?: string;
@@ -14,4 +14,5 @@ export type Project = {
   highlights?: string[];
   priceStarting?: string;
   completionYear?: string;
+  videoUrl?: string;
 };
