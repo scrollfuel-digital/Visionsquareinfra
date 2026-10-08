@@ -4,6 +4,24 @@ import ShutterBlindsCarousel, { Slide } from "@/components/ui/shutter-blinds-car
 
 export const HERO_SLIDES: Slide[] = [
   {
+    image: "/images/projects/the-one-rise.jpeg",
+    title: "The ONE Rise",
+    caption: "Nagpur — Reside Beyond Skyline with G+13 Storeyed Edifice & Rooftop Lifestyle",
+    alt: "The ONE Rise Luxury Apartments in Nagpur",
+  },
+  {
+    image: "/images/herosection/infinity.png",
+    title: "Infinity Elegance",
+    caption: "Tikekar Road, Dhantoli, Nagpur — 4 BHK Ultra-Luxurious Residential Apartments",
+    alt: "Infinity Elegance Ultra Luxury Apartments in Dhantoli Nagpur",
+  },
+  {
+    image: "/images/projects/sacchidanand-waman-nagri.jpeg",
+    title: "Sacchidanand Waman Nagri",
+    caption: "Besa Pipla Road, Nagpur — 2 & 3 BHK Thoughtfully Designed Luxurious Flats",
+    alt: "Sacchidanand Waman Nagri Luxury Flats in Pipla Nagpur",
+  },
+  {
     image: "/images/projects/skyconnect-7-crown.jpeg",
     title: "SkyConnect 7 Crown",
     caption: "Jaiprakash Nagar, Nagpur — Ultra-Luxury 3 BHK Signature Residences",
@@ -14,12 +32,6 @@ export const HERO_SLIDES: Slide[] = [
     title: "Pyramid Amara",
     caption: "Besa–Pipla Road, Nagpur — 6 High-Rise Towers & Gated Community",
     alt: "Pyramid Amara High-Rise Township in Nagpur",
-  },
-  {
-    image: "/images/projects/vision-heights.webp",
-    title: "Vision Heights",
-    caption: "Nagpur — Curated Luxury Villas & Contemporary Living Spaces",
-    alt: "Vision Heights Luxury Architecture",
   },
   {
     image: "/images/projects/vision-imperial.jpg",
