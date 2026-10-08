@@ -1494,17 +1494,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* SECTION PARTITION DIVIDER BAR */}
-      <div className="container">
-        <div className="section-partition">
-          <div className="partition-line"></div>
-          <div className="partition-pill">
-            <span className="partition-icon">◈</span>
-            <span className="partition-text">ENQUIRY & DIRECT CONTACT</span>
-          </div>
-          <div className="partition-line"></div>
-        </div>
-      </div>
+      
 
       {/* MAIN CONTENT SECTION */}
       <section className="main-section" id="enquiry">
@@ -1773,6 +1763,8 @@ export default function ContactPage() {
         </div>
       </section>
 
+      
+
       {/* ASK US ABOUT / HOW WE CAN HELP */}
       <section className="section-padding" style={{ background: "var(--cream)" }}>
         <div className="container">
@@ -1810,6 +1802,86 @@ export default function ContactPage() {
             <a href="tel:[Your Phone Number]" className="btn-gold">
               <span>☎ Call Our Team</span>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* VISIT OUR OFFICE SECTION */}
+      <section className="section-padding" style={{ background: "var(--cream)", borderTop: "1px solid var(--border-light)", borderBottom: "1px solid var(--border-light)" }}>
+        <div className="container">
+          <div className="section-header reveal" style={{ textAlign: "center", marginBottom: "40px" }}>
+            <div style={{ width: "44px", height: "2px", background: "var(--gold)", margin: "0 auto 12px", borderRadius: "2px" }}></div>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(2.2rem, 4vw, 3rem)", fontWeight: 700, color: "var(--dark)", letterSpacing: "0.02em" }}>
+              VISIT OUR <span style={{ color: "var(--gold)" }}>OFFICE</span>
+            </h2>
+            <p style={{ color: "var(--text-muted)", fontSize: "1.02rem", marginTop: "8px" }}>
+              Find us at our conveniently located office.
+            </p>
+          </div>
+
+          <div className="cards-grid reveal" style={{ gridTemplateColumns: "1.7fr 0.9fr", gap: "28px", alignItems: "stretch" }}>
+            {/* Map Card - Edge-to-Edge Map (Zero Negative Space) */}
+            <div style={{ background: "var(--white)", borderRadius: "20px", padding: "0", border: "1px solid var(--border-light)", boxShadow: "0 15px 35px rgba(0,0,0,0.06)", height: "440px", overflow: "hidden" }}>
+              <iframe
+                title="VisionSquare Infra Office Location"
+                src="https://maps.google.com/maps?q=21.09538780084516,79.06404091942248&z=15&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, borderRadius: "20px", display: "block" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            {/* Office Details Card - Sleek Compact Card */}
+            <div style={{ background: "var(--white)", borderRadius: "20px", padding: "30px 28px", border: "1px solid var(--border-light)", boxShadow: "0 15px 35px rgba(0,0,0,0.06)", display: "flex", flexDirection: "column", justifyContent: "center", height: "440px", position: "relative" }}>
+              <div style={{ width: "48px", height: "48px", borderRadius: "50%", background: "rgba(238, 175, 51, 0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
+                <span style={{ fontSize: "1.3rem", color: "var(--gold)" }}>🏢</span>
+              </div>
+
+              <div style={{ fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.15em", color: "var(--gold)", textTransform: "uppercase", marginBottom: "4px" }}>
+                OUR OFFICE
+              </div>
+
+              <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "2.2rem", fontWeight: 700, color: "var(--dark)", margin: "0 0 10px", display: "flex", alignItems: "center", gap: "6px" }}>
+                <span style={{ color: "var(--gold)", fontSize: "1.6rem" }}>📍</span>
+                <span>Nagpur</span>
+              </h3>
+
+              <p style={{ color: "var(--text-muted)", fontSize: "0.92rem", lineHeight: 1.55, marginBottom: "14px" }}>
+                Visit us at our office in Nagpur. We're here to help you with all your real estate needs.
+              </p>
+
+              <p style={{ color: "var(--dark)", fontSize: "0.88rem", fontWeight: 600, lineHeight: 1.5, marginBottom: "22px", paddingLeft: "10px", borderLeft: "3px solid var(--gold)" }}>
+                Bidoba Sahkari Sanstha, Plot no 133, Wardha Road, Near Hotel Center Point, Bante Layout, Sonegaon, Ujwal Nagar, Nagpur-440025
+              </p>
+
+              <a
+                href="https://www.google.com/maps?q=21.09538780084516,79.06404091942248"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: "var(--dark)",
+                  color: "var(--white)",
+                  fontWeight: 700,
+                  fontSize: "0.92rem",
+                  padding: "13px 26px",
+                  borderRadius: "50px",
+                  textDecoration: "none",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  alignSelf: "flex-start",
+                  transition: "all 0.3s ease",
+                  boxShadow: "0 4px 15px rgba(23, 32, 39, 0.2)"
+                }}
+              >
+                <span>View Location</span>
+                <span>→</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>

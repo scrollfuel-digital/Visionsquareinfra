@@ -6,6 +6,7 @@ export interface Testimonial {
   project: string;
   location: string;
   rating: number;
+  avatar?: string;
 }
 
 export const testimonials: Testimonial[] = [
@@ -17,6 +18,7 @@ export const testimonials: Testimonial[] = [
     project: "Vision Heights",
     location: "Kollur, Hyderabad",
     rating: 5,
+    avatar: "/images/testimonials/ramesh-varma.jpg",
   },
   {
     id: "2",
@@ -26,6 +28,7 @@ export const testimonials: Testimonial[] = [
     project: "Vision Imperial Park",
     location: "Mokila Corridor",
     rating: 5,
+    avatar: "/images/testimonials/ananya-rao.jpg",
   },
   {
     id: "3",
@@ -35,5 +38,6 @@ export const testimonials: Testimonial[] = [
     project: "Vision Horizon",
     location: "Kokapet / Financial District",
     rating: 5,
+    avatar: "/images/testimonials/vikramaditya-reddy.jpg",
   },
 ];

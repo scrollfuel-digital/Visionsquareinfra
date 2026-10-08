@@ -117,11 +117,11 @@ function Navbar() {
                   priority
                   className="
                     w-auto
-                    h-10
-                    sm:h-12
-                    md:h-14
-                    lg:h-[58px]
-                    max-h-[80%]
+                    h-12
+                    sm:h-14
+                    md:h-16
+                    lg:h-[68px]
+                    max-h-[90%]
                     object-contain
                     object-left
                     transition-transform

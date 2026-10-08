@@ -2,7 +2,9 @@
 
 @theme {
   --font-serif: var(--font-serif), "Cormorant Garamond", Georgia, serif;
-  --font-sans: var(--font-sans), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: var(--font-sans), "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  --font-body: var(--font-sans), "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
   --color-cream: #f8f7f3;
   --color-gold: #eeaf33;
   --color-gold-hover: #f5be47;
@@ -11,6 +13,10 @@
 }
 
 :root {
+  /* Official Brand Fonts */
+  --font-heading: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
+  --font-body: var(--font-sans), 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+
   /* Official Brand Color System */
   --brand-cream: #f8f7f3;
   --brand-gold: #eeaf33;
@@ -30,6 +36,16 @@
 
   --slate-border: rgba(40, 65, 83, 0.75);
   --gold-border: rgba(238, 175, 51, 0.28);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
 }
 
 * {
@@ -99,11 +115,9 @@ a {
   height: 64px;
   padding: 0 12px 0 22px;
   border-radius: 9999px;
-  background: linear-gradient(
-    180deg,
-    rgba(40, 65, 83, 0.75) 0%,
-    rgba(23, 32, 39, 0.92) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(40, 65, 83, 0.75) 0%,
+      rgba(23, 32, 39, 0.92) 100%);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(238, 175, 51, 0.28);
@@ -130,14 +144,12 @@ a {
   left: 48px;
   right: 48px;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(248, 247, 243, 0.35) 20%,
-    rgba(238, 175, 51, 0.6) 50%,
-    rgba(248, 247, 243, 0.35) 80%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(248, 247, 243, 0.35) 20%,
+      rgba(238, 175, 51, 0.6) 50%,
+      rgba(248, 247, 243, 0.35) 80%,
+      transparent 100%);
   border-radius: 9999px;
   pointer-events: none;
 }
@@ -147,12 +159,10 @@ a {
   position: absolute;
   inset: -4px;
   border-radius: 9999px;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(238, 175, 51, 0.18) 0%,
-    rgba(40, 65, 83, 0.25) 50%,
-    transparent 75%
-  );
+  background: radial-gradient(circle at 50% 50%,
+      rgba(238, 175, 51, 0.18) 0%,
+      rgba(40, 65, 83, 0.25) 50%,
+      transparent 75%);
   filter: blur(16px);
   z-index: -1;
   pointer-events: none;
@@ -208,14 +218,12 @@ a {
   font-weight: 600;
   color: var(--brand-dark);
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       transparent 0%,
       rgba(248, 247, 243, 0.25) 25%,
       transparent 50%,
       rgba(248, 247, 243, 0.15) 75%,
-      transparent 100%
-    ),
+      transparent 100%),
     linear-gradient(135deg, #f5be47 0%, #eeaf33 50%, #d8981d 100%);
   border: 1px solid rgba(248, 247, 243, 0.45);
   box-shadow:
@@ -239,14 +247,12 @@ a {
 .luxury-cta-btn:hover {
   transform: translateY(-1px);
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       transparent 0%,
       rgba(248, 247, 243, 0.35) 25%,
       transparent 50%,
       rgba(248, 247, 243, 0.2) 75%,
-      transparent 100%
-    ),
+      transparent 100%),
     linear-gradient(135deg, #f8ca5c 0%, #f5be47 50%, #eeaf33 100%);
   box-shadow:
     0 6px 28px rgba(238, 175, 51, 0.65),

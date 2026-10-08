@@ -16,7 +16,7 @@ export default function HomePage() {
       <FeaturedProjects />
 
       {/* 4th: Testimonials Section */}
-      <Testimonials />
+      {/* <Testimonials /> */}
     </main>
   );
 }
