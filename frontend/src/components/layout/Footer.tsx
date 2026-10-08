@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function Footer() {
@@ -11,16 +12,19 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
           {/* Brand Info */}
           <div className="lg:col-span-1">
-            <h3 className="font-serif text-2xl font-bold text-white mb-3 tracking-wide">
-              VisionSquare <span className="text-[#EEAF33]">Infra</span>
-            </h3>
-            <p className="text-[#a3b3bf] text-sm leading-relaxed mb-4">
+            <Link href="/" className="inline-block mb-5">
+              <Image
+                src="/images/logo/viplogo.png"
+                alt="VisionSquare Infra"
+                width={360}
+                height={120}
+                priority
+                className="h-20 sm:h-24 md:h-28 w-auto object-contain object-left"
+              />
+            </Link>
+            <p className="text-[#a3b3bf] text-sm leading-relaxed">
               VisionSquare Infra is a real estate channel partner in Nagpur, India. We guide buyers to shortlisted, verified residential projects and plots, arrange site visits, and guide you to booking.
             </p>
-            <div className="inline-flex items-center gap-2 bg-[#EEAF33]/10 border border-[#EEAF33]/30 text-[#EEAF33] text-xs font-semibold px-3.5 py-1.5 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#EEAF33]" />
-              <span>Verified Projects & Site Visit Guidance</span>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -113,7 +117,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 <Clock className="h-4 w-4 text-[#EEAF33] shrink-0" />
-                <span className="text-xs">Mon–Sun: 10:00 AM – 7:00 PM</span>
+                <span className="text-xs">Mon–Sat: 10:00 AM – 7:00 PM</span>
               </div>
             </div>
           </div>
