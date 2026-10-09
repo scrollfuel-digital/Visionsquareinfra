@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import CurvedHeader from "@/components/ui/curved-menu";
 
 const links = [
   { label: "About", to: "/about-us" },
@@ -19,6 +21,7 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  // Detect scrolling
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -26,17 +29,19 @@ function Navbar() {
 
     onScroll();
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
+  // Close mobile drawer after navigation
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
+  // Prevent background scrolling when mobile drawer is open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
 
@@ -47,266 +52,120 @@ function Navbar() {
 
   return (
     <>
-      {/* ================= DESKTOP / MAIN NAVBAR ================= */}
-      <motion.header
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{
-          duration: 0.7,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-        className={`fixed inset-x-0 top-0 z-50 pointer-events-none transition-all duration-300 ${
-          scrolled ? "py-2.5 sm:py-3" : "py-3.5 sm:py-5"
-        }`}
-      >
-        {/* Golden Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-[radial-gradient(ellipse_at_top,_rgba(229,169,60,0.22)_0%,_transparent_70%)] blur-2xl pointer-events-none" />
-
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <nav
-            className="
-              pointer-events-auto
-              relative
-              flex
-              items-center
-              justify-between
-              rounded-full
-              h-16
-              sm:h-[72px]
-              md:h-20
-              px-5
-              sm:px-8
-              md:px-10
-              transition-all
-              duration-300
-            "
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 40%, rgba(12,12,15,0.22) 100%), rgba(18,18,22,0.22)",
-              backdropFilter: "blur(24px) saturate(180%)",
-              WebkitBackdropFilter: "blur(24px) saturate(180%)",
-              border: "1px solid rgba(255,255,255,0.28)",
-              boxShadow:
-                "inset 0 1.5px 2px rgba(255,255,255,0.4), inset 0 0 20px rgba(231,197,139,0.15), 0 10px 30px rgba(0,0,0,0.65)",
+      {/* ================= MAIN NAVBAR (TOP OF PAGE) ================= */}
+      <AnimatePresence mode="wait">
+        {!scrolled ? (
+          <motion.header
+            key="header-full"
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
+            transition={{
+              duration: 0.4,
+              ease: [0.16, 1, 0.3, 1],
             }}
+            className="fixed inset-x-0 top-0 z-50"
           >
-            {/* =====================================================
-                LOGO
-                The logo fits inside the rounded navbar pill container.
-            ====================================================== */}
-            <div
-              className="
-                relative
-                z-20
-                flex
-                items-center
-                h-full
-                pointer-events-auto
-              "
-            >
-              <Link
-                href="/"
-                className="group relative flex items-center h-full"
-                aria-label="VisionSquare Infra Home"
-              >
-                <Image
-                  src="/images/logo/visionS infra.png"
-                  alt="VisionSquare Infra"
-                  width={500}
-                  height={200}
-                  priority
-                  className="
-                    w-auto
-                    h-12
-                    sm:h-14
-                    md:h-16
-                    lg:h-[68px]
-                    max-h-[90%]
-                    object-contain
-                    object-left
-                    transition-transform
-                    duration-300
-                    group-hover:scale-[1.02]
-                    drop-shadow-[0_2px_8px_rgba(0,0,0,0.3)]
-                  "
-                />
-              </Link>
+            <div className="w-full bg-[#121110]/80 backdrop-blur-lg border-b border-white/10">
+              <nav className="relative mx-auto w-full max-w-7xl flex items-center justify-between h-16 sm:h-[72px] md:h-20 px-4 sm:px-6 lg:px-8">
+                {/* Logo */}
+                <div className="relative z-20 flex h-full shrink-0 items-center">
+                  <Link href="/" className="group relative flex h-full items-center" aria-label="VisionSquare Infra Home">
+                    <div className="relative flex h-14 sm:h-16 md:h-[72px] w-auto max-w-[180px] sm:max-w-[220px] md:max-w-[240px] items-center">
+                      <Image
+                        src="/images/logo/visionS infra.png"
+                        alt="VisionSquare Infra"
+                        width={500}
+                        height={200}
+                        priority
+                        className="h-12 sm:h-14 md:h-16 w-auto max-w-full object-contain object-left transition-transform duration-300 group-hover:scale-[1.02]"
+                      />
+                    </div>
+                  </Link>
+                </div>
+
+                {/* Desktop Links */}
+                <ul className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-7 lg:gap-10">
+                  {links.map((link) => {
+                    const isActive = pathname === link.to;
+
+                    return (
+                      <li key={link.to} className="relative">
+                        <Link
+                          href={link.to}
+                          className={`group relative block whitespace-nowrap py-2 lg:text-xl transition-colors duration-300 ${
+                            isActive ? "text-[#DE9F20] font-medium" : "text-[#F8F7F3] font-normal hover:text-[#EEAF33]"
+                          }`}
+                          style={{ fontFamily: '"Playfair Display", Georgia, serif' }}
+                        >
+                          {link.label}
+                          {isActive && (
+                            <motion.span
+                              layoutId="activeTabUnderline"
+                              className="absolute -bottom-0.5 left-0 right-0 h-[2.5px] rounded-full bg-[#DE9F20] shadow-[0_2px_8px_rgba(229,169,60,0.55)]"
+                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                            />
+                          )}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                {/* Desktop CTA */}
+                <div className="relative z-30 ml-auto hidden md:block">
+                  <Link
+                    href="/contact"
+                    className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 lg:px-6 lg:py-3 text-sm lg:text-base font-medium text-[#120F0A] shadow-[0_4px_18px_rgba(229,169,60,0.35)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
+                    style={{
+                      background: "linear-gradient(135deg, #F6C85E 0%, #E5A93C 50%, #C88A24 100%)",
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                    }}
+                  >
+                    <span>Book Site Visit</span>
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.2} />
+                  </Link>
+                </div>
+
+                {/* Mobile Menu Toggle Button */}
+                <div className="relative z-30 ml-auto md:hidden">
+                  <CurvedHeader />
+                </div>
+              </nav>
             </div>
-
-            {/* =====================================================
-                DESKTOP NAVIGATION
-            ====================================================== */}
-            <ul
-              className="
-                hidden
-                md:flex
-                items-center
-                gap-7
-                lg:gap-10
-                absolute
-                left-1/2
-                -translate-x-1/2
-              "
+          </motion.header>
+        ) : (
+          <motion.div
+            key="header-scrolled"
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -30, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed top-4 right-4 sm:top-5 sm:right-6 z-50 flex items-center gap-2.5 sm:gap-3 pointer-events-auto"
+          >
+            {/* Pill 1: Contact Us Capsule */}
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#0d1013] text-white border border-white/15 shadow-2xl font-sans text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95"
             >
-              {links.map((l) => {
-                const isActive = pathname === l.to;
+              <span className="w-2.5 h-2.5 rounded-full border-2 border-white/80 shrink-0 transition-transform duration-300 group-hover:scale-125" />
+              <span>CONTACT US</span>
+            </Link>
 
-                return (
-                  <li key={l.to} className="relative">
-                    <Link
-                      href={l.to}
-                      className={`
-                        relative
-                        block
-                        py-1
-                        text-lg
-                        lg:text-xl
-                        whitespace-nowrap
-                        transition-colors
-                        duration-200
-                        ${
-                          isActive
-                            ? "text-white font-medium"
-                            : "text-white/80 hover:text-white font-normal"
-                        }
-                      `}
-                      style={{
-                        fontFamily: '"Playfair Display", Georgia, serif',
-                      }}
-                    >
-                      {l.label}
+            {/* Pill 2: Menu Capsule with Curved Navigation Drawer */}
+            <CurvedHeader />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-                      {isActive ? (
-                        <motion.div
-                          layoutId="activeTabUnderline"
-                          className="
-                            absolute
-                            -bottom-1.5
-                            left-0
-                            right-0
-                            h-[2.5px]
-                            bg-[#E5A93C]
-                            rounded-full
-                            shadow-[0_2px_8px_rgba(229,169,60,0.8)]
-                          "
-                          transition={{
-                            type: "spring",
-                            stiffness: 380,
-                            damping: 30,
-                          }}
-                        />
-                      ) : (
-                        <span
-                          className="
-                            absolute
-                            -bottom-1.5
-                            left-1/2
-                            right-1/2
-                            h-[2px]
-                            bg-[#E5A93C]/70
-                            rounded-full
-                            transition-all
-                            duration-300
-                            opacity-0
-                            hover:opacity-100
-                          "
-                        />
-                      )}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
 
-            {/* =====================================================
-                DESKTOP CTA
-            ====================================================== */}
-            <div className="hidden md:block ml-auto relative z-30">
-              <Link
-                href="/contact"
-                className="
-                  group
-                  relative
-                  inline-flex
-                  items-center
-                  gap-2
-                  rounded-full
-                  px-5
-                  py-2.5
-                  lg:px-6
-                  lg:py-3
-                  text-sm
-                  lg:text-base
-                  font-medium
-                  text-[#120F0A]
-                  shadow-[0_4px_18px_rgba(229,169,60,0.35)]
-                  transition-all
-                  duration-300
-                  hover:scale-[1.03]
-                  hover:shadow-[0_6px_22px_rgba(229,169,60,0.5)]
-                  active:scale-[0.98]
-                  whitespace-nowrap
-                "
-                style={{
-                  background:
-                    "linear-gradient(135deg, #F6C85E 0%, #E5A93C 50%, #C88A24 100%)",
-                  fontFamily: '"Playfair Display", Georgia, serif',
-                }}
-              >
-                <span>Book Site Visit</span>
+      {/* ================= NAVIGATION DRAWER ================= */}
 
-                <ArrowRight
-                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                  strokeWidth={2.2}
-                />
-              </Link>
-            </div>
-
-            {/* =====================================================
-                MOBILE MENU BUTTON
-            ====================================================== */}
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              className="
-                ml-auto
-                flex
-                md:hidden
-                h-11
-                w-11
-                items-center
-                justify-center
-                rounded-full
-                bg-white/10
-                text-white
-                backdrop-blur-md
-                border
-                border-white/20
-                transition-all
-                hover:bg-white/20
-                active:scale-95
-                relative
-                z-30
-              "
-              aria-label="Open menu"
-              aria-expanded={open}
-            >
-              <Menu
-                className="h-5 w-5"
-                strokeWidth={2.2}
-              />
-            </button>
-          </nav>
-        </div>
-      </motion.header>
-
-      {/* ==========================================================
-          MOBILE GLASS DRAWER
-      =========================================================== */}
       <AnimatePresence>
         {open && (
-          <div className="fixed inset-0 z-[100] md:hidden">
-            {/* Background Overlay */}
+          <div className="fixed inset-0 z-[100]">
+            {/* Background overlay */}
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -319,10 +178,13 @@ function Navbar() {
                 backdrop-blur-md
               "
               onClick={() => setOpen(false)}
+              aria-hidden="true"
             />
 
-            {/* Mobile Drawer */}
+            {/* Mobile drawer */}
+
             <motion.div
+              id="mobile-navigation"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -340,23 +202,27 @@ function Navbar() {
                 w-[85%]
                 max-w-[360px]
                 flex-col
-                bg-[#121110]
+                overflow-y-auto
                 border-l
                 border-white/15
+                bg-[#121110]
                 px-6
                 pb-8
                 pt-6
-                shadow-2xl
                 text-white
+                shadow-2xl
               "
             >
-              {/* Mobile Logo + Close */}
+              {/* Mobile logo and close button */}
+
               <div
                 className="
                   mb-8
                   flex
+                  min-h-[72px]
                   items-center
                   justify-between
+                  gap-3
                   border-b
                   border-white/10
                   pb-5
@@ -365,23 +231,26 @@ function Navbar() {
                 <Link
                   href="/"
                   onClick={() => setOpen(false)}
-                  className="flex items-center"
+                  className="flex min-w-0 flex-1 items-center"
+                  aria-label="VisionSquare Infra Home"
                 >
-                  <Image
-                    src="/images/logo/visionS infra.png"
-                    alt="VisionSquare Infra"
-                    width={300}
-                    height={100}
-                    priority
-                    className="
-                      h-16
-                      sm:h-[72px]
-                      w-auto
-                      max-w-[240px]
-                      object-contain
-                      object-left
-                    "
-                  />
+                  <div className="relative flex h-14 w-full max-w-[220px] items-center">
+                    <Image
+                      src="/images/logo/visionS infra.png"
+                      alt="VisionSquare Infra"
+                      width={300}
+                      height={100}
+                      priority
+                      className="
+                        h-12
+                        sm:h-14
+                        w-auto
+                        max-w-full
+                        object-contain
+                        object-left
+                      "
+                    />
+                  </div>
                 </Link>
 
                 <button
@@ -397,8 +266,8 @@ function Navbar() {
                     rounded-full
                     bg-white/10
                     text-white
-                    hover:bg-white/20
                     transition-all
+                    hover:bg-white/20
                     active:scale-95
                   "
                   aria-label="Close menu"
@@ -407,21 +276,24 @@ function Navbar() {
                 </button>
               </div>
 
-              {/* Mobile Links */}
+              {/* Mobile navigation links */}
+
               <ul className="space-y-3">
-                {links.map((l) => {
-                  const isActive = pathname === l.to;
+                {links.map((link) => {
+                  const isActive = pathname === link.to;
 
                   return (
-                    <li key={l.to}>
+                    <li key={link.to}>
                       <Link
-                        href={l.to}
+                        href={link.to}
                         onClick={() => setOpen(false)}
+                        aria-current={isActive ? "page" : undefined}
                         className={`
                           flex
                           items-center
                           justify-between
                           rounded-xl
+                          border
                           px-4
                           py-3
                           text-xl
@@ -429,8 +301,8 @@ function Navbar() {
                           duration-200
                           ${
                             isActive
-                              ? "bg-[#E5A93C]/15 text-[#E5A93C] font-medium border border-[#E5A93C]/30"
-                              : "text-white/80 hover:bg-white/5 hover:text-white font-normal"
+                              ? "border-[#E5A93C]/30 bg-[#E5A93C]/15 text-[#E5A93C] font-medium"
+                              : "border-transparent text-white/85 hover:border-white/10 hover:bg-white/5 hover:text-[#EEAF33] font-normal"
                           }
                         `}
                         style={{
@@ -438,10 +310,10 @@ function Navbar() {
                             '"Playfair Display", Georgia, serif',
                         }}
                       >
-                        <span>{l.label}</span>
+                        <span>{link.label}</span>
 
                         {isActive && (
-                          <div className="h-2 w-2 rounded-full bg-[#E5A93C]" />
+                          <span className="h-2 w-2 rounded-full bg-[#E5A93C]" />
                         )}
                       </Link>
                     </li>
@@ -450,7 +322,8 @@ function Navbar() {
               </ul>
 
               {/* Mobile CTA */}
-              <div className="mt-8 pt-4 border-t border-white/10">
+
+              <div className="mt-8 border-t border-white/10 pt-6">
                 <Link
                   href="/contact"
                   onClick={() => setOpen(false)}
@@ -467,6 +340,7 @@ function Navbar() {
                     text-[#120F0A]
                     shadow-[0_4px_20px_rgba(229,169,60,0.4)]
                     transition-all
+                    duration-300
                     hover:scale-[1.02]
                     active:scale-[0.98]
                   "
@@ -486,9 +360,10 @@ function Navbar() {
                 </Link>
               </div>
 
-              {/* Bottom Text */}
+              {/* Bottom text */}
+
               <div className="mt-auto pt-8 text-center">
-                <p className="text-[11px] tracking-[0.25em] text-white/40 uppercase">
+                <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">
                   VisionSquare Infra Private Limited
                 </p>
               </div>
@@ -499,7 +374,6 @@ function Navbar() {
     </>
   );
 }
-
 
 export { Navbar };
 export default Navbar;
