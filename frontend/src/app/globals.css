@@ -1,1 +1,99 @@
 @import "tailwindcss";
+
+@theme {
+  --font-cinzel: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  --font-serif: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  --font-sans: var(--font-sans), 'Manrope', system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    --bg-cream: #F8F7F3;
+    --bg-cream-light: #FAF9F5;
+    --text-headline: #172027;
+    --text-paragraph: #4A5568;
+    --text-muted: #64748B;
+    --brand-gold: #9A7432;
+    --brand-gold-bright: #EEAF33;
+    --btn-gold: #9A7432;
+    --btn-gold-hover: #172027;
+    --font-cinzel: var(--font-cinzel), 'Cinzel', Georgia, serif;
+    --font-serif: var(--font-cinzel), 'Cinzel', Georgia, serif;
+    --font-sans: var(--font-sans), 'Manrope', system-ui, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg-cream);
+    color: var(--text-headline);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+    color: var(--text-headline);
+  }
+
+  p {
+    font-family: var(--font-sans);
+    color: var(--text-paragraph);
+    line-height: 1.65;
+  }
+}
+
+/* Custom Design Token Utility Classes */
+.font-cinzel {
+  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif !important;
+}
+
+.font-serif {
+  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif !important;
+}
+
+.bg-cream-theme {
+  background-color: #F8F7F3;
+}
+
+.text-headline-dark {
+  color: #172027;
+  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+}
+
+.text-tagline-gold {
+  color: #9A7432;
+  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-weight: 700;
+}
+
+.text-paragraph-slate {
+  color: #4A5568;
+  font-family: var(--font-sans);
+  line-height: 1.65;
+}
+
+.btn-gold-pill {
+  background-color: #9A7432;
+  color: #FFFFFF;
+  font-family: var(--font-cinzel), 'Cinzel', Georgia, serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  border-radius: 9999px;
+  padding: 0.875rem 1.75rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  cursor: pointer;
+}
+
+.btn-gold-pill:hover {
+  background-color: #172027;
+  color: #FFFFFF;
+  box-shadow: 0 10px 25px rgba(23, 32, 39, 0.25);
+  transform: translateY(-2px);
+}

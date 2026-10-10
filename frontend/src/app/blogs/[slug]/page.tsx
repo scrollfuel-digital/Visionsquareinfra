@@ -27,11 +27,11 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
       <style>{`
         :root {
           --cream: #F8F7F3;
-          --gold: #EEAF33;
-          --navy: #284153;
+          --gold: #9A7432;
+          --navy: #172027;
           --dark: #172027;
           --white: #ffffff;
-          --text-muted: #5b6a75;
+          --text-muted: #4A5568;
           --border-light: rgba(23, 32, 39, 0.12);
           --font-heading: 'Cormorant Garamond', Georgia, serif;
           --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -210,15 +210,15 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
           <div className="meta-bar">
             <div className="meta-item">
-              <User size={16} className="text-[#EEAF33]" />
+              <User size={16} className="text-[#9A7432]" />
               <span>{blog.author}</span>
             </div>
             <div className="meta-item">
-              <Calendar size={16} className="text-[#EEAF33]" />
+              <Calendar size={16} className="text-[#9A7432]" />
               <span>{blog.publishedAt}</span>
             </div>
             <div className="meta-item">
-              <Clock size={16} className="text-[#EEAF33]" />
+              <Clock size={16} className="text-[#9A7432]" />
               <span>{blog.readTime}</span>
             </div>
           </div>
@@ -243,7 +243,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
               <div className="mt-12 pt-8 border-t border-slate-200">
                 <Link
                   href="/blogs"
-                  className="inline-flex items-center gap-2 font-bold text-[#284153] hover:text-[#EEAF33] transition-colors"
+                  className="inline-flex items-center gap-2 font-bold text-[#172027] hover:text-[#9A7432] transition-colors"
                 >
                   <ArrowLeft size={18} />
                   <span>Back to all articles</span>
@@ -258,13 +258,13 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                 <p className="text-sm text-slate-600 leading-relaxed">
                   As your channel partner, VisionSquare Infra helps you shortlist verified residential projects and plots, arrange free site visits, and guide your booking.
                 </p>
-                <Link href="/contact#enquiry" className="btn-sidebar-gold">
+                <Link href="/contact" className="btn-sidebar-gold">
                   <span>Send Enquiry</span>
                   <span>→</span>
                 </Link>
                 <a
-                  href="tel:[Your Phone Number]"
-                  className="mt-3 flex items-center justify-center gap-2 border border-[#284153] text-[#284153] font-bold py-3 px-5 rounded-full text-sm hover:bg-[#284153] hover:text-white transition-all text-center"
+                  href="tel:+919876543210"
+                  className="mt-3 flex items-center justify-center gap-2 border border-[#172027] text-[#172027] font-bold py-3 px-5 rounded-none text-sm hover:bg-[#172027] hover:text-white transition-all text-center"
                 >
                   <Phone size={15} />
                   <span>Call Our Team</span>

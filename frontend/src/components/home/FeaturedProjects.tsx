@@ -229,7 +229,7 @@ export default function FeaturedProjects({ showIntroHeader = true }: FeaturedPro
                   </div>
 
                   {/* Description */}
-                  <p className="font-sans text-sm sm:text-base text-[#172027]/80 leading-relaxed mb-6">
+                  <p className="font-sans text-sm sm:text-base text-[#4A5568] leading-relaxed mb-6">
                     {project.description}
                   </p>
 
