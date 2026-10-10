@@ -36,8 +36,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cinzelFont.variable} ${serifFont.variable} ${sansFont.variable}`}>
-      <body className="font-sans antialiased bg-[#172027] text-[#F8F7F3]">
+    <html
+      lang="en"
+      className={`${cinzelFont.variable} ${serifFont.variable} ${sansFont.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="font-sans antialiased bg-[#172027] text-[#F8F7F3]" suppressHydrationWarning>
         <Header />
         {children}
         <Footer />
