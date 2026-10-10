@@ -27,6 +27,7 @@ const sansFont = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://visionsquareinfra.com"),
   title: {
     default: "Vision Square Infrastructure",
     template: "%s | Vision Square Infrastructure",

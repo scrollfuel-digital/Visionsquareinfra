@@ -88,7 +88,7 @@ export function Navbar() {
       <div className="absolute top-4 left-4 sm:left-6 md:left-10 z-30">
         <Link href="/" aria-label="VisionSquare Infra Home">
           <Image
-            src="/images/logo/visionS infra.png"
+            src="/images/logo/VISIONSQUARE infra.png"
             alt="VisionSquare Infra Logo"
             width={300}
             height={120}
@@ -130,7 +130,7 @@ export function Navbar() {
         <div className="absolute top-6 left-0 right-0 lg:right-auto lg:w-[420px] flex justify-center z-20 pointer-events-auto">
           <Link href="/" onClick={() => setOpen(false)}>
             <Image
-              src="/images/logo/visionS infra.png"
+              src="/images/logo/VISIONSQUARE infra.png"
               alt="VisionSquare Infra Logo"
               width={300}
               height={120}
