@@ -140,10 +140,7 @@ const NavLink: React.FC<iNavLinkProps> = ({
     >
       <Link ref={ref} onMouseMove={handleMouseMove} href={href} className="w-full">
         <div className="relative flex items-center justify-between">
-          <div className="flex items-baseline gap-4">
-            <span className="text-[#EEAF33] transition-colors duration-500 text-2xl sm:text-3xl font-serif italic">
-              0{index}.
-            </span>
+          <div className="flex items-baseline">
             <motion.span
               variants={{
                 initial: { x: 0 },

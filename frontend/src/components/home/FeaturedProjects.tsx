@@ -55,7 +55,7 @@ const projectsList: ProjectItem[] = [
   },
   {
     number: "02",
-    slug: "pyramid-amara",
+    slug: "amara-pyramid",
     taglineBadge: "HIGH-RISE TOWNSHIP",
     nameLine1: "AMARA",
     nameLine2: "PYRAMID",
@@ -72,31 +72,13 @@ const projectsList: ProjectItem[] = [
     ],
     footerTags: "TOWNSHIP / RERA APPROVED / GREENERY",
   },
-  {
-    number: "03",
-    slug: "sky-joy",
-    taglineBadge: "WATERFRONT PLOTS",
-    nameLine1: "JOY",
-    nameLine2: "SKY",
-    tagline: "INDIA'S FIRST LUXURY WATERFRONT PLOTTED DEVELOPMENT.",
-    description:
-      "Spread across approximately 78 acres in Mondha, Hingna, featuring a ~3-acre man-made beach and wave pool, and a grand 28,000 sq. ft. clubhouse with 40+ lifestyle amenities.",
-    location: "Mondha, Hingna, South Nagpur",
-    image: "/images/projects/vision-imperial.jpg",
-    specsGrid: [
-      { iconType: "waves", title: "~3-ACRE BEACH", sub: "& WAVE POOL" },
-      { iconType: "building", title: "28,000 SQ.FT", sub: "CLUBHOUSE" },
-      { iconType: "home", title: "918 WATERFRONT", sub: "PLOTS" },
-      { iconType: "shield", title: "MAHARERA", sub: "APPROVED" },
-    ],
-    footerTags: "WATERFRONT / WAVE POOL / 78 ACRES",
-  },
+ 
   {
     number: "04",
-    slug: "the-one-rise",
+    slug: "one-rise",
     taglineBadge: "LUXURY APARTMENTS",
-    nameLine1: "RISE",
-    nameLine2: "THE ONE",
+    nameLine1: "ONE",
+    nameLine2: "RISE",
     tagline: "RESIDE BEYOND THE SKYLINE.",
     description:
       "A signature-styled 2 & 3 BHK residential development featuring a G+13-storey magnificent edifice, premium construction, cross-ventilated homes, and rooftop lifestyle spaces.",
@@ -114,8 +96,8 @@ const projectsList: ProjectItem[] = [
     number: "05",
     slug: "infinity-elegance",
     taglineBadge: "ULTRA-LUXURY APARTMENTS",
-    nameLine1: "ELEGANCE",
-    nameLine2: "INFINITY",
+    nameLine1: "INFINITY",
+    nameLine2: "ELEGANCE",
     tagline: "LUXURY, REDEFINED FOR THE MODERN YOU.",
     description:
       "An ultra-luxurious 4 BHK residential project designed with spacious living areas, premium finishes, smart security, mechanical car parking, and refined rooftop amenities in Dhantoli, Nagpur.",
@@ -247,7 +229,7 @@ export default function FeaturedProjects({ showIntroHeader = true }: FeaturedPro
                   </div>
 
                   {/* Description */}
-                  <p className="font-sans text-sm sm:text-base text-[#172027]/80 leading-relaxed mb-6">
+                  <p className="font-sans text-sm sm:text-base text-[#4A5568] leading-relaxed mb-6">
                     {project.description}
                   </p>
 

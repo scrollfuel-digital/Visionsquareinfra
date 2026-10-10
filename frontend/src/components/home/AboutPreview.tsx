@@ -1,267 +1,99 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import React from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  TrendingUp,
-  UserCheck,
-  ShieldCheck,
-  Handshake,
-  ArrowRight,
-  Play,
-  X,
-  Home,
-  Building2,
-  Building,
-  Briefcase,
-  Mountain,
-} from "lucide-react";
-
-const propertyCategories = [
-  {
-    label: "Houses",
-    count: "1,250+ Properties",
-    icon: Home,
-  },
-  {
-    label: "Apartments",
-    count: "2,350+ Properties",
-    icon: Building2,
-  },
-  {
-    label: "Penthouses",
-    count: "450+ Properties",
-    icon: Building,
-  },
-  {
-    label: "Offices",
-    count: "650+ Properties",
-    icon: Briefcase,
-  },
-  {
-    label: "Lands / Plots",
-    count: "950+ Properties",
-    icon: Mountain,
-  },
-];
+import { ArrowRight } from "lucide-react";
 
 export default function AboutPreview() {
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-
   return (
-    <>
-      <section className="relative pt-20 md:pt-28 lg:pt-32 pb-4 sm:pb-6 md:pb-8 bg-[#F8F7F3] text-[#172027] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Main 2-Column Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left Column: Mansion Showcase Image Card with Play Button & Badge */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(40,65,83,0.14)] bg-[#172027]">
-                <Image
-                  src="/images/about/about-showcase.jpg"
-                  alt="VisionS Infra Luxury Architecture Villa in Nagpur"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 hover:scale-105"
-                />
+    <section className="w-full pt-20 pb-16 px-4 md:px-8 bg-[#F8F7F3] text-[#172027]">
+      <div className="max-w-6xl mx-auto flex flex-col items-center text-center">
+        {/* Heading (Matching Signature Gold Font Design) */}
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          className="text-3xl sm:text-5xl lg:text-6xl font-serif font-extrabold text-[#172027] tracking-tight leading-tight uppercase"
+        >
+          ABOUT{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#EEAF33] via-[#9A7432] to-[#EEAF33]">
+            VISIONSQUARE INFRA
+          </span>
+        </motion.h2>
 
-                {/* Subtle vignette overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 pointer-events-none" />
+        {/* Signature divider */}
+        <motion.span
+          aria-hidden="true"
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+          className="mt-6 mb-8 h-px w-28 origin-center bg-[#EEAF33]"
+        />
 
-                {/* Center Circular Play Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsVideoModalOpen(true)}
-                  aria-label="Watch video walkthrough"
-                  className="group absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 hover:bg-white shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer z-10"
-                >
-                  <span className="absolute inset-0 rounded-full bg-white/40 animate-ping pointer-events-none" />
-                  <Play className="h-6 w-6 sm:h-7 sm:w-7 fill-[#172027] text-[#172027] translate-x-0.5 transition-transform group-hover:scale-110" />
-                </button>
+        {/* Subheading */}
+        <motion.h3
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          className="text-base md:text-xl font-bold uppercase tracking-[0.2em] mb-6 text-[#9A7432]"
+        >
+          Signature Living
+        </motion.h3>
 
-                {/* Bottom Right Floating Badge: 28+ YEARS OF EXCELLENCE */}
-                {/* <div className="absolute bottom-5 right-5 sm:bottom-6 sm:right-6 bg-[#172027]/95 backdrop-blur-md border border-[#eeaf33]/30 text-white rounded-2xl px-5 py-3.5 sm:px-6 sm:py-4 shadow-2xl flex flex-col items-center justify-center text-center z-10">
-                  <span className="font-serif text-3xl sm:text-4xl font-bold text-[#eeaf33] tracking-tight leading-none">
-                    28+
-                  </span>
-                  <span className="text-[10px] sm:text-[11px] font-bold tracking-widest text-[#F8F7F3] uppercase leading-tight mt-1">
-                    Years of
-                    <br />
-                    Excellence
-                  </span>
-                </div> */}
-              </div>
-            </div>
+        {/* Paragraphs */}
+        <div className="text-sm md:text-[18px] leading-relaxed max-w-5xl mx-auto space-y-6 text-center text-[#172027]/80 font-sans">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
+          >
+            A distinguished real estate developer with a legacy of excellence in
+            Nagpur. Renowned for its commitment to thoughtful design, precision
+            build quality, MahaRERA transparency, and ethical execution. VisionSquare
+            Infra Private Limited curates refined residential spaces, high-rise
+            townships, and waterfront plotted developments that embody comfort,
+            trust, and enduring value.
+          </motion.p>
 
-            {/* Right Column: Content, Pillars & CTA */}
-            <div className="lg:col-span-6 flex flex-col justify-center">
-              {/* Eyebrow */}
-              <span className="font-sans text-xs sm:text-sm uppercase tracking-[0.22em] text-[#eeaf33] font-bold mb-3 block">
-                ABOUT VISIONS INFRA
-              </span>
-
-              {/* Headline */}
-              <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-[#284153] leading-[1.12] tracking-tight mb-5">
-                Elevating Real Estate Experience in Nagpur
-              </h2>
-
-              {/* Narrative Paragraph */}
-              <p className="font-sans text-sm sm:text-base text-[#5A6872] leading-relaxed mb-8 font-normal">
-                At VisionS Infra, we believe in more than just properties — we believe in people, dreams, and creating lasting value. We are committed to creating thoughtfully planned properties that combine quality, convenience, functionality, and long-term value.
-              </p>
-
-              {/* 4 Feature Points in a 2x2 Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 mb-10">
-                {/* 1. Market Expertise */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-11 h-11 rounded-full bg-[#eeaf33]/15 flex items-center justify-center shrink-0 text-[#eeaf33]">
-                    <TrendingUp className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-base sm:text-lg font-bold text-[#284153] leading-snug">
-                      Market Expertise
-                    </h3>
-                    <p className="font-sans text-xs text-[#5A6872] leading-normal mt-1">
-                      In-depth Nagpur market knowledge &amp; strategic planning.
-                    </p>
-                  </div>
-                </div>
-
-                {/* 2. Personalized Service */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-11 h-11 rounded-full bg-[#eeaf33]/15 flex items-center justify-center shrink-0 text-[#eeaf33]">
-                    <UserCheck className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-base sm:text-lg font-bold text-[#284153] leading-snug">
-                      Personalized Service
-                    </h3>
-                    <p className="font-sans text-xs text-[#5A6872] leading-normal mt-1">
-                      Honest &amp; clear communication tailored to your lifestyle.
-                    </p>
-                  </div>
-                </div>
-
-                {/* 3. Trusted & Transparent */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-11 h-11 rounded-full bg-[#eeaf33]/15 flex items-center justify-center shrink-0 text-[#eeaf33]">
-                    <ShieldCheck className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-base sm:text-lg font-bold text-[#284153] leading-snug">
-                      Trusted &amp; Transparent
-                    </h3>
-                    <p className="font-sans text-xs text-[#5A6872] leading-normal mt-1">
-                      Clear documentation and verified project insights.
-                    </p>
-                  </div>
-                </div>
-
-                {/* 4. Seamless Process */}
-                <div className="flex items-start gap-3.5">
-                  <div className="w-11 h-11 rounded-full bg-[#eeaf33]/15 flex items-center justify-center shrink-0 text-[#eeaf33]">
-                    <Handshake className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-base sm:text-lg font-bold text-[#284153] leading-snug">
-                      Seamless Process
-                    </h3>
-                    <p className="font-sans text-xs text-[#5A6872] leading-normal mt-1">
-                      Smooth from initial exploration to registry &amp; possession.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* CTA Button */}
-              <div>
-                <Link
-                  href="/about-us"
-                  className="inline-flex items-center gap-3 px-7 py-4 rounded-xl bg-[#172027] text-[#eeaf33] border border-[#eeaf33]/30 text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-[#284153] hover:border-[#eeaf33] hover:shadow-[0_8px_24px_rgba(238,175,51,0.25)] hover:scale-[1.02] active:scale-[0.98] group"
-                >
-                  <span className="text-[#eeaf33]">LEARN MORE ABOUT US</span>
-                  <ArrowRight className="h-4 w-4 text-[#eeaf33] transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Property Types Floating Bar */}
-          <div className="mt-8 sm:mt-12">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_15px_45px_rgba(40,65,83,0.06)] border border-[#284153]/10">
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 divide-y sm:divide-y-0 lg:divide-x divide-neutral-100">
-                {propertyCategories.map((item, idx) => {
-                  const Icon = item.icon;
-                  return (
-                    <div
-                      key={item.label}
-                      className={`flex items-center gap-3.5 ${idx !== 0 ? "pt-4 sm:pt-0 lg:pl-6" : ""
-                        } transition-transform duration-300 hover:translate-y-[-2px]`}
-                    >
-                      <div className="w-12 h-12 rounded-2xl bg-[#eeaf33]/15 flex items-center justify-center shrink-0 text-[#eeaf33]">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <h4 className="font-serif text-base font-bold text-[#284153] leading-tight">
-                          {item.label}
-                        </h4>
-                        <p className="font-sans text-xs text-[#5A6872] mt-0.5">
-                          {item.count}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.5 }}
+          >
+            Rooted by principles of integrity, uncompromising quality, timely
+            delivery, and a strong customer-centric ethos, VisionSquare Infra
+            follows a refined approach to luxury—subtle, considered, and timeless
+            in expression. From 3 BHK signature residences in Jaiprakash Nagar and 6
+            high-rise towers on Besa–Pipla Road to India's first waterfront plotted
+            development in Hingna, each development reflects a dedication to creating
+            homes that transcend structure, offering lasting elegance and a foundation
+            for meaningful living.
+          </motion.p>
         </div>
-      </section>
 
-      {/* Video Walkthrough Modal */}
-      {isVideoModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-4xl rounded-2xl overflow-hidden bg-[#172027] border border-[#eeaf33]/30 shadow-2xl">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#284153]">
-              <span className="font-serif text-lg text-[#F8F7F3] font-bold">
-                VisionS Infra — Luxury Living Showcase
-              </span>
-              <button
-                type="button"
-                onClick={() => setIsVideoModalOpen(false)}
-                className="w-9 h-9 rounded-full bg-[#284153]/70 text-[#F8F7F3] hover:text-[#eeaf33] flex items-center justify-center transition-colors"
-                aria-label="Close video modal"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            {/* Video Player / Walkthrough Preview */}
-            <div className="relative aspect-video w-full bg-black">
-              <Image
-                src="/images/about/about-showcase.jpg"
-                alt="Walkthrough preview"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6 text-center">
-                <div className="w-16 h-16 rounded-full bg-[#eeaf33] text-[#172027] flex items-center justify-center mb-4 shadow-lg">
-                  <Play className="h-7 w-7 fill-[#172027] translate-x-0.5" />
-                </div>
-                <h3 className="font-serif text-2xl text-white font-bold mb-2">
-                  Experience Architectural Brilliance
-                </h3>
-                <p className="font-sans text-neutral-300 text-sm max-w-md font-normal">
-                  Private video walkthrough of our signature luxury properties in Nagpur &amp; premier corridors.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+        {/* CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.6 }}
+          className="mt-10"
+        >
+          <Link
+            href="/about-us"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#9A7432] text-white text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-[#172027] hover:shadow-xl hover:-translate-y-0.5 cursor-pointer"
+          >
+            <span>Learn More About Us</span>
+            <ArrowRight className="h-4 w-4 text-white" />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
   );
 }

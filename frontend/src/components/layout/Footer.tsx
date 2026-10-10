@@ -4,9 +4,9 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#172027] text-[#d5dde2] font-sans border-t border-white/10 pt-16 pb-10 overflow-hidden z-20">
+    <footer className="relative bg-[#172027] text-[#F8F7F3] font-sans border-t border-white/10 pt-16 pb-10 overflow-hidden z-20">
       {/* Ambient Radial Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[220px] bg-[#EEAF33]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[220px] bg-[#9A7432]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-[1140px] mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
@@ -34,27 +34,27 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm text-[#a3b3bf]">
               <li>
-                <Link href="/" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about-us" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/about-us" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/projects" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Projects Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="/blogs" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/blogs" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Blog & Insights
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/contact" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Contact Us
                 </Link>
               </li>
@@ -68,27 +68,27 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm text-[#a3b3bf]">
               <li>
-                <Link href="/projects" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/projects" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Residential Projects
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/projects" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Plots & Land Opportunities
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/projects" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Investment Opportunities
                 </Link>
               </li>
               <li>
-                <Link href="/contact#enquiry" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/contact#enquiry" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Free Site Visit Scheduling
                 </Link>
               </li>
               <li>
-                <Link href="/contact#enquiry" className="hover:text-[#EEAF33] hover:translate-x-1 transition-all inline-block">
+                <Link href="/contact#enquiry" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Booking Assistance
                 </Link>
               </li>
@@ -102,21 +102,21 @@ export default function Footer() {
             </h4>
             <div className="space-y-3 text-sm text-[#a3b3bf]">
               <div className="flex items-center gap-2.5">
-                <Phone className="h-4 w-4 text-[#EEAF33] shrink-0" />
+                <Phone className="h-4 w-4 text-[#9A7432] shrink-0" />
                 <span>+91 9699660972</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="h-4 w-4 text-[#EEAF33] shrink-0" />
+                <Mail className="h-4 w-4 text-[#9A7432] shrink-0" />
                 <span>info@visionsquareinfra.com</span>
               </div>
               <div className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 text-[#EEAF33] shrink-0 mt-1" />
+                <MapPin className="h-4 w-4 text-[#9A7432] shrink-0 mt-1" />
                 <span className="text-xs leading-relaxed">
                   Bidoba Sahkari Sanstha, Plot no 133, Wardha Road, Near Hotel Center Point, Bante Layout, Sonegaon, Ujwal Nagar, Nagpur-440025
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Clock className="h-4 w-4 text-[#EEAF33] shrink-0" />
+                <Clock className="h-4 w-4 text-[#9A7432] shrink-0" />
                 <span className="text-xs">Mon–Sat: 10:00 AM – 7:00 PM</span>
               </div>
             </div>
@@ -127,13 +127,13 @@ export default function Footer() {
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7b8e9b]">
           <p>© {new Date().getFullYear()} VisionSquare Infra Private Limited · Real Estate Channel Partner, Nagpur.</p>
           <div className="flex items-center gap-6">
-            <Link href="/contact" className="hover:text-[#EEAF33] transition-colors">
+            <Link href="/contact" className="hover:text-[#9A7432] transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/contact" className="hover:text-[#EEAF33] transition-colors">
+            <Link href="/contact" className="hover:text-[#9A7432] transition-colors">
               Terms & Conditions
             </Link>
-            <Link href="/contact" className="hover:text-[#EEAF33] transition-colors">
+            <Link href="/contact" className="hover:text-[#9A7432] transition-colors">
               Channel Partner Disclaimer
             </Link>
           </div>

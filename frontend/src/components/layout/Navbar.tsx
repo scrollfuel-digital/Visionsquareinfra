@@ -1,379 +1,221 @@
-
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight } from "lucide-react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import CurvedHeader from "@/components/ui/curved-menu";
+import { X } from "lucide-react";
 
-const links = [
-  { label: "About", to: "/about-us" },
-  { label: "Projects", to: "/projects" },
-  { label: "Blog", to: "/blogs" },
-  { label: "Contact", to: "/contact" },
+// INDIVIDUAL MENU IMAGE STYLING CONFIGURATION FOR VISIONSQUARE INFRA
+const NAV_LINKS = [
+  {
+    id: 1,
+    title: "Home",
+    path: "/",
+    image: "/images/projects/skyconnect-7-crown.jpeg",
+    fit: "object-cover",
+    position: "object-center",
+    scale: "scale-100",
+    className: "w-full h-full",
+    style: {},
+  },
+  {
+    id: 2,
+    title: "About",
+    path: "/about-us",
+    image: "/images/projects/pyramid-amara.jpg",
+    fit: "object-cover",
+    position: "object-center",
+    scale: "scale-100",
+    className: "w-full h-full",
+    style: {},
+  },
+  {
+    id: 3,
+    title: "Projects",
+    path: "/projects",
+    image: "/images/projects/vision-imperial.jpg",
+    fit: "object-cover",
+    position: "object-[50%_20%]",
+    scale: "scale-100",
+    className: "w-full h-full",
+    style: {},
+  },
+  {
+    id: 5,
+    title: "Blog",
+    path: "/blogs",
+    image: "/images/projects/the-one-rise.jpeg",
+    fit: "object-cover",
+    position: "object-center",
+    scale: "scale-100",
+    className: "w-full h-full",
+    style: {},
+  },
+  {
+    id: 6,
+    title: "Contact",
+    path: "/contact",
+    image: "/images/projects/infinity-elegance.jpeg",
+    fit: "object-cover",
+    position: "object-center",
+    scale: "scale-100",
+    className: "w-full h-full",
+    style: {},
+  },
 ];
 
-function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(NAV_LINKS[0]);
   const pathname = usePathname();
 
-  // Detect scrolling
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
-    onScroll();
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
-
-  // Close mobile drawer after navigation
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  // Prevent background scrolling when mobile drawer is open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
-
     return () => {
       document.body.style.overflow = "";
     };
   }, [open]);
 
+  // Close menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
     <>
-      {/* ================= MAIN NAVBAR (TOP OF PAGE) ================= */}
-      <AnimatePresence mode="wait">
-        {!scrolled ? (
-          <motion.header
-            key="header-full"
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -50, opacity: 0 }}
-            transition={{
-              duration: 0.4,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="fixed inset-x-0 top-0 z-50"
+      {/* MAIN LOGO - Absolute (Scrolls naturally with the page, NOT fixed) */}
+      <div className="absolute top-4 left-4 sm:left-6 md:left-10 z-30">
+        <Link href="/" aria-label="VisionSquare Infra Home">
+          <Image
+            src="/images/logo/visionS infra.png"
+            alt="VisionSquare Infra Logo"
+            width={300}
+            height={120}
+            priority
+            className="h-11 sm:h-14 md:h-16 lg:h-18 w-auto object-contain drop-shadow-md transition-transform duration-300 hover:scale-[1.02]"
+          />
+        </Link>
+      </div>
+
+      {/* Header Menu Button - Prominent & Large (Scrolls naturally with the page, NOT fixed) */}
+      {!open && (
+        <header className="absolute top-6 right-6 sm:right-10 md:right-14 z-40">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="flex items-center gap-3.5 text-[#9A7432] hover:text-white transition duration-300 group cursor-pointer"
           >
-            <div className="w-full bg-[#121110]/80 backdrop-blur-lg border-b border-white/10">
-              <nav className="relative mx-auto w-full max-w-7xl flex items-center justify-between h-16 sm:h-[72px] md:h-20 px-4 sm:px-6 lg:px-8">
-                {/* Logo */}
-                <div className="relative z-20 flex h-full shrink-0 items-center">
-                  <Link href="/" className="group relative flex h-full items-center" aria-label="VisionSquare Infra Home">
-                    <div className="relative flex h-14 sm:h-16 md:h-[72px] w-auto max-w-[180px] sm:max-w-[220px] md:max-w-[240px] items-center">
-                      <Image
-                        src="/images/logo/visionS infra.png"
-                        alt="VisionSquare Infra"
-                        width={500}
-                        height={200}
-                        priority
-                        className="h-12 sm:h-14 md:h-16 w-auto max-w-full object-contain object-left transition-transform duration-300 group-hover:scale-[1.02]"
-                      />
-                    </div>
-                  </Link>
-                </div>
+            <span className="hidden sm:block text-lg sm:text-xl font-bold tracking-[0.25em] uppercase font-cinzel">
+              Menu
+            </span>
 
-                {/* Desktop Links */}
-                <ul className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-7 lg:gap-10">
-                  {links.map((link) => {
-                    const isActive = pathname === link.to;
+            <span className="flex flex-col gap-1.5 w-7 sm:w-8">
+              <span className="h-[2.5px] bg-[#9A7432] group-hover:bg-white transition-colors rounded-full"></span>
+              <span className="h-[2.5px] w-5 self-end bg-[#9A7432] group-hover:bg-white group-hover:w-full transition-all rounded-full"></span>
+            </span>
+          </button>
+        </header>
+      )}
 
-                    return (
-                      <li key={link.to} className="relative">
-                        <Link
-                          href={link.to}
-                          className={`group relative block whitespace-nowrap py-2 lg:text-xl transition-colors duration-300 ${
-                            isActive ? "text-[#DE9F20] font-medium" : "text-[#F8F7F3] font-normal hover:text-[#EEAF33]"
-                          }`}
-                          style={{ fontFamily: '"Playfair Display", Georgia, serif' }}
-                        >
-                          {link.label}
-                          {isActive && (
-                            <motion.span
-                              layoutId="activeTabUnderline"
-                              className="absolute -bottom-0.5 left-0 right-0 h-[2.5px] rounded-full bg-[#DE9F20] shadow-[0_2px_8px_rgba(229,169,60,0.55)]"
-                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                            />
-                          )}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-
-                {/* Desktop CTA */}
-                <div className="relative z-30 ml-auto hidden md:block">
-                  <Link
-                    href="/contact"
-                    className="group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 lg:px-6 lg:py-3 text-sm lg:text-base font-medium text-[#120F0A] shadow-[0_4px_18px_rgba(229,169,60,0.35)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
-                    style={{
-                      background: "linear-gradient(135deg, #F6C85E 0%, #E5A93C 50%, #C88A24 100%)",
-                      fontFamily: '"Playfair Display", Georgia, serif',
-                    }}
-                  >
-                    <span>Book Site Visit</span>
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.2} />
-                  </Link>
-                </div>
-
-                {/* Mobile Menu Toggle Button */}
-                <div className="relative z-30 ml-auto md:hidden">
-                  <CurvedHeader />
-                </div>
-              </nav>
-            </div>
-          </motion.header>
-        ) : (
-          <motion.div
-            key="header-scrolled"
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -30, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-4 right-4 sm:top-5 sm:right-6 z-50 flex items-center gap-2.5 sm:gap-3 pointer-events-auto"
-          >
-            {/* Pill 1: Contact Us Capsule */}
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#0d1013] text-white border border-white/15 shadow-2xl font-sans text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-300 hover:bg-black hover:scale-105 active:scale-95"
-            >
-              <span className="w-2.5 h-2.5 rounded-full border-2 border-white/80 shrink-0 transition-transform duration-300 group-hover:scale-125" />
-              <span>CONTACT US</span>
-            </Link>
-
-            {/* Pill 2: Menu Capsule with Curved Navigation Drawer */}
-            <CurvedHeader />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-
-      {/* ================= NAVIGATION DRAWER ================= */}
-
-      <AnimatePresence>
-        {open && (
-          <div className="fixed inset-0 z-[100]">
-            {/* Background overlay */}
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="
-                absolute
-                inset-0
-                bg-black/70
-                backdrop-blur-md
-              "
-              onClick={() => setOpen(false)}
-              aria-hidden="true"
+      {/* Full Screen Menu Drawer - TRANSPARENT GLASSMORPHISM BACKDROP */}
+      <div
+        className={`fixed inset-0 z-50 bg-[#172027]/90 backdrop-blur-2xl transition-all duration-500 ${
+          open
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Logo inside Menu Page - CENTER ALIGNED ON LEFT COLUMN */}
+        <div className="absolute top-6 left-0 right-0 lg:right-auto lg:w-[420px] flex justify-center z-20 pointer-events-auto">
+          <Link href="/" onClick={() => setOpen(false)}>
+            <Image
+              src="/images/logo/visionS infra.png"
+              alt="VisionSquare Infra Logo"
+              width={300}
+              height={120}
+              priority
+              className="h-11 sm:h-14 md:h-16 w-auto object-contain drop-shadow-lg transition-transform duration-300 hover:scale-[1.02]"
             />
+          </Link>
+        </div>
 
-            {/* Mobile drawer */}
+        {/* Close Button */}
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="absolute top-5 right-6 sm:top-7 sm:right-10 z-20 flex items-center gap-3 px-7 py-3 rounded-full text-white text-sm sm:text-base font-extrabold uppercase tracking-[0.2em] font-cinzel cursor-pointer shadow-lg select-none border-0 outline-none bg-[#9A7432] hover:bg-[#172027] transition-colors"
+        >
+          <span>CLOSE</span>
+          <X size={20} strokeWidth={2.5} className="text-white" />
+        </button>
 
-            <motion.div
-              id="mobile-navigation"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{
-                type: "spring",
-                damping: 28,
-                stiffness: 220,
-              }}
-              className="
-                absolute
-                right-0
-                top-0
-                flex
-                h-full
-                w-[85%]
-                max-w-[360px]
-                flex-col
-                overflow-y-auto
-                border-l
-                border-white/15
-                bg-[#121110]
-                px-6
-                pb-8
-                pt-6
-                text-white
-                shadow-2xl
-              "
-            >
-              {/* Mobile logo and close button */}
+        <div className="flex h-full flex-col lg:flex-row overflow-y-auto">
+          {/* Navigation - CENTER ALIGNED & INCREASED ELEGANT FONT SIZE */}
+          <nav className="w-full lg:w-[420px] lg:border-r border-white/15 flex flex-col justify-center items-center text-center px-6 sm:px-10 pt-36 pb-20 space-y-3 relative z-10 bg-[#172027]">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.path;
 
-              <div
-                className="
-                  mb-8
-                  flex
-                  min-h-[72px]
-                  items-center
-                  justify-between
-                  gap-3
-                  border-b
-                  border-white/10
-                  pb-5
-                "
-              >
+              return (
                 <Link
-                  href="/"
+                  key={link.id}
+                  href={link.path}
+                  onMouseEnter={() => setHovered(link)}
                   onClick={() => setOpen(false)}
-                  className="flex min-w-0 flex-1 items-center"
-                  aria-label="VisionSquare Infra Home"
+                  className={`group relative py-3.5 uppercase tracking-[0.35em] text-xl sm:text-2xl font-cinzel font-medium transition-all duration-300 flex flex-col items-center ${
+                    isActive
+                      ? "text-[#9A7432]"
+                      : "text-white/80 hover:text-[#9A7432]"
+                  }`}
                 >
-                  <div className="relative flex h-14 w-full max-w-[220px] items-center">
-                    <Image
-                      src="/images/logo/visionS infra.png"
-                      alt="VisionSquare Infra"
-                      width={300}
-                      height={100}
-                      priority
-                      className="
-                        h-12
-                        sm:h-14
-                        w-auto
-                        max-w-full
-                        object-contain
-                        object-left
-                      "
-                    />
-                  </div>
+                  {link.title}
+                  <span className="h-[2px] w-0 bg-[#9A7432] transition-all duration-300 group-hover:w-16 mt-1"></span>
                 </Link>
+              );
+            })}
+          </nav>
 
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="
-                    flex
-                    h-9
-                    w-9
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-white/10
-                    text-white
-                    transition-all
-                    hover:bg-white/20
-                    active:scale-95
-                  "
-                  aria-label="Close menu"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+          {/* Right Image Preview - INDIVIDUAL PER-IMAGE SIZE & POSITION CONTROLS */}
+          <div className="hidden lg:block flex-1 relative overflow-hidden bg-[#172027] pointer-events-none">
+            {NAV_LINKS.map((link) => (
+              <img
+                key={link.id}
+                src={link.image}
+                alt={link.title}
+                className={`absolute inset-0 ${link.fit || "object-cover"} ${
+                  link.position || "object-center"
+                } ${
+                  link.className || "w-full h-full"
+                } transition-all duration-700 ${
+                  hovered?.id === link.id ? "opacity-90" : "opacity-0"
+                }`}
+                style={link.style || {}}
+              />
+            ))}
 
-              {/* Mobile navigation links */}
-
-              <ul className="space-y-3">
-                {links.map((link) => {
-                  const isActive = pathname === link.to;
-
-                  return (
-                    <li key={link.to}>
-                      <Link
-                        href={link.to}
-                        onClick={() => setOpen(false)}
-                        aria-current={isActive ? "page" : undefined}
-                        className={`
-                          flex
-                          items-center
-                          justify-between
-                          rounded-xl
-                          border
-                          px-4
-                          py-3
-                          text-xl
-                          transition-all
-                          duration-200
-                          ${
-                            isActive
-                              ? "border-[#E5A93C]/30 bg-[#E5A93C]/15 text-[#E5A93C] font-medium"
-                              : "border-transparent text-white/85 hover:border-white/10 hover:bg-white/5 hover:text-[#EEAF33] font-normal"
-                          }
-                        `}
-                        style={{
-                          fontFamily:
-                            '"Playfair Display", Georgia, serif',
-                        }}
-                      >
-                        <span>{link.label}</span>
-
-                        {isActive && (
-                          <span className="h-2 w-2 rounded-full bg-[#E5A93C]" />
-                        )}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-
-              {/* Mobile CTA */}
-
-              <div className="mt-8 border-t border-white/10 pt-6">
-                <Link
-                  href="/contact"
-                  onClick={() => setOpen(false)}
-                  className="
-                    flex
-                    w-full
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-full
-                    py-3.5
-                    text-center
-                    font-medium
-                    text-[#120F0A]
-                    shadow-[0_4px_20px_rgba(229,169,60,0.4)]
-                    transition-all
-                    duration-300
-                    hover:scale-[1.02]
-                    active:scale-[0.98]
-                  "
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #F6C85E 0%, #E5A93C 50%, #C88A24 100%)",
-                    fontFamily:
-                      '"Playfair Display", Georgia, serif',
-                  }}
-                >
-                  <span>Book Site Visit</span>
-
-                  <ArrowRight
-                    className="h-4 w-4"
-                    strokeWidth={2.2}
-                  />
-                </Link>
-              </div>
-
-              {/* Bottom text */}
-
-              <div className="mt-auto pt-8 text-center">
-                <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">
-                  VisionSquare Infra Private Limited
-                </p>
-              </div>
-            </motion.div>
+            {/* Left Edge Dark Gradient Blend into Navigation Menu */}
+            <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#172027] via-[#172027]/50 to-transparent pointer-events-none w-36"></div>
           </div>
-        )}
-      </AnimatePresence>
+        </div>
+
+        {/* Back To Top Button */}
+        <button
+          type="button"
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+            setOpen(false);
+          }}
+          className="absolute bottom-8 right-8 w-12 h-12 rounded-2xl bg-[#9A7432] hover:bg-white text-white hover:text-[#172027] flex items-center justify-center shadow-xl cursor-pointer font-bold text-lg transition-colors"
+          aria-label="Back to top"
+        >
+          ↑
+        </button>
+      </div>
     </>
   );
 }
 
-export { Navbar };
 export default Navbar;
