@@ -1,7 +1,8 @@
 import Hero from "@/components/home/Hero";
 import AboutPreview from "@/components/home/AboutPreview";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
-import Testimonials from "@/components/home/Testimonials";
+import LatestBlogs from "@/components/home/LatestBlogs";
+// import Testimonials from "@/components/home/Testimonials";
 
 export default function HomePage() {
   return (
@@ -15,8 +16,11 @@ export default function HomePage() {
       {/* 3rd: Project Section */}
       <FeaturedProjects />
 
-      {/* 4th: Testimonials Section */}
-      {/* <Testimonials /> */}
+      {/* 4th: Property Insights & Latest Blogs Section */}
+      <LatestBlogs />
+
+      {/* 5th: Testimonials Section
+      <Testimonials /> */}
     </main>
   );
 }

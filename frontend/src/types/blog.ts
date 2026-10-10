@@ -8,4 +8,5 @@ export type Blog = {
   readTime: string;
   author: string;
   featured?: boolean;
+  image?: string;
 };
