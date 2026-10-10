@@ -15,11 +15,10 @@ export default function AboutPreview() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-          className="text-3xl sm:text-5xl lg:text-6xl font-serif font-extrabold text-[#172027] tracking-tight leading-tight uppercase"
+          className="text-3xl sm:text-5xl lg:text-4xl font-serif font-extrabold text-[#172027] tracking-tight leading-tight uppercase"
         >
-          ABOUT{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#EEAF33] via-[#9A7432] to-[#EEAF33]">
-            VISIONSQUARE INFRA
+            The Art of Real Estate
           </span>
         </motion.h2>
 
@@ -33,16 +32,7 @@ export default function AboutPreview() {
           className="mt-6 mb-8 h-px w-28 origin-center bg-[#EEAF33]"
         />
 
-        {/* Subheading */}
-        <motion.h3
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-          className="text-base md:text-xl font-bold uppercase tracking-[0.2em] mb-6 text-[#9A7432]"
-        >
-          Signature Living
-        </motion.h3>
+       
 
         {/* Paragraphs */}
         <div className="text-sm md:text-[18px] leading-relaxed max-w-5xl mx-auto space-y-6 text-center text-[#172027]/80 font-sans">

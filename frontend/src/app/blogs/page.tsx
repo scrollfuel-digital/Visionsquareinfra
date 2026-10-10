@@ -88,8 +88,8 @@ export default function BlogsPage() {
           </span>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-extrabold text-[#172027] tracking-tight leading-tight uppercase">
-            Nagpur Real Estate &{" "}
-            <span className="italic font-serif text-[#9A7432]">Property Insights</span>
+            The{" "}
+            <span className="font-serif text-[#9A7432]">Knowledge Corner</span>
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl font-sans text-[#4A5568] font-normal max-w-3xl mx-auto leading-relaxed">

@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#172027] text-[#F8F7F3] font-sans border-t border-white/10 pt-16 pb-10 overflow-hidden z-20">
+    <footer className="relative bg-[#FAF4ED] text-[#F8F7F3] font-sans border-t border-white/10 pt-16 pb-10 overflow-hidden z-20">
       {/* Ambient Radial Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[220px] bg-[#9A7432]/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -23,7 +23,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-[#a3b3bf] text-sm leading-relaxed">
-              VisionSquare Infra is a real estate channel partner in Nagpur, India. We guide buyers to shortlisted, verified residential projects and plots, arrange site visits, and guide you to booking.
+              VisionSquare Infra is a real estate channel partner in Nagpur, India. 
             </p>
           </div>
 
