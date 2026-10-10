@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 const SLIDES = [
   {
-    image: "/images/projects/skyconnect-7-crown.jpeg",
+    image: "/images/herosection/7 Crown at Sunset.png",
     eyebrow: "Signature Residential Address",
     title: ["7 CROWN", "SKYCONNECT"],
     titleColor: "text-[#9A7432]",

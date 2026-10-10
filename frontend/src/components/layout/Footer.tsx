@@ -4,17 +4,17 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#FAF4ED] text-[#F8F7F3] font-sans border-t border-white/10 pt-16 pb-10 overflow-hidden z-20">
+    <footer className="relative bg-[#FAF4ED] text-[#172027] font-sans border-t border-[#172027]/10 pt-16 pb-10 overflow-hidden z-20">
       {/* Ambient Radial Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[220px] bg-[#9A7432]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-[1140px] mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-[#172027]/10">
           {/* Brand Info */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-5">
               <Image
-                src="/images/logo/viplogo.png"
+                src="/images/logo/VISIONSQUARE infra.png"
                 alt="VisionSquare Infra"
                 width={360}
                 height={120}
@@ -22,17 +22,17 @@ export default function Footer() {
                 className="h-20 sm:h-24 md:h-28 w-auto object-contain object-left"
               />
             </Link>
-            <p className="text-[#a3b3bf] text-sm leading-relaxed">
-              VisionSquare Infra is a real estate channel partner in Nagpur, India. 
+            <p className="text-[#172027]/75 text-sm leading-relaxed">
+              VisionSquare Infra is a real estate channel partner in Nagpur, India.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif text-white text-lg font-bold mb-4 tracking-wider">
+            <h4 className="font-sans text-[#172027] text-lg font-bold mb-4 tracking-wider">
               Quick Links
             </h4>
-            <ul className="space-y-2.5 text-sm text-[#a3b3bf]">
+            <ul className="space-y-2.5 text-sm text-[#172027]/75">
               <li>
                 <Link href="/" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Home
@@ -63,10 +63,10 @@ export default function Footer() {
 
           {/* Services & Offerings */}
           <div>
-            <h4 className="font-serif text-white text-lg font-bold mb-4 tracking-wider">
+            <h4 className="font-sans text-[#172027] text-lg font-bold mb-4 tracking-wider">
               Properties & Services
             </h4>
-            <ul className="space-y-2.5 text-sm text-[#a3b3bf]">
+            <ul className="space-y-2.5 text-sm text-[#172027]/75">
               <li>
                 <Link href="/projects" className="hover:text-[#9A7432] hover:translate-x-1 transition-all inline-block">
                   Residential Projects
@@ -97,10 +97,10 @@ export default function Footer() {
 
           {/* Direct Contact Details */}
           <div>
-            <h4 className="font-serif text-white text-lg font-bold mb-4 tracking-wider">
+            <h4 className="font-sans text-[#172027] text-lg font-bold mb-4 tracking-wider">
               Get In Touch
             </h4>
-            <div className="space-y-3 text-sm text-[#a3b3bf]">
+            <div className="space-y-3 text-sm text-[#172027]/80">
               <div className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 text-[#9A7432] shrink-0" />
                 <span>+91 9699660972</span>
@@ -124,7 +124,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Legal Bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7b8e9b]">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#172027]/60">
           <p>© {new Date().getFullYear()} VisionSquare Infra Private Limited · Real Estate Channel Partner, Nagpur.</p>
           <div className="flex items-center gap-6">
             <Link href="/contact" className="hover:text-[#9A7432] transition-colors">
@@ -141,4 +141,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+}
