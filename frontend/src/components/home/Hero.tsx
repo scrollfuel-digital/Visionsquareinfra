@@ -13,15 +13,7 @@ const SLIDES = [
       "A premium 3 BHK residential address designed around spacious living, refined finishes, smart security, and contemporary rooftop amenities in Jaiprakash Nagar, Nagpur.",
     slug: "skyconnect-7-crown",
   },
-  {
-    image: "/images/projects/pyramid-amara.jpg",
-    eyebrow: "High-Rise Gated Township",
-    title: ["PYRAMID", "AMARA"],
-    titleColor: "text-[#9A7432]",
-    subtitle:
-      "A grand ~6-acre premium gated township featuring 6 high-rise towers rising 14–16 floors with MahaRERA approval on Besa–Pipla Road, Nagpur.",
-    slug: "pyramid-amara",
-  },
+  
   {
     image: "/images/projects/the-one-rise.jpeg",
     eyebrow: "G+13 Storeyed Edifice",

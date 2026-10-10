@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   MapPin,
@@ -30,7 +31,7 @@ interface ProjectItem {
   location: string;
   image: string;
   specsGrid: [SpecGridItem, SpecGridItem, SpecGridItem, SpecGridItem];
-  footerTags: string;
+
 }
 
 const projectsList: ProjectItem[] = [
@@ -50,31 +51,10 @@ const projectsList: ProjectItem[] = [
       { iconType: "leaf", title: "ROOFTOP GARDEN", sub: "DECK" },
       { iconType: "shield", title: "SMART SECURITY", sub: "SYSTEM" },
       { iconType: "check", title: "READY FOR", sub: "POSSESSION" },
-    ],
-    footerTags: "LUXURY / COMFORT / CONNECTIVITY",
+    ]
   },
   {
     number: "02",
-    slug: "amara-pyramid",
-    taglineBadge: "HIGH-RISE TOWNSHIP",
-    nameLine1: "AMARA",
-    nameLine2: "PYRAMID",
-    tagline: "PREMIUM LIVING ON BESA–PIPLA ROAD.",
-    description:
-      "A grand ~6-acre premium gated township featuring 6 high-rise towers rising 14–16 floors. Thoughtfully planned 2 & 3 BHK residences with RERA approval.",
-    location: "Besa–Pipla Road, Nagpur",
-    image: "/images/projects/pyramid-amara.jpg",
-    specsGrid: [
-      { iconType: "building", title: "6 HIGH-RISE TOWERS", sub: "14–16 FLOORS" },
-      { iconType: "home", title: "2 & 3 BHK", sub: "CONFIGURATIONS" },
-      { iconType: "shield", title: "MAHARERA", sub: "APPROVED" },
-      { iconType: "leaf", title: "GRAND CLUBHOUSE", sub: "AMENITIES" },
-    ],
-    footerTags: "TOWNSHIP / RERA APPROVED / GREENERY",
-  },
- 
-  {
-    number: "04",
     slug: "one-rise",
     taglineBadge: "LUXURY APARTMENTS",
     nameLine1: "ONE",
@@ -90,10 +70,10 @@ const projectsList: ProjectItem[] = [
       { iconType: "home", title: "2 & 3 BHK", sub: "RESIDENCES" },
       { iconType: "check", title: "PRIME LOCATION", sub: "NAGPUR" },
     ],
-    footerTags: "SKYLINE / INFINITY POOL / EDIFICE",
+    
   },
   {
-    number: "05",
+    number: "03",
     slug: "infinity-elegance",
     taglineBadge: "ULTRA-LUXURY APARTMENTS",
     nameLine1: "INFINITY",
@@ -109,10 +89,10 @@ const projectsList: ProjectItem[] = [
       { iconType: "leaf", title: "ROOFTOP GARDEN", sub: "& GYMNASIUM" },
       { iconType: "check", title: "EV CHARGING", sub: "& SOLAR POWER" },
     ],
-    footerTags: "ULTRA-LUXURY / DHANTOLI / SOLAR",
+   
   },
   {
-    number: "06",
+    number: "04",
     slug: "sacchidanand-waman-nagri",
     taglineBadge: "SIGNATURE RESIDENCES",
     nameLine1: "SACCHIDANAND",
@@ -128,7 +108,7 @@ const projectsList: ProjectItem[] = [
       { iconType: "shield", title: "24×7 SECURITY", sub: "& POWER BACKUP" },
       { iconType: "leaf", title: "ROOFTOP GARDEN", sub: "& YOGA DECK" },
     ],
-    footerTags: "LUXURY FLATS / BESA PIPLA ROAD / AMENITIES",
+    
   },
 ];
 
@@ -165,13 +145,20 @@ export default function FeaturedProjects({ showIntroHeader = true }: FeaturedPro
             <div className="inline-flex items-center justify-center gap-2 mb-3">
               <span className="h-px w-8 bg-[#284153]" />
               <span className="font-sans text-xs uppercase tracking-[0.25em] text-[#284153] font-bold">
-                OUR FEATURED DEVELOPMENTS
+                DESIGNED TO INSPIRE
               </span>
             </div>
-            <h2 className="font-serif text-4xl sm:text-5xl lg:text-7xl text-[#172027] font-bold leading-[1.05]">
-              Architectural <br />
-              <span className="italic text-[#eeaf33]">Masterpieces</span>
-            </h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+              className="text-3xl sm:text-5xl lg:text-5xl font-serif font-extrabold text-[#172027] tracking-tight leading-tight uppercase"
+            >
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#EEAF33] via-[#9A7432] to-[#EEAF33]">
+               Defining Skylines
+              </span>
+            </motion.h2>
           </div>
         </div>
       )}
@@ -218,7 +205,7 @@ export default function FeaturedProjects({ showIntroHeader = true }: FeaturedPro
 
                 <div className="relative z-10 max-w-xl">
                   {/* 2-Line Project Name */}
-                  <h3 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-[#172027] tracking-tight uppercase leading-[1.06] mb-3">
+                  <h3 className="font-serif text-5xl sm:text-5xl lg:text-4xl font-bold text-[#9A7432] tracking-tight uppercase leading-[1.06] mb-3">
                     <span className="block">{project.nameLine1}</span>
                     <span className="block">{project.nameLine2}</span>
                   </h3>
@@ -264,10 +251,7 @@ export default function FeaturedProjects({ showIntroHeader = true }: FeaturedPro
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                     </Link>
 
-                    <div className="hidden sm:flex items-center gap-2 text-[10px] sm:text-[11px] font-bold uppercase tracking-widest text-[#9A7432]/80">
-                      <span className="h-px w-8 bg-[#9A7432]/40" />
-                      <span>{project.footerTags}</span>
-                    </div>
+                  
                   </div>
                 </div>
               </div>
