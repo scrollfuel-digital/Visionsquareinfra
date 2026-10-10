@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type React from "react";
 import { Cinzel, Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   description: "Building better spaces for modern living.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cinzelFont.variable} ${serifFont.variable} ${sansFont.variable}`}>
       <body className="font-sans antialiased bg-[#172027] text-[#F8F7F3]">

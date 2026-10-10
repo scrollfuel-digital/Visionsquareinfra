@@ -72,10 +72,10 @@ export default function AboutUsPage() {
             </div>
 
             {/* Main Title */}
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#F8F7F3] leading-[1.12] mb-8 tracking-tight drop-shadow-md">
-              Building Stronger Partnerships for a{" "}
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-5xl font-bold text-[#F8F7F3] leading-[1.12] mb-8 tracking-tight drop-shadow-md">
+              Building <br />Stronger{" "}
               <span className="italic font-serif text-[#9A7432]">
-                Brighter Future
+                Partnerships
               </span>
             </h1>
 
@@ -209,11 +209,11 @@ export default function AboutUsPage() {
                 </div>
 
                 {/* Main Headline */}
-                <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#172027] leading-[1.12] mb-6 tracking-tight">
+                <h2 className="font-serif text-4xl sm:text-5xl lg:text-5xl font-bold text-[#172027] leading-[1.12] mb-6 tracking-tight">
                   Your Trust
                   <br />
                   Builds Our{" "}
-                  <span className="italic font-serif text-[#9A7432]">
+                  <span className="font-serif text-[#9A7432]">
                     Success
                   </span>
                 </h2>
@@ -321,7 +321,7 @@ export default function AboutUsPage() {
               </div>
 
               <p className="text-[#4A5568] text-base sm:text-lg font-sans leading-relaxed">
-                We provide you with verified property choices, complete legal clarity, and personalized site visit support to help you find your dream property. With VisionSquare Infra, you get access to premium projects and a partnership built on trust.
+                We provide you with verified property choices, complete legal clarity, and personalized site visit support to help you find your dream property, With VisionSquare Infra.
               </p>
 
               {/* Primary Action Button */}
@@ -397,7 +397,7 @@ export default function AboutUsPage() {
 
             {/* Right Block: Partner Handshake Showcase Image */}
             <div className="lg:col-span-5 relative">
-              <div className="relative w-full aspect-[4/3] rounded-[2rem] bg-[#172027] shadow-[0_20px_50px_rgba(40,65,83,0.18)] border border-[#9A7432]/30 overflow-hidden group">
+              <div className="relative w-full aspect-[4/3] bg-[#172027] shadow-[0_20px_50px_rgba(40,65,83,0.18)] border border-[#9A7432]/30 overflow-hidden group">
                 <Image
                   src="/images/about/partner-handshake.png"
                   alt="VisionSquare Infra Real Estate Partnership Handshake in Nagpur"
@@ -415,13 +415,6 @@ export default function AboutUsPage() {
                   <span className="text-[11px] font-bold uppercase tracking-widest text-[#9A7432] bg-[#172027]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#9A7432]/30 shadow-lg">
                     Channel Partner Support
                   </span>
-                </div>
-
-                {/* Bottom Floating Commitment Badge */}
-                <div className="absolute bottom-4 left-4 right-4 z-10 bg-[#172027]/90 backdrop-blur-md border border-[#9A7432]/30 rounded-xl p-3.5 shadow-xl">
-                  <p className="font-serif text-sm sm:text-base font-bold text-[#F8F7F3] leading-snug">
-                    <span className="italic text-[#9A7432]">Your Growth</span> & Peace of Mind Is Our Priority
-                  </p>
                 </div>
               </div>
             </div>
